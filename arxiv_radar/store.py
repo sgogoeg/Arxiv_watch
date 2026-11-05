@@ -7,6 +7,7 @@ Files the dashboard edits (through GitHub commits):
                    "papers": {arxiv_id: paper metadata}}
   authors.json    {"authors": [{"name", "openalex_id", "added"}]}
   my_papers.json  {"papers": [{"query", "label", "added"}]}
+  settings.json   {"categories": [...]}   (overrides config.yaml categories when set)
 
 Files the pipeline writes:
   days/YYYY-MM-DD.json, index.json, author_matches.json, citations.json
@@ -22,6 +23,7 @@ DEFAULTS: dict[str, Any] = {
     "library.json": {"folders": {}, "papers": {}},
     "authors.json": {"authors": []},
     "my_papers.json": {"papers": []},
+    "settings.json": {},
     "author_matches.json": {"authors": {}, "backfilled": []},
     "citations.json": {"papers": {}, "updated": None},
     "index.json": {"days": [], "topics": [], "generated": None},
@@ -85,6 +87,11 @@ class Store:
 
     def deleted_papers(self) -> dict[str, dict]:
         return self.read("feedback.json").get("deleted", {})
+
+    def categories(self, default: list[str]) -> list[str]:
+        """Categories chosen on the dashboard, falling back to config.yaml."""
+        cats = [c.strip() for c in self.read("settings.json").get("categories") or [] if c and c.strip()]
+        return cats or list(default)
 
     def followed_author_names(self, extra: list[str] | None = None) -> list[str]:
         names = [a["name"] for a in self.read("authors.json").get("authors", []) if a.get("name")]

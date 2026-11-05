@@ -93,3 +93,30 @@ def test_seed_ids_drop_versions():
     from arxiv_radar.config import Topic
 
     assert Topic(name="t", seed_ids=["2305.02357v3", "arXiv:2403.09816"]).seed_ids == ["2305.02357", "2403.09816"]
+
+
+def test_dashboard_categories_override_config(cfg, sample_day):
+    store = Store(cfg.data_dir)
+    assert store.categories(cfg.categories) == ["cs.LG", "cs.CL"]
+    store.write("settings.json", {"categories": ["hep-ph", " gr-qc ", ""]})
+    assert store.categories(cfg.categories) == ["hep-ph", "gr-qc"]
+    doc = pipeline.run(cfg, offline=str(sample_day))
+    assert doc["categories"] == ["hep-ph", "gr-qc"]
+
+
+def test_fetch_skips_failing_category(monkeypatch, sample_day):
+    import pytest
+    from arxiv_radar import fetch
+
+    class Client:
+        def get(self, url, params=None):
+            if url.endswith("bad.cat"):
+                raise RuntimeError("boom")
+            if "rss" in url:
+                return (sample_day / "rss/cs.LG.xml").read_text()
+            return (sample_day / "api/batch1.xml").read_text()
+
+    papers, _ = fetch.fetch_today(["cs.LG", "bad.cat"], Client())
+    assert len(papers) == 7
+    with pytest.raises(RuntimeError):
+        fetch.fetch_today(["bad.cat"], Client())

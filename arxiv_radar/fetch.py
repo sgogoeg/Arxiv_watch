@@ -194,11 +194,19 @@ def fetch_today(categories: list[str], client: ArxivClient | None = None) -> tup
     client = client or ArxivClient()
     rss: list[dict] = []
     announced: date | None = None
+    failed = []
     for cat in categories:
-        papers, d = parse_rss(client.get(RSS_URL.format(cat=cat)))
+        try:
+            papers, d = parse_rss(client.get(RSS_URL.format(cat=cat)))
+        except Exception as e:  # one bad or unreachable category should not sink the day
+            log.warning("%s: could not fetch the RSS feed (%s); skipping", cat, e)
+            failed.append(cat)
+            continue
         log.info("%s: %d new/cross-listed papers", cat, len(papers))
         rss.extend(papers)
         announced = announced or d
+    if failed and len(failed) == len(categories):
+        raise RuntimeError(f"no arXiv category could be fetched: {failed}")
     ids = list(dict.fromkeys(p["id"] for p in rss))
     try:
         api = fetch_metadata(client, ids)

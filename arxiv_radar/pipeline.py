@@ -97,12 +97,13 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     writer = Store(out_dir) if out_dir else store
     offline_dir = Path(offline) if offline else None
     client = None if offline_dir else ArxivClient()
+    categories = store.categories(cfg.categories)
 
     # 1. fetch
     if offline_dir:
         papers, announced = load_offline(offline_dir)
     else:
-        papers, announced = fetch_today(cfg.categories, client)
+        papers, announced = fetch_today(categories, client)
     day = day or announced.isoformat()
     log.info("%s: %d papers fetched", day, len(papers))
 
@@ -190,7 +191,7 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     day_doc = {
         "date": day,
         "generated": _now(),
-        "categories": cfg.categories,
+        "categories": categories,
         "topics": names,
         "score_source": dict(zip(names, sources)),
         "counts": {"fetched": len(papers), "shortlisted": len(entries)},
@@ -288,6 +289,7 @@ def build_site(cfg: Config, site_src: str = "site", out: str = "_site") -> Path:
         "repo": cfg.repo,
         "branch": cfg.github_branch,
         "data_dir": cfg.data_dir,
+        "categories": cfg.categories,
         "topics": cfg.topic_names,
         "threshold": cfg.score_threshold,
     }, indent=1))

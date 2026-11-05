@@ -39,6 +39,17 @@
     <label>Repository <input id="set-repo" placeholder="owner/repo" autocomplete="off"></label>
     <label>Branch <input id="set-branch" placeholder="main" autocomplete="off"></label>
     <label>Token <input id="set-token" type="password" placeholder="github_pat_…" autocomplete="off"></label>
+    <fieldset class="cats">
+      <legend>arXiv categories</legend>
+      <p class="muted small">Searched by the daily run. Changes apply from the next run after you Sync.</p>
+      <div id="cat-chips" class="chips"></div>
+      <div class="row gap">
+        <input id="cat-input" list="cat-list" placeholder="e.g. hep-th or astro-ph.CO" autocomplete="off" style="flex:1">
+        <button type="button" class="btn small" id="cat-add">Add</button>
+      </div>
+      <datalist id="cat-list"></datalist>
+      <div id="cat-msg" class="err" aria-live="polite"></div>
+    </fieldset>
     <label>Theme
       <select id="set-theme"><option value="">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
     </label>

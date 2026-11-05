@@ -6,12 +6,13 @@
  */
 "use strict";
 
-const EDIT_FILES = ["feedback.json", "library.json", "authors.json", "my_papers.json"];
+const EDIT_FILES = ["feedback.json", "library.json", "authors.json", "my_papers.json", "settings.json"];
 const DEFAULTS = {
   "feedback.json": { deleted: {}, cared: {} },
   "library.json": { folders: {}, papers: {} },
   "authors.json": { authors: [] },
   "my_papers.json": { papers: [] },
+  "settings.json": {},
 };
 const OP_FILE = {
   delete: "feedback.json", undelete: "feedback.json", care: "feedback.json", uncare: "feedback.json",
@@ -19,6 +20,7 @@ const OP_FILE = {
   folder_rename: "library.json", folder_delete: "library.json", folder_topic: "library.json",
   author_add: "authors.json", author_remove: "authors.json",
   mypaper_add: "my_papers.json", mypaper_remove: "my_papers.json",
+  categories_set: "settings.json",
 };
 
 const S = {
@@ -146,6 +148,9 @@ function applyOp(f, op) {
       if (!list.some((p) => p.query === op.query)) list.push({ query: op.query, label: op.label || null, added: op.date });
       break;
     }
+    case "categories_set":
+      f["settings.json"].categories = op.categories;
+      break;
     case "mypaper_remove":
       f["my_papers.json"].papers = f["my_papers.json"].papers.filter((p) => p.query !== op.query);
       break;
@@ -177,8 +182,19 @@ function cancelsLast(op) {
   return last.query === op.query;
 }
 
+const sameSet = (a, b) => JSON.stringify([...a].sort()) === JSON.stringify([...b].sort());
+
 function push(op) {
   op.date = op.date || today();
+  // Repeated category edits collapse into one; an edit back to the synced list cancels it.
+  if (op.type === "categories_set") {
+    const last = S.pending[S.pending.length - 1];
+    if (last && last.type === "categories_set") S.pending.pop();
+    const base = (S.base["settings.json"] || {}).categories || S.cfg.categories || [];
+    if (sameSet(op.categories, base)) {
+      ls.set("pending", S.pending); recompute(); render(); return;
+    }
+  }
   if (cancelsLast(op)) S.pending.pop();
   else S.pending.push(op);
   ls.set("pending", S.pending);
@@ -286,7 +302,7 @@ function summarizeOps(ops) {
   ops.forEach((o) => { n[o.type] = (n[o.type] || 0) + 1; });
   const label = { delete: "deleted", undelete: "restored", care: "marked I care", uncare: "unmarked I care", save: "saved", unsave: "removed from folder", folder_create: "new folder",
     folder_rename: "renamed folder", folder_delete: "deleted folder", folder_topic: "folder topic", author_add: "author add",
-    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed" };
+    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed" };
   return Object.entries(n).map(([k, v]) => `${v} ${label[k] || k}`).join(", ");
 }
 
@@ -430,6 +446,61 @@ async function loadDay(date) {
   return S.dayCache[date];
 }
 
+// ------------------------------------------------------------------ daily summary (donut)
+const SLICE_VARS = ["--cat-1", "--cat-2", "--cat-3", "--cat-4", "--cat-5"];
+
+function donut(parts, total) {
+  const R = 60, r = 36, C = 70;
+  let a0 = -Math.PI / 2;
+  const pt = (rad, a) => `${(C + rad * Math.cos(a)).toFixed(2)},${(C + rad * Math.sin(a)).toFixed(2)}`;
+  const slices = parts.map((p) => {
+    const frac = p.n / total;
+    if (frac >= 0.9999) {
+      return `<g><title>${esc(p.label)}: ${p.n} (100%)</title><circle cx="${C}" cy="${C}" r="${(R + r) / 2}" fill="none" stroke="var(${p.color})" stroke-width="${R - r}"/></g>`;
+    }
+    const a1 = a0 + frac * 2 * Math.PI, large = frac > 0.5 ? 1 : 0;
+    const d = `M${pt(R, a0)} A${R},${R} 0 ${large} 1 ${pt(R, a1)} L${pt(r, a1)} A${r},${r} 0 ${large} 0 ${pt(r, a0)} Z`;
+    a0 = a1;
+    return `<path d="${d}" fill="var(${p.color})" stroke="var(--surface)" stroke-width="2"><title>${esc(p.label)}: ${p.n} (${pct(p.n, total)})</title></path>`;
+  }).join("");
+  return `<svg class="donut" viewBox="0 0 140 140" role="img" aria-label="Selected papers by category">${slices}
+    <text x="70" y="68" text-anchor="middle" class="donut-n">${total}</text><text x="70" y="86" text-anchor="middle" class="donut-l">selected</text></svg>`;
+}
+
+function dailySummary(d, deleted) {
+  const sel = d.papers.filter((p) => !deleted[p.id] && ((p.topics || []).length || (p.followed_authors || []).length));
+  const fetched = d.counts?.fetched ?? d.papers.length;
+  const open = ls.get("summary-open", true);
+  if (!sel.length) return `<details class="panel summary" ${open ? "open" : ""}><summary>Today's selection</summary><p class="muted small">Nothing passed your filters today.</p></details>`;
+  const byCat = {};
+  sel.forEach((p) => { const c = p.primary_category || "(unknown)"; byCat[c] = (byCat[c] || 0) + 1; });
+  const ranked = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
+  const top = ranked.length > 6 ? ranked.slice(0, 5) : ranked.slice(0, 6);
+  const parts = top.slice(0, 5).map(([label, n], i) => ({ label, n, color: SLICE_VARS[i] }));
+  const rest = ranked.slice(parts.length).reduce((a, [, n]) => a + n, 0);
+  if (rest) parts.push({ label: ranked.length - parts.length === 1 ? ranked[parts.length][0] : "Other", n: rest, color: "--series-other" });
+  const total = sel.length;
+  const fb = S.view["feedback.json"], lib = S.view["library.json"];
+  const ids = new Set(d.papers.map((p) => p.id));
+  const savedToday = new Set(Object.values(lib.folders).flatMap((f) => f.papers).filter((id) => ids.has(id))).size;
+  const caredToday = Object.keys(fb.cared).filter((id) => ids.has(id)).length;
+  const deletedToday = Object.keys(fb.deleted).filter((id) => ids.has(id)).length;
+  const topics = d.topics || [];
+  const terms = (d.stats?.personal?.top_terms || []).slice(0, 4).map((t) => t[0]);
+  const followed = sel.filter((p) => (p.followed_authors || []).length).length;
+  return `<details class="panel summary" ${open ? "open" : ""}><summary>Today's selection · ${total} of ${fetched} papers (${pct(total, fetched)})</summary>
+    <div class="summary-body">
+      ${donut(parts, total)}
+      <ul class="legend-list">${parts.map((p) => `<li><i class="sw" style="background:var(${p.color})"></i><span class="name">${esc(p.label)}</span><span class="v">${p.n}</span><span class="muted">${pct(p.n, total)}</span></li>`).join("")}</ul>
+      <dl class="facts">
+        ${topics.length > 1 ? topics.map((t) => `<dt>${esc(t)}</dt><dd>${sel.filter((p) => (p.topics || []).includes(t)).length}</dd>`).join("") : ""}
+        <dt>Followed authors</dt><dd>${followed}</dd>
+        <dt>Saved · I care · deleted</dt><dd>${savedToday} · ${caredToday} · ${deletedToday}</dd>
+        ${terms.length ? `<dt>Frequent terms</dt><dd class="terms">${terms.map(esc).join(", ")}</dd>` : ""}
+      </dl>
+    </div></details>`;
+}
+
 async function renderDaily(v) {
   if (!S.index.days.length) {
     v.innerHTML = `<div class="empty">No days yet. The daily GitHub Action writes the first one after its next run.</div>`;
@@ -469,6 +540,7 @@ async function renderDaily(v) {
       <button class="btn small" id="next" ${idx <= 0 ? "disabled" : ""} aria-label="Next day">→</button>
       <input type="search" class="grow" id="q" placeholder="Search title, abstract, authors" value="${esc(f.q)}">
     </div>
+    ${dailySummary(d, deleted)}
     <div class="chips">
       <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all">All<span class="n">${counts.all}</span></button>
       ${dayTopics.map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
@@ -478,7 +550,7 @@ async function renderDaily(v) {
       <label class="check"><input type="checkbox" id="followed" ${f.followedOnly ? "checked" : ""}> Followed authors only</label>
       <label class="check"><input type="checkbox" id="showdel" ${f.showDeleted ? "checked" : ""}> Show deleted</label>
     </div>
-    <div class="stat">${list.length} shown · ${d.counts?.shortlisted ?? all.length} shortlisted from ${d.counts?.fetched ?? "?"} new papers in ${esc((d.categories || []).join(", "))}
+    <div class="stat">${list.length} shown · ${d.counts?.shortlisted ?? all.length} shortlisted from ${d.counts?.fetched ?? "?"} new papers in ${esc((d.categories || []).join(", "))}${categoriesNote(d)}
       ${untrained.length ? ` · <span title="Save or delete a few papers to train these topics">ranking by similarity for: ${untrained.map(esc).join(", ")}</span>` : ""}</div>
     <div class="cards">${list.map((p) => card(p)).join("") || `<div class="empty">No papers match these filters.</div>`}</div>`;
   $("#day").onchange = (e) => { S.day = e.target.value; render(); };
@@ -490,6 +562,8 @@ async function renderDaily(v) {
   $("#followed").onchange = (e) => { f.followedOnly = e.target.checked; render(); };
   $("#showdel").onchange = (e) => { f.showDeleted = e.target.checked; render(); };
   v.querySelectorAll("[data-topic]").forEach((b) => { b.onclick = () => { f.topic = b.dataset.topic; render(); }; });
+  const sum = v.querySelector("details.summary");
+  if (sum) sum.ontoggle = () => ls.set("summary-open", sum.open);
   bindCards(v);
 }
 
@@ -778,12 +852,64 @@ function applyTheme() {
   if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
 }
 
+// arXiv taxonomy (archives and subject classes) for validating category edits.
+const ARXIV_CATS = (() => {
+  const g = (pre, subs) => subs.split(" ").map((x) => `${pre}.${x}`);
+  return ["astro-ph", ...g("astro-ph", "CO EP GA HE IM SR"), "cond-mat",
+    ...g("cond-mat", "dis-nn mes-hall mtrl-sci other quant-gas soft stat-mech str-el supr-con"),
+    "gr-qc", "hep-ex", "hep-lat", "hep-ph", "hep-th", "math-ph", "nlin", ...g("nlin", "AO CD CG PS SI"),
+    "nucl-ex", "nucl-th", "physics", ...g("physics", "acc-ph ao-ph app-ph atm-clus atom-ph bio-ph chem-ph class-ph comp-ph data-an ed-ph flu-dyn gen-ph geo-ph hist-ph ins-det med-ph optics plasm-ph pop-ph soc-ph space-ph"),
+    "quant-ph", "math", ...g("math", "AC AG AP AT CA CO CT CV DG DS FA GM GN GR GT HO IT KT LO MG MP NA NT OA OC PR QA RA RT SG SP ST"),
+    "cs", ...g("cs", "AI AR CC CE CG CL CR CV CY DB DC DL DM DS ET FL GL GR GT HC IR IT LG LO MA MM MS NA NE NI OH OS PF PL RO SC SD SE SI SY"),
+    "econ", ...g("econ", "EM GN TH"), "eess", ...g("eess", "AS IV SP SY"),
+    "q-bio", ...g("q-bio", "BM CB GN MN NC OT PE QM SC TO"), "q-fin", ...g("q-fin", "CP EC GN MF PM PR RM ST TR"),
+    "stat", ...g("stat", "AP CO ME ML OT TH")];
+})();
+
+const currentCategories = () => S.view["settings.json"]?.categories || S.cfg.categories || S.index.days.length && S.dayCache[S.index.days[0].date]?.categories || [];
+
+function categoriesNote(d) {
+  const cur = currentCategories();
+  if (!cur.length || sameSet(cur, d.categories || [])) return "";
+  return ` · <span class="pending-note">from the next run: ${esc(cur.join(", "))}</span>`;
+}
+
+function renderCatEditor() {
+  const cats = currentCategories();
+  $("#cat-chips").innerHTML = cats.map((c) => `<span class="chip cat">${esc(c)}<button type="button" data-cat="${esc(c)}" aria-label="Remove ${esc(c)}">×</button></span>`).join("")
+    || `<span class="muted small">No categories: the daily run would fall back to config.yaml.</span>`;
+  $("#cat-chips").querySelectorAll("[data-cat]").forEach((b) => {
+    b.onclick = () => {
+      const next = currentCategories().filter((c) => c !== b.dataset.cat);
+      if (!next.length) { $("#cat-msg").textContent = "Keep at least one category."; return; }
+      push({ type: "categories_set", categories: next });
+      renderCatEditor();
+    };
+  });
+}
+
+function addCategory() {
+  const input = $("#cat-input");
+  const raw = input.value.trim();
+  const match = ARXIV_CATS.find((c) => c.toLowerCase() === raw.toLowerCase());
+  $("#cat-msg").textContent = "";
+  if (!raw) return;
+  if (!match) { $("#cat-msg").textContent = `"${raw}" is not an arXiv category (e.g. hep-th, astro-ph.CO, cs.LG).`; return; }
+  const cur = currentCategories();
+  if (cur.includes(match)) { $("#cat-msg").textContent = `${match} is already in the list.`; return; }
+  push({ type: "categories_set", categories: [...cur, match] });
+  input.value = "";
+  renderCatEditor();
+}
+
 function openSettings() {
   const { repo, branch, token } = gh();
   $("#set-repo").value = repo;
   $("#set-branch").value = branch;
   $("#set-token").value = token;
   $("#set-theme").value = ls.get("theme", "");
+  $("#cat-msg").textContent = "";
+  renderCatEditor();
   $("#settings").showModal();
 }
 
@@ -808,6 +934,9 @@ async function init() {
   window.addEventListener("hashchange", render);
   $("#sync-btn").onclick = sync;
   $("#settings-btn").onclick = openSettings;
+  $("#cat-list").innerHTML = ARXIV_CATS.map((c) => `<option value="${c}">`).join("");
+  $("#cat-add").onclick = addCategory;
+  $("#cat-input").onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); addCategory(); } };
   $("#set-save").onclick = () => {
     ls.set("repo", $("#set-repo").value.trim());
     ls.set("branch", $("#set-branch").value.trim() || "main");

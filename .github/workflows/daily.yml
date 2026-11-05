@@ -20,6 +20,7 @@ on:
       - config.yaml
       - data/authors.json
       - data/my_papers.json
+      - data/settings.json
       - data/library.json
       - data/feedback.json
 

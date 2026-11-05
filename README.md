@@ -16,6 +16,7 @@ LaTeX in titles, summaries and abstracts is rendered with KaTeX.
 | Tab | What it does |
 | --- | --- |
 | **Daily** | Today's shortlisted papers with per-topic scores, why each matched, TL;DR, abstract. Filter by topic, score, followed authors, text. Delete (with undo) or save to a folder. |
+| (Daily, top) | *Today's selection*: a pie of the papers that passed your filters by category, with followed-author, saved / I care / deleted counts and frequent terms. |
 | **Stats** | Analytics for a day. *General*: everything fetched (categories, title terms, active authors, authors per paper, similarity to your topics). *Personalized*: what passed your filters (per-topic counts, score distribution, pass rate by category, top papers). |
 | **Authors** | Follow one name or paste a list. Their new papers are always shown in Daily; the last 30 days are backfilled when you add someone. |
 | **My papers** | Add your papers by arXiv ID, DOI or title. Shows citation counts over time, new citations since your last visit, and the citing papers. |
@@ -60,6 +61,11 @@ RSS (today's IDs) → arXiv API (metadata, ≥3 s between requests)
 
 The workflow's push trigger and Pages deployment assume your default branch is `main`. Change
 `branches:` in `.github/workflows/daily.yml` and `github_branch` in `config.yaml` if it isn't.
+
+### Changing categories
+
+Edit the list under **Settings → arXiv categories** on the dashboard and press **Sync**. It is stored in
+`data/settings.json` and overrides `categories` in `config.yaml` from the next daily run.
 
 ## Run locally
 
