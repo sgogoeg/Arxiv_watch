@@ -8,7 +8,8 @@ Files the dashboard edits (through GitHub commits):
                    "papers": {arxiv_id: paper metadata}}
   authors.json    {"authors": [{"name", "openalex_id", "added"}]}
   my_papers.json  {"papers": [{"query", "label", "added"}]}
-  settings.json   {"categories": [...]}   (overrides config.yaml categories when set)
+  settings.json   {"categories": [...], "topics": [{name, description, seed_ids, keywords,
+                   negative_keywords}]}   (each overrides config.yaml when set)
 
 Files the pipeline writes:
   days/YYYY-MM-DD.json, index.json, author_matches.json, citations.json
@@ -93,6 +94,21 @@ class Store:
         """Categories chosen on the dashboard, falling back to config.yaml."""
         cats = [c.strip() for c in self.read("settings.json").get("categories") or [] if c and c.strip()]
         return cats or list(default)
+
+    def topics(self, default: list) -> list:
+        """Topics edited on the dashboard, falling back to config.yaml. Invalid entries are skipped."""
+        from .config import Topic
+
+        out, names = [], set()
+        for raw in self.read("settings.json").get("topics") or []:
+            try:
+                t = Topic.model_validate(raw)
+            except Exception:
+                continue
+            if t.name.strip() and t.name not in names:
+                names.add(t.name)
+                out.append(t)
+        return out or list(default)
 
     def followed_author_names(self, extra: list[str] | None = None) -> list[str]:
         names = [a["name"] for a in self.read("authors.json").get("authors", []) if a.get("name")]

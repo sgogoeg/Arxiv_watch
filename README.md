@@ -80,6 +80,16 @@ categories for everything else, and the extra papers are not stored. This adds a
   "X:" prefixes, first person, alliteration and unusual length. It shows its top 2 plus 1 exploratory pick. Your votes
   (`feedback.json` → `wacky_votes`) train its weights on every run (`data/awards_model.json`).
 
+### Topics
+
+Add, edit, rename or delete topics under **Settings → Topics**: a name, a description, example arXiv IDs (3+ so it can
+be trained) and keywords. They are stored in `data/settings.json` and override `topics` in `config.yaml` from the next run.
+Folders linked to a renamed topic follow the new name.
+
+Daily's **Combined** ranking orders papers by the chance they match at least one topic (noisy-OR of the topic scores).
+With one topic it equals that topic's score, and papers that fit several topics rank higher. The **Category** filter
+narrows Daily to one arXiv category (primary or cross-list) or a whole archive (`astro-ph.*`).
+
 ### Changing categories
 
 Edit the list under **Settings → arXiv categories** on the dashboard and press **Sync**. It is stored in

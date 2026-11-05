@@ -20,13 +20,13 @@ const OP_FILE = {
   folder_rename: "library.json", folder_delete: "library.json", folder_topic: "library.json",
   author_add: "authors.json", author_remove: "authors.json",
   mypaper_add: "my_papers.json", mypaper_remove: "my_papers.json",
-  categories_set: "settings.json", wacky_vote: "feedback.json",
+  categories_set: "settings.json", wacky_vote: "feedback.json", topics_set: "settings.json",
 };
 
 const S = {
   cfg: {}, index: { days: [], topics: [] }, awardsModel: {}, dayCache: {}, day: null,
   base: {}, view: {}, matches: { authors: {} }, citations: { papers: {} },
-  pending: [], filters: { topic: "all", min: null, q: "", showDeleted: false, followedOnly: false },
+  pending: [], filters: { topic: "all", cat: "", min: null, q: "", showDeleted: false, followedOnly: false },
   folder: null, openAuthor: null, openCite: null, statsDay: null, statsTab: "general",
 };
 
@@ -83,6 +83,16 @@ function typeset(root) {
     try { window.renderMathInElement(el, TEX_OPTS); } catch (e) { /* leave the raw text */ }
   });
 }
+
+// Chance a paper matches at least one topic (noisy-OR); the pipeline stores the same value as p.combined.
+function combinedScore(p) {
+  if (p.combined != null) return p.combined;
+  const vals = Object.values(p.scores || {});
+  if (!vals.length) return p.score ?? 0;
+  return 1 - vals.reduce((m, v) => m * (1 - Math.min(Math.max(v, 0), 1)), 1);
+}
+const paperCats = (p) => (p.categories && p.categories.length ? p.categories : [p.primary_category].filter(Boolean));
+const inCat = (p, cat) => paperCats(p).some((c) => c === cat || c.startsWith(cat + "."));
 
 // ------------------------------------------------------------------ ops
 function paperMeta(p) {
@@ -152,6 +162,13 @@ function applyOp(f, op) {
       fb.wacky_votes = fb.wacky_votes || {};
       fb.wacky_votes[op.day] = { winner: op.winner, candidates: op.candidates, date: op.date };
       break;
+    case "topics_set":
+      f["settings.json"].topics = op.topics;
+      Object.entries(op.renames || {}).forEach(([from, to]) => {  // keep folders linked to a renamed topic
+        Object.values(lib.folders).forEach((fo) => { if (fo.topic === from) fo.topic = to; });
+      });
+      Object.values(lib.folders).forEach((fo) => { if (fo.topic && !op.topics.some((t) => t.name === fo.topic)) fo.topic = null; });
+      break;
     case "categories_set":
       f["settings.json"].categories = op.categories;
       break;
@@ -194,6 +211,12 @@ function push(op) {
   if (op.type === "wacky_vote") {  // changing your mind replaces the earlier vote for that day
     const last = S.pending[S.pending.length - 1];
     if (last && last.type === "wacky_vote" && last.day === op.day) S.pending.pop();
+  }
+  if (op.type === "topics_set") {
+    const last = S.pending[S.pending.length - 1];
+    if (last && last.type === "topics_set") { op.renames = { ...(last.renames || {}), ...(op.renames || {}) }; S.pending.pop(); }
+    const base = (S.base["settings.json"] || {}).topics || S.cfg.topic_defs || [];
+    if (JSON.stringify(op.topics) === JSON.stringify(base)) { ls.set("pending", S.pending); recompute(); render(); return; }
   }
   if (op.type === "categories_set") {
     const last = S.pending[S.pending.length - 1];
@@ -310,7 +333,7 @@ function summarizeOps(ops) {
   ops.forEach((o) => { n[o.type] = (n[o.type] || 0) + 1; });
   const label = { delete: "deleted", undelete: "restored", care: "marked I care", uncare: "unmarked I care", save: "saved", unsave: "removed from folder", folder_create: "new folder",
     folder_rename: "renamed folder", folder_delete: "deleted folder", folder_topic: "folder topic", author_add: "author add",
-    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed", wacky_vote: "wackiest-title vote" };
+    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed", wacky_vote: "wackiest-title vote", topics_set: "topics changed" };
   return Object.entries(n).map(([k, v]) => `${v} ${label[k] || k}`).join(", ");
 }
 
@@ -356,7 +379,9 @@ function card(p, opts = {}) {
     + ((p.authors || []).length > 12 ? `, … (+${p.authors.length - 12})` : "");
   const topics = Object.keys(p.scores || {});
   const thr = S.index.threshold ?? 0.5;
-  const scores = p.scores ? topics.map((t) => {
+  const combinedPill = topics.length > 1
+    ? `<span class="score combined" title="Combined: chance it matches at least one topic">Combined <b>${combinedScore(p).toFixed(2)}</b></span>` : "";
+  const scores = p.scores ? combinedPill + topics.map((t) => {
     const v = p.scores[t] ?? 0;
     return `<span class="score ${v >= thr ? "hit" : ""}" title="${esc(t)}: ${v.toFixed(2)}">${esc(t)} <span class="bar"><i style="width:${Math.round(v * 100)}%"></i></span></span>`;
   }).join("") : "";
@@ -585,17 +610,31 @@ async function renderDaily(v) {
   const counts = { all: all.filter((p) => !deleted[p.id]).length };
   const dayTopics = d.topics || S.index.topics || [];
   if (f.topic !== "all" && !dayTopics.includes(f.topic)) f.topic = "all";
-  dayTopics.forEach((t) => { counts[t] = all.filter((p) => !deleted[p.id] && (p.scores?.[t] ?? 0) >= thr).length; });
+  // category filter: every category on the day's papers (primary and cross-lists), plus whole archives
+  const catCount = {};
+  all.forEach((p) => { if (!deleted[p.id]) new Set(paperCats(p)).forEach((c) => { catCount[c] = (catCount[c] || 0) + 1; }); });
+  const archives = {};
+  Object.keys(catCount).forEach((c) => { if (c.includes(".")) { const a = c.split(".")[0]; (archives[a] = archives[a] || []).push(c); } });
+  const catOptions = Object.entries(catCount).sort((a, b) => b[1] - a[1]).map(([c, n]) => [c, c, n]);
+  Object.entries(archives).filter(([, subs]) => subs.length > 1).forEach(([a]) => {
+    catOptions.push([a, `${a}.*`, all.filter((p) => !deleted[p.id] && inCat(p, a)).length]);
+  });
+  if (f.cat && !catOptions.some(([c]) => c === f.cat)) f.cat = "";
+  const inScope = (p) => !f.cat || inCat(p, f.cat);
+  counts.all = all.filter((p) => !deleted[p.id] && inScope(p)).length;
+  dayTopics.forEach((t) => { counts[t] = all.filter((p) => !deleted[p.id] && inScope(p) && (p.scores?.[t] ?? 0) >= thr).length; });
   const list = all.filter((p) => {
     if (!f.showDeleted && deleted[p.id]) return false;
+    if (!inScope(p)) return false;
     if (f.followedOnly && !(p.followed_authors || []).length) return false;
-    const s = f.topic === "all" ? p.score : (p.scores?.[f.topic] ?? 0);
+    const s = f.topic === "all" ? combinedScore(p) : (p.scores?.[f.topic] ?? 0);
     if (f.topic !== "all" && s < thr && !(p.followed_authors || []).length) return false;
     if (s < f.min && !(p.followed_authors || []).length) return false;
     if (q && !`${p.title} ${p.abstract} ${(p.authors || []).join(" ")}`.toLowerCase().includes(q)) return false;
     return true;
   });
   if (f.topic !== "all") list.sort((a, b) => (b.scores?.[f.topic] ?? 0) - (a.scores?.[f.topic] ?? 0));
+  else list.sort((a, b) => combinedScore(b) - combinedScore(a));
   cardPapers = Object.fromEntries(all.map((p) => [p.id, p]));
   const sources = d.score_source || {};
   const untrained = Object.entries(sources).filter(([, s]) => s !== "model").map(([t]) => t);
@@ -610,10 +649,13 @@ async function renderDaily(v) {
     ${dailySummary(d, deleted)}
     ${dailyAwards(d)}
     <div class="chips">
-      <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all">All<span class="n">${counts.all}</span></button>
+      <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all" title="All papers, ranked by how well they match any of your topics">Combined<span class="n">${counts.all}</span></button>
       ${dayTopics.map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
     </div>
     <div class="toolbar">
+      <label class="check">Category
+        <select id="cat-filter"><option value="">All categories</option>${catOptions.map(([c, label, n]) => `<option value="${esc(c)}" ${f.cat === c ? "selected" : ""}>${esc(label)} (${n})</option>`).join("")}</select>
+      </label>
       <label class="check">Min score <input type="range" id="min" min="0" max="1" step="0.05" value="${f.min}"> <span id="minv">${Number(f.min).toFixed(2)}</span></label>
       <label class="check"><input type="checkbox" id="followed" ${f.followedOnly ? "checked" : ""}> Followed authors only</label>
       <label class="check"><input type="checkbox" id="showdel" ${f.showDeleted ? "checked" : ""}> Show deleted</label>
@@ -628,6 +670,7 @@ async function renderDaily(v) {
   $("#min").oninput = (e) => { $("#minv").textContent = Number(e.target.value).toFixed(2); };
   $("#min").onchange = (e) => { f.min = Number(e.target.value); render(); };
   $("#followed").onchange = (e) => { f.followedOnly = e.target.checked; render(); };
+  $("#cat-filter").onchange = (e) => { f.cat = e.target.value; render(); };
   $("#showdel").onchange = (e) => { f.showDeleted = e.target.checked; render(); };
   v.querySelectorAll("[data-topic]").forEach((b) => { b.onclick = () => { f.topic = b.dataset.topic; render(); }; });
   const sum = v.querySelector("details.summary");
@@ -938,9 +981,79 @@ const ARXIV_CATS = (() => {
 const currentCategories = () => S.view["settings.json"]?.categories || S.cfg.categories || S.index.days.length && S.dayCache[S.index.days[0].date]?.categories || [];
 
 function categoriesNote(d) {
+  const notes = [];
   const cur = currentCategories();
-  if (!cur.length || sameSet(cur, d.categories || [])) return "";
-  return ` · <span class="pending-note">from the next run: ${esc(cur.join(", "))}</span>`;
+  if (cur.length && !sameSet(cur, d.categories || [])) notes.push(`categories ${esc(cur.join(", "))}`);
+  const names = currentTopics().map((t) => t.name);
+  if (names.length && !sameSet(names, d.topics || [])) notes.push(`topics ${esc(names.join(", "))}`);
+  return notes.length ? ` · <span class="pending-note">from the next run: ${notes.join("; ")}</span>` : "";
+}
+
+// ------------------------------------------------------------------ topics editor
+const currentTopics = () => S.view["settings.json"]?.topics || S.cfg.topic_defs || [];
+const splitList = (s) => s.split(/[\n,;]+/).map((x) => x.trim()).filter(Boolean);
+function normalizeArxivId(raw) {
+  const s = raw.trim().replace(/^https?:\/\/(www\.)?arxiv\.org\/(abs|pdf)\//i, "").replace(/^arxiv:/i, "").replace(/\.pdf$/i, "").replace(/v\d+$/, "");
+  return /^\d{4}\.\d{4,5}$/.test(s) || /^[a-z-]+(\.[A-Z]{2})?\/\d{7}$/.test(s) ? s : null;
+}
+
+function topicForm(t, i) {
+  const isNew = i === -1;
+  return `<details class="topic-ed" ${isNew || S.openTopic === i ? "open" : ""} data-i="${i}">
+    <summary>${isNew ? "New topic" : `${esc(t.name)} <span class="muted small">· ${t.seed_ids.length} example${t.seed_ids.length === 1 ? "" : "s"}</span>`}</summary>
+    <label>Name <input class="t-name" value="${esc(t.name)}" placeholder="e.g. Dark matter models"></label>
+    <label>Description <textarea class="t-desc" rows="2" placeholder="One or two sentences on what you want to read">${esc(t.description)}</textarea></label>
+    <label>Example papers (arXiv IDs, one per line) <textarea class="t-seeds" rows="3" placeholder="2305.02357&#10;2403.09816">${esc(t.seed_ids.join("\n"))}</textarea></label>
+    <label>Keywords (comma-separated) <input class="t-kw" value="${esc(t.keywords.join(", "))}" placeholder="domain walls, phase transition"></label>
+    <label>Exclude keywords <input class="t-nkw" value="${esc(t.negative_keywords.join(", "))}"></label>
+    <div class="t-msg err" aria-live="polite"></div>
+    <div class="row gap">
+      <button type="button" class="btn small primary t-save">${isNew ? "Add topic" : "Save topic"}</button>
+      ${isNew ? `<button type="button" class="btn small t-cancel">Cancel</button>` : `<button type="button" class="btn small danger t-del">Delete topic</button>`}
+    </div></details>`;
+}
+
+function renderTopicEditor() {
+  const topics = currentTopics().map((t) => ({ description: "", seed_ids: [], keywords: [], negative_keywords: [], ...t }));
+  const blank = { name: "", description: "", seed_ids: [], keywords: [], negative_keywords: [] };
+  $("#topic-list").innerHTML = topics.map(topicForm).join("") + (S.topicDraft ? topicForm(blank, -1) : "");
+  $("#topic-new").hidden = !!S.topicDraft;
+  $("#topic-list").querySelectorAll(".topic-ed").forEach((el) => {
+    const i = Number(el.dataset.i);
+    el.ontoggle = () => { if (i >= 0 && el.open) S.openTopic = i; };
+    const msg = el.querySelector(".t-msg");
+    const cancel = el.querySelector(".t-cancel");
+    if (cancel) cancel.onclick = () => { S.topicDraft = false; renderTopicEditor(); };
+    const del = el.querySelector(".t-del");
+    if (del) del.onclick = () => {
+      if (topics.length === 1) { msg.textContent = "Keep at least one topic."; return; }
+      if (!confirm(`Delete topic "${topics[i].name}"?`)) return;
+      S.openTopic = null;
+      push({ type: "topics_set", topics: topics.filter((_, k) => k !== i) });
+      renderTopicEditor();
+    };
+    el.querySelector(".t-save").onclick = () => {
+      const name = el.querySelector(".t-name").value.trim();
+      const rawIds = splitList(el.querySelector(".t-seeds").value.replace(/\s+/g, "\n"));
+      const ids = rawIds.map(normalizeArxivId);
+      const bad = rawIds.filter((_, k) => !ids[k]);
+      if (!name) { msg.textContent = "Give the topic a name."; return; }
+      if (topics.some((t, k) => k !== i && t.name.toLowerCase() === name.toLowerCase())) { msg.textContent = `There is already a topic called "${name}".`; return; }
+      if (bad.length) { msg.textContent = `Not arXiv IDs: ${bad.join(", ")}`; return; }
+      const topic = {
+        name, description: el.querySelector(".t-desc").value.trim(), seed_ids: [...new Set(ids)],
+        keywords: splitList(el.querySelector(".t-kw").value), negative_keywords: splitList(el.querySelector(".t-nkw").value),
+      };
+      const next = i === -1 ? [...topics, topic] : topics.map((t, k) => (k === i ? topic : t));
+      const renames = i >= 0 && topics[i].name !== name ? { [topics[i].name]: name } : {};
+      S.topicDraft = false;
+      S.openTopic = i === -1 ? next.length - 1 : i;
+      push({ type: "topics_set", topics: next, renames });
+      renderTopicEditor();
+      const n = topic.seed_ids.length;
+      toast(n >= 3 ? `Saved "${name}". Sync to use it from the next run.` : `Saved "${name}". Add ${3 - n} more example paper${3 - n === 1 ? "" : "s"} so it can be trained.`);
+    };
+  });
 }
 
 function renderCatEditor() {
@@ -979,6 +1092,8 @@ function openSettings() {
   $("#set-theme").value = ls.get("theme", "");
   $("#cat-msg").textContent = "";
   renderCatEditor();
+  S.topicDraft = false;
+  renderTopicEditor();
   $("#settings").showModal();
 }
 
@@ -1006,6 +1121,7 @@ async function init() {
   $("#settings-btn").onclick = openSettings;
   $("#cat-list").innerHTML = ARXIV_CATS.map((c) => `<option value="${c}">`).join("");
   $("#cat-add").onclick = addCategory;
+  $("#topic-new").onclick = () => { S.topicDraft = true; renderTopicEditor(); };
   $("#cat-input").onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); addCategory(); } };
   $("#set-save").onclick = () => {
     ls.set("repo", $("#set-repo").value.trim());

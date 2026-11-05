@@ -125,3 +125,26 @@ def test_fetch_skips_failing_category(monkeypatch, sample_day):
     assert len(papers) == 7
     with pytest.raises(RuntimeError):
         fetch.fetch_today(["bad.cat"], Client())
+
+
+def test_combined_score():
+    assert pipeline.combined_score({"a": 0.8}) == 0.8
+    assert pipeline.combined_score({"a": 0.5, "b": 0.5}) == 0.75
+    assert pipeline.combined_score({"a": 0.9, "b": 0.0}) == 0.9
+
+
+def test_dashboard_topics_override_config(cfg, sample_day):
+    store = Store(cfg.data_dir)
+    store.write("settings.json", {"topics": [
+        {"name": "Robotics", "description": "Legged robots and locomotion", "seed_ids": [], "keywords": ["robot"]},
+        {"name": "LLM evaluation", "description": "Benchmarks for language models", "seed_ids": ["2405.00003v2"]},
+        {"name": ""}, {"description": "missing name"}, {"name": "Robotics"},
+    ]})
+    assert [t.name for t in store.topics(cfg.topics)] == ["Robotics", "LLM evaluation"]
+    doc = pipeline.run(cfg, offline=str(sample_day))
+    assert doc["topics"] == ["Robotics", "LLM evaluation"]
+    by = {p["id"]: p for p in doc["papers"]}
+    assert by["2511.00110"]["best_topic"] == "Robotics"
+    combined = [p["combined"] for p in doc["papers"]]
+    assert combined == sorted(combined, reverse=True)
+    assert Store(cfg.data_dir).read("index.json")["topics"] == ["Robotics", "LLM evaluation"]

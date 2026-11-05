@@ -91,9 +91,26 @@ def update_index(store: Store, writer: Store, cfg: Config, day: str, count: int,
     })
 
 
+def effective_config(cfg: Config, store: Store) -> Config:
+    """config.yaml with the dashboard's topic list (data/settings.json) applied."""
+    return cfg.model_copy(update={"topics": store.topics(cfg.topics)})
+
+
+def combined_score(scores: dict[str, float]) -> float:
+    """Chance that a paper matches at least one topic (noisy-OR of the topic scores).
+
+    Equals the best score with one topic; a paper that fits several topics ranks above one that fits only one.
+    """
+    miss = 1.0
+    for s in scores.values():
+        miss *= 1.0 - min(max(s, 0.0), 1.0)
+    return round(1.0 - miss, 3)
+
+
 def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_dir: str | None = None,
         skip_citations: bool = False, seed: int = 0) -> dict:
     store = Store(cfg.data_dir)
+    cfg = effective_config(cfg, store)
     writer = Store(out_dir) if out_dir else store
     offline_dir = Path(offline) if offline else None
     client = None if offline_dir else ArxivClient()
@@ -165,6 +182,7 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
             "date": day,
             "scores": s,
             "score": s[best],
+            "combined": combined_score(s),
             "best_topic": best,
             "topics": [t for t in names if s[t] >= cfg.score_threshold],
             "why": {
@@ -177,7 +195,7 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
         if p["id"] in saved_where:
             p["saved_in"] = saved_where[p["id"]]
         entries.append(p)
-    entries.sort(key=lambda p: (p["score"], bool(p["followed_authors"])), reverse=True)
+    entries.sort(key=lambda p: (p["combined"], bool(p["followed_authors"])), reverse=True)
 
     # 6. INSPIRE links, summaries for the top papers, analytics
     if cfg.inspire.enabled and client:
@@ -262,6 +280,7 @@ def refresh_citations(cfg: Config, store: Store, writer: Store, day: str | None 
 def refresh(cfg: Config) -> None:
     """Light update after dashboard edits: backfill new followed authors and refresh citations."""
     store = Store(cfg.data_dir)
+    cfg = effective_config(cfg, store)
     client = ArxivClient()
     matches = store.read("author_matches.json")
     followed = store.followed_author_names(cfg.authors)
@@ -294,6 +313,7 @@ def restat(cfg: Config, day: str) -> dict:
 def retrain(cfg: Config) -> None:
     """Train (or reuse) the classifier without fetching new papers."""
     store = Store(cfg.data_dir)
+    cfg = effective_config(cfg, store)
     seeds = ensure_seeds(cfg, store, ArxivClient(), None)
     examples = build_training_set(cfg.topics, seeds, store.positive_papers(), store.deleted_papers(),
                                   recent_background(store), cfg.classifier.random_negatives, random.Random(0))
@@ -321,7 +341,9 @@ def build_site(cfg: Config, site_src: str = "site", out: str = "_site") -> Path:
         "branch": cfg.github_branch,
         "data_dir": cfg.data_dir,
         "categories": cfg.categories,
-        "topics": cfg.topic_names,
+        "topics": effective_config(cfg, Store(cfg.data_dir)).topic_names,
+        "topic_defs": [t.model_dump() for t in effective_config(cfg, Store(cfg.data_dir)).topics],
+        "config_topic_defs": [t.model_dump() for t in cfg.topics],
         "threshold": cfg.score_threshold,
     }, indent=1))
     (out_p / ".nojekyll").write_text("")
