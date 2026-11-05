@@ -1,0 +1,48 @@
+# Copy to config.yaml and edit. Only `categories` and `topics` are required.
+
+# arXiv categories to watch (https://arxiv.org/category_taxonomy). No default: list your own.
+categories:
+  # - cs.LG
+  # - cs.CL
+
+# Named interest profiles. Each paper gets a score per topic.
+# seed_ids: 3–20 arXiv IDs of papers that are exactly what you want. They train the classifier
+#           and anchor the similarity ranking before you have saved anything.
+# keywords / negative_keywords: small score nudges (whole-word, case-insensitive).
+topics:
+  - name: Example topic
+    description: One or two sentences describing what you want to read about.
+    seed_ids: []
+    keywords: []
+    negative_keywords: []
+
+# Authors followed from the start. Add more from the dashboard's Authors tab.
+authors: []
+
+prefilter_top_n: 150      # papers kept per day after the cheap similarity pass
+score_threshold: 0.5      # a paper is tagged with a topic at or above this score
+author_backfill_days: 30  # when you follow someone, fetch their papers from this many days back
+
+embedding:
+  backend: sentence-transformers   # or "hashing" for a model-free dry run
+  model: allenai/specter2_base
+
+classifier:
+  backend: setfit                  # or "similarity" to skip training
+  min_positives_per_topic: 3       # a topic is trained once it has this many seeds + saved papers
+  random_negatives: 100
+  num_iterations: 10
+  max_steps: 400
+
+summary:
+  backend: flan-t5                 # "first-sentence" or "none" to skip the model
+  model: google/flan-t5-base
+  top_k: 20
+
+citations:
+  enabled: true
+  max_citing_works: 200
+
+# Repository and branch the dashboard commits your edits to (defaults to this repo).
+# github_repo: you/arxiv-radar
+github_branch: main

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<link href="http://arxiv.org/api/query" rel="self" type="application/atom+xml"/>
+<title type="html">ArXiv Query</title>
+<id>http://arxiv.org/api/query</id>
+<updated>2025-11-05T00:00:00-05:00</updated>
+<entry>
+<id>http://arxiv.org/abs/2405.00001v1</id>
+<updated>2025-11-03T17:59:01Z</updated>
+<published>2025-11-03T17:59:01Z</published>
+<title>Conservative Q-Learning for Offline Reinforcement Learning Revisited</title>
+<summary>  Offline reinforcement learning learns policies from static datasets. We revisit conservative Q-learning and value penalties for out-of-distribution actions.
+</summary>
+<author><name>A. Author</name></author>
+
+<arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">12 pages, 4 figures</arxiv:comment>
+<link href="http://arxiv.org/abs/2405.00001v1" rel="alternate" type="text/html"/>
+<link title="pdf" href="http://arxiv.org/pdf/2405.00001v1" rel="related" type="application/pdf"/>
+<arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+<category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+</entry>
+<entry>
+<id>http://arxiv.org/abs/2405.00002v1</id>
+<updated>2025-11-03T17:59:01Z</updated>
+<published>2025-11-03T17:59:01Z</published>
+<title>Proximal Policy Optimization in Continuous Control</title>
+<summary>  We analyze policy optimization for continuous control reinforcement learning agents in MuJoCo.
+</summary>
+<author><name>B. Author</name></author>
+
+<arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">12 pages, 4 figures</arxiv:comment>
+<link href="http://arxiv.org/abs/2405.00002v1" rel="alternate" type="text/html"/>
+<link title="pdf" href="http://arxiv.org/pdf/2405.00002v1" rel="related" type="application/pdf"/>
+<arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+<category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+</entry>
+<entry>
+<id>http://arxiv.org/abs/2405.00003v1</id>
+<updated>2025-11-03T17:59:01Z</updated>
+<published>2025-11-03T17:59:01Z</published>
+<title>Holistic Evaluation of Large Language Models</title>
+<summary>  We present a holistic evaluation framework and benchmark for large language models across many scenarios and metrics.
+</summary>
+<author><name>C. Author</name></author>
+
+<arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">12 pages, 4 figures</arxiv:comment>
+<link href="http://arxiv.org/abs/2405.00003v1" rel="alternate" type="text/html"/>
+<link title="pdf" href="http://arxiv.org/pdf/2405.00003v1" rel="related" type="application/pdf"/>
+<arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+<category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+</entry>
+<entry>
+<id>http://arxiv.org/abs/2405.00004v1</id>
+<updated>2025-11-03T17:59:01Z</updated>
+<published>2025-11-03T17:59:01Z</published>
+<title>Judging LLM-as-a-Judge with Chatbot Arena</title>
+<summary>  We study using strong large language models as judges for evaluation of chat assistants and analyze their biases.
+</summary>
+<author><name>D. Author</name></author>
+
+<arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">12 pages, 4 figures</arxiv:comment>
+<link href="http://arxiv.org/abs/2405.00004v1" rel="alternate" type="text/html"/>
+<link title="pdf" href="http://arxiv.org/pdf/2405.00004v1" rel="related" type="application/pdf"/>
+<arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+<category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+</entry>
+</feed>

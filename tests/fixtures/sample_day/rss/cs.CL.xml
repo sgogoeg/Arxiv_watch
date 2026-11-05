@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+<title>cs.CL updates on arXiv.org</title>
+<link>http://rss.arxiv.org/rss/cs.CL</link>
+<description>cs.CL updates on the arXiv.org e-print archive.</description>
+<language>en-us</language>
+<lastBuildDate>Wed, 05 Nov 2025 00:30:00 +0000</lastBuildDate>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<item>
+<title>A Benchmark for Evaluating Long-Context Reasoning in Large Language Models</title>
+<link>https://arxiv.org/abs/2511.00104</link>
+<description>arXiv:2511.00104v1 Announce Type: new 
+Abstract: We present a benchmark for the evaluation of large language models on long-context reasoning. The benchmark contains 5,000 questions and we evaluate 20 language models, finding that accuracy degrades with context length.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00104v1</guid>
+<category>cs.CL</category><category>cs.AI</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Sara Okafor, Jörg Müller</dc:creator>
+</item>
+<item>
+<title>LLM-as-a-Judge Is Biased Toward Verbose Answers</title>
+<link>https://arxiv.org/abs/2511.00105</link>
+<description>arXiv:2511.00105v1 Announce Type: new 
+Abstract: Large language models are increasingly used as judges for model evaluation. We show that LLM judges systematically prefer longer answers and propose a length-controlled evaluation protocol.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00105v1</guid>
+<category>cs.CL</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Tom Brown, Ana Lima</dc:creator>
+</item>
+<item>
+<title>Morphological Tagging for Low-Resource Bantu Languages</title>
+<link>https://arxiv.org/abs/2511.00108</link>
+<description>arXiv:2511.00108v1 Announce Type: new 
+Abstract: We release annotated corpora and morphological taggers for six low-resource Bantu languages.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00108v1</guid>
+<category>cs.CL</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Kwame Mensah</dc:creator>
+</item>
+<item>
+<title>Quantum-Inspired Word Embeddings</title>
+<link>https://arxiv.org/abs/2511.00111</link>
+<description>arXiv:2511.00111v1 Announce Type: new 
+Abstract: We propose word embeddings inspired by density matrices from quantum mechanics.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00111v1</guid>
+<category>cs.CL</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Elena Rossi</dc:creator>
+</item>
+</channel>
+</rss>

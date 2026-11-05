@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<link href="http://arxiv.org/api/query" rel="self" type="application/atom+xml"/>
+<title type="html">ArXiv Query</title>
+<id>http://arxiv.org/api/query</id>
+<updated>2025-11-05T00:00:00-05:00</updated>
+<entry>
+<id>http://arxiv.org/abs/2511.00101v1</id>
+<updated>2025-11-03T17:59:01Z</updated>
+<published>2025-11-03T17:59:01Z</published>
+<title>Offline Reinforcement Learning with Conservative Value Ensembles</title>
+<summary>  We study offline reinforcement learning where the agent must learn a policy from a fixed dataset. We propose conservative value ensembles that penalize out-of-distribution actions and improve policy optimization on D4RL benchmarks.
+</summary>
+<author><name>Maria García</name></author><author><name>Adrian Del Maestro</name></author><author><name>Wei Zhang</name></author>
+
+<arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">12 pages, 4 figures</arxiv:comment>
+<link href="http://arxiv.org/abs/2511.00101v1" rel="alternate" type="text/html"/>
+<link title="pdf" href="http://arxiv.org/pdf/2511.00101v1" rel="related" type="application/pdf"/>
+<arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+<category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/><category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+</entry>
+<entry>
+<id>http://arxiv.org/abs/2511.00104v1</id>
+<updated>2025-11-03T17:59:01Z</updated>
+<published>2025-11-03T17:59:01Z</published>
+<title>A Benchmark for Evaluating Long-Context Reasoning in Large Language Models</title>
+<summary>  We present a benchmark for the evaluation of large language models on long-context reasoning. The benchmark contains 5,000 questions and we evaluate 20 language models, finding that accuracy degrades with context length.
+</summary>
+<author><name>Sara Okafor</name></author><author><name>Jörg Müller</name></author>
+<arxiv:doi xmlns:arxiv="http://arxiv.org/schemas/atom">10.1000/test.2025.104</arxiv:doi>
+<arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">12 pages, 4 figures</arxiv:comment>
+<link href="http://arxiv.org/abs/2511.00104v1" rel="alternate" type="text/html"/>
+<link title="pdf" href="http://arxiv.org/pdf/2511.00104v1" rel="related" type="application/pdf"/>
+<arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+<category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/><category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+</entry>
+<entry>
+<id>http://arxiv.org/abs/2511.00106v1</id>
+<updated>2025-11-03T17:59:01Z</updated>
+<published>2025-11-03T17:59:01Z</published>
+<title>Contamination Detection for Language Model Benchmarks</title>
+<summary>  Benchmark contamination inflates evaluation scores of large language models. We propose a membership inference method to detect test set contamination in pretraining data.
+</summary>
+<author><name>Rui Silva</name></author><author><name>Sara Okafor</name></author>
+
+<arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">12 pages, 4 figures</arxiv:comment>
+<link href="http://arxiv.org/abs/2511.00106v1" rel="alternate" type="text/html"/>
+<link title="pdf" href="http://arxiv.org/pdf/2511.00106v1" rel="related" type="application/pdf"/>
+<arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+<category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/><category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+</entry>
+</feed>

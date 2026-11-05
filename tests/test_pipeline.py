@@ -1,0 +1,87 @@
+import json
+
+from arxiv_radar import pipeline
+from arxiv_radar.bibtex import cite_key, folder_bibtex, to_bibtex
+from arxiv_radar.store import Store
+
+
+def test_offline_run_end_to_end(cfg, sample_day):
+    doc = pipeline.run(cfg, offline=str(sample_day))
+    store = Store(cfg.data_dir)
+    assert doc["date"] == "2025-11-05"
+    assert store.read_day("2025-11-05")["counts"]["fetched"] == 11
+    papers = doc["papers"]
+    ids = [p["id"] for p in papers]
+    # top_n=6 plus the followed-author paper (Jorg Muller) even if it ranks lower
+    assert len(papers) >= 6 and "2511.00110" in ids and "2511.00104" in ids
+    by = {p["id"]: p for p in papers}
+    assert by["2511.00110"]["followed_authors"] == ["Jörg Müller"]
+    assert by["2511.00101"]["best_topic"] == "Reinforcement learning"
+    assert by["2511.00105"]["best_topic"] == "LLM evaluation"
+    assert by["2511.00101"]["why"]["closest"]["id"] in {"2405.00001", "2405.00002"}
+    assert all("tldr" in p for p in papers[:5])
+    assert doc["score_source"] == {"Reinforcement learning": "similarity", "LLM evaluation": "similarity"}
+    assert len(doc["background"]) == 11 - len(papers)
+    idx = store.read("index.json")
+    assert idx["days"][0]["date"] == "2025-11-05" and idx["topics"] == cfg.topic_names
+    matches = store.read("author_matches.json")
+    assert [m["id"] for m in matches["authors"]["Jörg Müller"]] == ["2511.00104", "2511.00110"] or \
+        {m["id"] for m in matches["authors"]["Jörg Müller"]} == {"2511.00104", "2511.00110"}
+    assert set(store.read("seeds.json")) == {"2405.00001", "2405.00002", "2405.00003", "2405.00004"}
+
+
+def test_deleted_papers_are_hidden_and_saved_are_marked(cfg, sample_day):
+    store = Store(cfg.data_dir)
+    store.write("feedback.json", {"deleted": {"2511.00104": {"title": "x", "abstract": "y"}}})
+    store.write("library.json", {"folders": {"To read": {"topic": None, "papers": ["2511.00105"]}},
+                                 "papers": {"2511.00105": {"id": "2511.00105", "title": "LLM judge",
+                                                            "abstract": "judge", "topics": ["LLM evaluation"]}}})
+    doc = pipeline.run(cfg, offline=str(sample_day))
+    ids = {p["id"]: p for p in doc["papers"]}
+    assert "2511.00104" not in ids
+    assert ids["2511.00105"]["saved_in"] == ["To read"]
+
+
+def test_dry_run_writes_elsewhere(cfg, sample_day, tmp_path):
+    out = tmp_path / "out"
+    pipeline.run(cfg, offline=str(sample_day), out_dir=str(out))
+    assert (out / "days/2025-11-05.json").exists()
+    assert not (tmp_path / "data/days").exists()
+
+
+def test_build_site(cfg, sample_day, tmp_path, monkeypatch):
+    pipeline.run(cfg, offline=str(sample_day))
+    monkeypatch.setenv("GITHUB_REPOSITORY", "me/radar")
+    out = pipeline.build_site(cfg, site_src="site", out=str(tmp_path / "_site"))
+    conf = json.loads((out / "config.json").read_text())
+    assert conf["repo"] == "me/radar" and conf["topics"] == cfg.topic_names
+    assert (out / "index.html").exists() and (out / "data/days/2025-11-05.json").exists()
+
+
+def test_bibtex():
+    p = {"id": "2511.00104", "title": "A Benchmark for Evaluating Long-Context Reasoning",
+         "authors": ["Sara Okafor", "Jörg Müller"], "primary_category": "cs.CL", "published": "2025-11-03"}
+    assert cite_key(p) == "okafor2025benchmark"
+    b = to_bibtex(p)
+    assert "author = {Sara Okafor and Jörg Müller}" in b and "eprint = {2511.00104}" in b
+    lib = {"folders": {"f": {"papers": ["2511.00104", "missing"]}}, "papers": {"2511.00104": p}}
+    assert folder_bibtex(lib, "f").count("@misc") == 1
+
+
+def test_empty_day_writes_nothing(cfg, tmp_path):
+    empty = tmp_path / "empty_day"
+    (empty / "rss").mkdir(parents=True)
+    (empty / "rss/cs.LG.xml").write_text(
+        "<?xml version='1.0'?><rss version='2.0'><channel><title>x</title>"
+        "<pubDate>Sat, 08 Nov 2025 00:00:00 -0500</pubDate></channel></rss>")
+    doc = pipeline.run(cfg, offline=str(empty))
+    assert doc == {"date": "2025-11-08", "papers": []}
+    assert not Store(cfg.data_dir).day_files()
+
+
+def test_example_config_requires_categories(tmp_path):
+    import pytest
+    from arxiv_radar.config import load_config
+
+    with pytest.raises(ValueError, match="categories"):
+        load_config("config.example.yaml")

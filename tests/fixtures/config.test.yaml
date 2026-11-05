@@ -1,0 +1,17 @@
+categories: [cs.LG, cs.CL]
+topics:
+  - name: Reinforcement learning
+    description: Reinforcement learning algorithms, offline RL, exploration and policy optimization
+    seed_ids: ["2405.00001", "2405.00002"]
+    keywords: [reinforcement learning, policy optimization]
+    negative_keywords: [federated]
+  - name: LLM evaluation
+    description: Benchmarks and evaluation methods for large language models
+    seed_ids: ["2405.00003", "2405.00004"]
+    keywords: [benchmark, evaluation, LLM-as-a-judge]
+authors: ["Jörg Müller"]
+prefilter_top_n: 6
+score_threshold: 0.6
+embedding: {backend: hashing}
+classifier: {backend: setfit, min_positives_per_topic: 3}
+summary: {backend: first-sentence, top_k: 5}

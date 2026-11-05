@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+<title>cs.LG updates on arXiv.org</title>
+<link>http://rss.arxiv.org/rss/cs.LG</link>
+<description>cs.LG updates on the arXiv.org e-print archive.</description>
+<language>en-us</language>
+<lastBuildDate>Wed, 05 Nov 2025 00:30:00 +0000</lastBuildDate>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<item>
+<title>Offline Reinforcement Learning with Conservative Value Ensembles</title>
+<link>https://arxiv.org/abs/2511.00101</link>
+<description>arXiv:2511.00101v1 Announce Type: new 
+Abstract: We study offline reinforcement learning where the agent must learn a policy from a fixed dataset. We propose conservative value ensembles that penalize out-of-distribution actions and improve policy optimization on D4RL benchmarks.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00101v1</guid>
+<category>cs.LG</category><category>cs.AI</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Maria García, Adrian Del Maestro, Wei Zhang</dc:creator>
+</item>
+<item>
+<title>Reward Shaping for Sparse-Reward Exploration in Deep Reinforcement Learning</title>
+<link>https://arxiv.org/abs/2511.00102</link>
+<description>arXiv:2511.00102v1 Announce Type: new 
+Abstract: Exploration under sparse rewards remains difficult for deep reinforcement learning agents. We introduce a reward shaping method based on learned potential functions that accelerates policy learning in Atari and MuJoCo.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00102v1</guid>
+<category>cs.LG</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>John Smith, Priya Patel</dc:creator>
+</item>
+<item>
+<title>Spectral Bounds for Graph Neural Network Expressivity</title>
+<link>https://arxiv.org/abs/2511.00103</link>
+<description>arXiv:2511.00103v1 Announce Type: new 
+Abstract: We derive spectral bounds on the expressivity of message passing graph neural networks and relate them to the Weisfeiler-Lehman hierarchy.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00103v1</guid>
+<category>cs.LG</category><category>stat.ML</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Li Chen, Oskar Novak</dc:creator>
+</item>
+<item>
+<title>Contamination Detection for Language Model Benchmarks</title>
+<link>https://arxiv.org/abs/2511.00106</link>
+<description>arXiv:2511.00106v1 Announce Type: cross 
+Abstract: Benchmark contamination inflates evaluation scores of large language models. We propose a membership inference method to detect test set contamination in pretraining data.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00106v1</guid>
+<category>cs.CL</category><category>cs.LG</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>cross</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Rui Silva, Sara Okafor</dc:creator>
+</item>
+<item>
+<title>Federated Learning with Differential Privacy for Medical Imaging</title>
+<link>https://arxiv.org/abs/2511.00107</link>
+<description>arXiv:2511.00107v1 Announce Type: new 
+Abstract: We study federated learning across hospitals with differential privacy guarantees for medical image segmentation.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00107v1</guid>
+<category>cs.LG</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Hannah Lee</dc:creator>
+</item>
+<item>
+<title>An Old Paper That Was Replaced</title>
+<link>https://arxiv.org/abs/2511.00109</link>
+<description>arXiv:2511.00109v1 Announce Type: replace 
+Abstract: This replacement should be dropped.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00109v1</guid>
+<category>cs.LG</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>replace</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Someone Else</dc:creator>
+</item>
+<item>
+<title>Model-Based Reinforcement Learning for Legged Robot Locomotion</title>
+<link>https://arxiv.org/abs/2511.00110</link>
+<description>arXiv:2511.00110v1 Announce Type: new 
+Abstract: We combine learned world models with model predictive control to train legged robot locomotion policies with reinforcement learning in under one hour of real-world data.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00110v1</guid>
+<category>cs.LG</category><category>cs.RO</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>Jorg Muller, Yuki Tanaka</dc:creator>
+</item>
+<item>
+<title>Scaling Laws for Sparse Mixture-of-Experts Training</title>
+<link>https://arxiv.org/abs/2511.00112</link>
+<description>arXiv:2511.00112v1 Announce Type: new 
+Abstract: We fit scaling laws for sparse mixture-of-experts language model pretraining as a function of expert count and compute.</description>
+<guid isPermaLink="false">oai:arXiv.org:2511.00112v1</guid>
+<category>cs.LG</category>
+<pubDate>Wed, 05 Nov 2025 00:00:00 -0500</pubDate>
+<arxiv:announce_type>new</arxiv:announce_type>
+<dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+<dc:creator>David Kim</dc:creator>
+</item>
+</channel>
+</rss>

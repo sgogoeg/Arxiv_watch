@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arXiv Radar</title>
+<meta name="description" content="Personalized daily arXiv papers, followed authors, citation tracking and a reading library.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%23b31b1b' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%23b31b1b'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="dot" aria-hidden="true"></span>arXiv Radar</div>
+  <nav class="tabs" role="tablist">
+    <a href="#daily" data-tab="daily">Daily</a>
+    <a href="#authors" data-tab="authors">Authors</a>
+    <a href="#my-papers" data-tab="my-papers">My papers</a>
+    <a href="#library" data-tab="library">Library</a>
+  </nav>
+  <div class="top-actions">
+    <button id="sync-btn" class="btn" title="Commit your changes to the repository">Sync <span id="pending-count" class="badge" hidden>0</span></button>
+    <button id="settings-btn" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+  </div>
+</header>
+
+<main id="view" aria-live="polite"><p class="muted center">Loading…</p></main>
+
+<dialog id="settings">
+  <form method="dialog" class="settings-form">
+    <h2>Settings</h2>
+    <p class="muted small">Edits (deletes, folders, authors, my papers) are saved in this browser and committed to the repo when you press <b>Sync</b>.
+      Use a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> limited to this repository with <i>Contents: read and write</i>.
+      It is stored only in this browser.</p>
+    <label>Repository <input id="set-repo" placeholder="owner/repo" autocomplete="off"></label>
+    <label>Branch <input id="set-branch" placeholder="main" autocomplete="off"></label>
+    <label>Token <input id="set-token" type="password" placeholder="github_pat_…" autocomplete="off"></label>
+    <label>Theme
+      <select id="set-theme"><option value="">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
+    </label>
+    <div class="row gap">
+      <button value="save" class="btn primary" id="set-save">Save</button>
+      <button value="cancel" class="btn">Close</button>
+      <button type="button" class="btn danger ml-auto" id="set-discard" title="Throw away unsynced edits">Discard unsynced edits</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
