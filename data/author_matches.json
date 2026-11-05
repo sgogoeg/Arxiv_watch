@@ -149,7 +149,8 @@
     "categories": [
      "hep-ex",
      "hep-ph"
-    ]
+    ],
+    "inspire_url": "https://inspirehep.net/literature/3222489"
    },
    {
     "id": "2610.33153",
@@ -169,7 +170,8 @@
      "hep-ex",
      "nucl-ex",
      "nucl-th"
-    ]
+    ],
+    "inspire_url": "https://inspirehep.net/literature/3218786"
    },
    {
     "id": "2610.17263",
@@ -187,7 +189,8 @@
     "categories": [
      "hep-ph",
      "hep-ex"
-    ]
+    ],
+    "inspire_url": "https://inspirehep.net/literature/3214464"
    },
    {
     "id": "2610.16836",
@@ -205,7 +208,8 @@
     "categories": [
      "hep-ph",
      "hep-ex"
-    ]
+    ],
+    "inspire_url": "https://inspirehep.net/literature/3214395"
    }
   ]
  },
