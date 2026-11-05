@@ -56,6 +56,8 @@ def test_build_site(cfg, sample_day, tmp_path, monkeypatch):
     conf = json.loads((out / "config.json").read_text())
     assert conf["repo"] == "me/radar" and conf["topics"] == cfg.topic_names
     assert (out / "index.html").exists() and (out / "data/days/2025-11-05.json").exists()
+    html = (out / "index.html").read_text()
+    assert 'src="app.js?v=' in html and 'href="style.css?v=' in html
 
 
 def test_bibtex():

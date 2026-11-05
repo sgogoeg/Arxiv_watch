@@ -292,4 +292,13 @@ def build_site(cfg: Config, site_src: str = "site", out: str = "_site") -> Path:
         "threshold": cfg.score_threshold,
     }, indent=1))
     (out_p / ".nojekyll").write_text("")
+    # Version the script and stylesheet URLs so browsers fetch new copies after each deploy.
+    import hashlib
+
+    index = out_p / "index.html"
+    html = index.read_text()
+    for asset in ("app.js", "style.css"):
+        digest = hashlib.sha256((out_p / asset).read_bytes()).hexdigest()[:10]
+        html = html.replace(f'"{asset}"', f'"{asset}?v={digest}"')
+    index.write_text(html)
     return out_p
