@@ -8,7 +8,7 @@
 
 const EDIT_FILES = ["feedback.json", "library.json", "authors.json", "my_papers.json", "settings.json"];
 const DEFAULTS = {
-  "feedback.json": { deleted: {}, cared: {} },
+  "feedback.json": { deleted: {}, cared: {}, wacky_votes: {} },
   "library.json": { folders: {}, papers: {} },
   "authors.json": { authors: [] },
   "my_papers.json": { papers: [] },
@@ -20,11 +20,11 @@ const OP_FILE = {
   folder_rename: "library.json", folder_delete: "library.json", folder_topic: "library.json",
   author_add: "authors.json", author_remove: "authors.json",
   mypaper_add: "my_papers.json", mypaper_remove: "my_papers.json",
-  categories_set: "settings.json",
+  categories_set: "settings.json", wacky_vote: "feedback.json",
 };
 
 const S = {
-  cfg: {}, index: { days: [], topics: [] }, dayCache: {}, day: null,
+  cfg: {}, index: { days: [], topics: [] }, awardsModel: {}, dayCache: {}, day: null,
   base: {}, view: {}, matches: { authors: {} }, citations: { papers: {} },
   pending: [], filters: { topic: "all", min: null, q: "", showDeleted: false, followedOnly: false },
   folder: null, openAuthor: null, openCite: null, statsDay: null, statsTab: "general",
@@ -148,6 +148,10 @@ function applyOp(f, op) {
       if (!list.some((p) => p.query === op.query)) list.push({ query: op.query, label: op.label || null, added: op.date });
       break;
     }
+    case "wacky_vote":
+      fb.wacky_votes = fb.wacky_votes || {};
+      fb.wacky_votes[op.day] = { winner: op.winner, candidates: op.candidates, date: op.date };
+      break;
     case "categories_set":
       f["settings.json"].categories = op.categories;
       break;
@@ -187,6 +191,10 @@ const sameSet = (a, b) => JSON.stringify([...a].sort()) === JSON.stringify([...b
 function push(op) {
   op.date = op.date || today();
   // Repeated category edits collapse into one; an edit back to the synced list cancels it.
+  if (op.type === "wacky_vote") {  // changing your mind replaces the earlier vote for that day
+    const last = S.pending[S.pending.length - 1];
+    if (last && last.type === "wacky_vote" && last.day === op.day) S.pending.pop();
+  }
   if (op.type === "categories_set") {
     const last = S.pending[S.pending.length - 1];
     if (last && last.type === "categories_set") S.pending.pop();
@@ -302,7 +310,7 @@ function summarizeOps(ops) {
   ops.forEach((o) => { n[o.type] = (n[o.type] || 0) + 1; });
   const label = { delete: "deleted", undelete: "restored", care: "marked I care", uncare: "unmarked I care", save: "saved", unsave: "removed from folder", folder_create: "new folder",
     folder_rename: "renamed folder", folder_delete: "deleted folder", folder_topic: "folder topic", author_add: "author add",
-    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed" };
+    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed", wacky_vote: "wackiest-title vote" };
   return Object.entries(n).map(([k, v]) => `${v} ${label[k] || k}`).join(", ");
 }
 
@@ -501,6 +509,65 @@ function dailySummary(d, deleted) {
     </div></details>`;
 }
 
+// ------------------------------------------------------------------ daily awards
+function awardLink(p) {
+  return `<a class="tex" href="${esc(paperUrl(p))}" target="_blank" rel="noopener">${esc(p.title)}</a>`;
+}
+function shortAuthors(p) {
+  const a = p.authors || [];
+  return esc(a.slice(0, 3).join(", ") + (a.length > 3 ? " et al." : ""));
+}
+
+function dailyAwards(d) {
+  const a = d.awards;
+  if (!a) return "";
+  const open = ls.get("awards-open", true);
+  const L = a.longest, M = a.most_submissions, D = a.drama || [], W = a.wacky;
+  const longest = L ? `${awardLink(L.winner)}<div class="award-meta">${L.winner.pages} pages · ${esc(L.winner.primary_category || "")} · ${shortAuthors(L.winner)}</div>
+      ${L.runners_up?.length ? `<div class="award-meta">Next: ${L.runners_up.map((r) => `<a href="${esc(paperUrl(r))}" target="_blank" rel="noopener">${r.pages} pp.</a>`).join(", ")}</div>` : ""}`
+    : `<p class="muted small">No paper stated its length today.</p>`;
+  const most = M ? M.winners.map((w) => `<div class="award-name">${esc(w.name)}</div>
+      <details class="award-papers"><summary>${M.count} papers</summary><ul>${w.papers.map((p) => `<li>${awardLink(p)}</li>`).join("")}</ul></details>`).join("")
+      + (M.tied > M.winners.length ? `<div class="award-meta">+${M.tied - M.winners.length} more tied</div>` : "")
+      + `<div class="award-meta">Ignoring ${M.excluded_collaborations} collaboration or 30+ author papers</div>`
+    : `<p class="muted small">Nobody submitted more than one paper.</p>`;
+  const drama = D.length ? D.map((p) => `<div class="drama">${awardLink(p)}
+      <div class="award-meta">${shortAuthors(p)}${p.target ? ` · responds to <a href="${esc(p.target.abs_url)}" target="_blank" rel="noopener">arXiv:${esc(p.target.id)}</a>` : ""}</div></div>`).join("")
+    : `<p class="muted small">No public disputes today.</p>`;
+  let wacky = `<p class="muted small">Not enough papers to choose from.</p>`;
+  if (W && W.candidates?.length) {
+    const vote = S.view["feedback.json"].wacky_votes?.[d.date];
+    const votes = S.awardsModel.votes || 0;
+    wacky = `<div class="wacky">${W.candidates.map((c) => {
+      const mine = vote && vote.winner === c.id;
+      return `<div class="wacky-cand ${mine ? "picked" : ""}"><div>${awardLink(c)}<div class="award-meta">${shortAuthors(c)}</div></div>
+        <button class="btn small ${mine ? "on" : ""}" data-wacky="${esc(c.id)}" aria-pressed="${mine}">${mine ? "★ Picked" : "Pick"}</button></div>`;
+    }).join("")}
+      <div class="row gap"><button class="btn small ${vote && vote.winner === null ? "on" : ""}" data-wacky="">None of these</button>
+      <span class="muted small">${vote ? "Thanks, your pick trains the selector." : "Your pick trains the selector."} ${votes ? `Trained on ${votes} vote${votes === 1 ? "" : "s"}.` : ""}</span></div></div>`;
+  }
+  return `<details class="panel awards" ${open ? "open" : ""}><summary>Daily awards</summary>
+    <p class="muted small">Longest paper, most submissions and drama cover all of arXiv today (${fmt(a.pool)} papers). The wackiest title is from your categories.</p>
+    <div class="award-grid">
+      <section class="award"><h4>Longest paper</h4>${longest}</section>
+      <section class="award"><h4>Most submissions</h4>${most}</section>
+      <section class="award"><h4>arXiv drama</h4>${drama}</section>
+      <section class="award award-wide"><h4>Wackiest title</h4>${wacky}</section>
+    </div></details>`;
+}
+
+function bindAwards(v, d) {
+  const aw = v.querySelector("details.awards");
+  if (!aw) return;
+  aw.ontoggle = () => ls.set("awards-open", aw.open);
+  aw.querySelectorAll("[data-wacky]").forEach((b) => {
+    b.onclick = () => {
+      const winner = b.dataset.wacky || null;
+      push({ type: "wacky_vote", day: d.date, winner, candidates: d.awards.wacky.candidates.map((c) => c.id) });
+    };
+  });
+}
+
 async function renderDaily(v) {
   if (!S.index.days.length) {
     v.innerHTML = `<div class="empty">No days yet. The daily GitHub Action writes the first one after its next run.</div>`;
@@ -541,6 +608,7 @@ async function renderDaily(v) {
       <input type="search" class="grow" id="q" placeholder="Search title, abstract, authors" value="${esc(f.q)}">
     </div>
     ${dailySummary(d, deleted)}
+    ${dailyAwards(d)}
     <div class="chips">
       <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all">All<span class="n">${counts.all}</span></button>
       ${dayTopics.map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
@@ -564,6 +632,7 @@ async function renderDaily(v) {
   v.querySelectorAll("[data-topic]").forEach((b) => { b.onclick = () => { f.topic = b.dataset.topic; render(); }; });
   const sum = v.querySelector("details.summary");
   if (sum) sum.ontoggle = () => ls.set("summary-open", sum.open);
+  bindAwards(v, d);
   bindCards(v);
 }
 
@@ -921,6 +990,7 @@ async function init() {
     getJSON("data/author_matches.json", { authors: {}, backfilled: [] }),
     getJSON("data/citations.json", { papers: {} }),
   ]);
+  S.awardsModel = await getJSON("data/awards_model.json", {});
   const site = await Promise.all(EDIT_FILES.map((n) => getJSON(`data/${n}`, clone(DEFAULTS[n]))));
   EDIT_FILES.forEach((n, i) => { S.base[n] = site[i]; });
   // The deployed snapshot can be older than your last sync; prefer the repo, then the last synced copy.

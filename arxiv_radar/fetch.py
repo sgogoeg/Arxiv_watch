@@ -181,6 +181,23 @@ def merge_papers(rss: Iterable[dict], api: Iterable[dict]) -> list[dict]:
 
 # --------------------------------------------------------------------------- high level
 
+def in_categories(cat: str, wanted: list[str]) -> bool:
+    """'astro-ph.CO' is in ['astro-ph']; 'hep-ph' is in ['hep-ph']."""
+    return any(cat == w or cat.startswith(w + ".") for w in wanted)
+
+
+def filter_by_categories(papers: list[dict], wanted: list[str]) -> list[dict]:
+    """Papers listed in any wanted category (primary or cross-list), with announce_type relative to them."""
+    out = []
+    for p in papers:
+        cats = p.get("categories") or ([p["primary_category"]] if p.get("primary_category") else [])
+        if not any(in_categories(c, wanted) for c in cats):
+            continue
+        prim = p.get("primary_category") or (cats[0] if cats else "")
+        out.append({**p, "announce_type": "new" if in_categories(prim, wanted) else "cross"})
+    return out
+
+
 def fetch_metadata(client: ArxivClient, ids: list[str], batch: int = 100) -> list[dict]:
     out: list[dict] = []
     for i in range(0, len(ids), batch):

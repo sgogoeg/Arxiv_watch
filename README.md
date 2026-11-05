@@ -17,6 +17,7 @@ LaTeX in titles, summaries and abstracts is rendered with KaTeX.
 | --- | --- |
 | **Daily** | Today's shortlisted papers with per-topic scores, why each matched, TL;DR, abstract. Filter by topic, score, followed authors, text. Delete (with undo) or save to a folder. |
 | (Daily, top) | *Today's selection*: a pie of the papers that passed your filters by category, with followed-author, saved / I care / deleted counts and frequent terms. |
+| (Daily, below it) | *Daily awards*: longest paper, most submissions (collaborations excluded) and arXiv drama, picked from **all of arXiv**; wackiest title as 3 candidates from your categories. Your pick retrains the selector. |
 | **Stats** | Analytics for a day. *General*: everything fetched (categories, title terms, active authors, authors per paper, similarity to your topics). *Personalized*: what passed your filters (per-topic counts, score distribution, pass rate by category, top papers). |
 | **Authors** | Follow one name or paste a list. Their new papers are always shown in Daily; the last 30 days are backfilled when you add someone. |
 | **My papers** | Add your papers by arXiv ID, DOI or title. Shows citation counts over time, new citations since your last visit, and the citing papers. |
@@ -61,6 +62,23 @@ RSS (today's IDs) → arXiv API (metadata, ≥3 s between requests)
 
 The workflow's push trigger and Pages deployment assume your default branch is `main`. Change
 `branches:` in `.github/workflows/daily.yml` and `github_branch` in `config.yaml` if it isn't.
+
+### Daily awards
+
+With `awards.enabled` (default), each run reads the RSS feed of every arXiv archive, so the listing covers the whole day.
+Longest paper, most submissions and arXiv drama are picked from that full listing. It is then filtered to your
+categories for everything else, and the extra papers are not stored. This adds about 20 RSS and 10–25 API requests
+(1–2 minutes at arXiv's rate limit).
+
+* **Longest paper**: the page count authors give in the arXiv comment ("45 pages, 12 figures"). Papers that don't
+  state one are skipped.
+* **Most submissions**: author names are merged across spellings ("F. Beutler" = "Florian Beutler"). Papers with more than
+  30 authors or a collaboration/consortium author are ignored.
+* **arXiv drama**: "Comment on…", "Reply to…", "Rebuttal…" titles, arXiv comments like "comment on arXiv:…", and
+  abstracts that say they are a comment or reply. Errata are excluded. Links to the paper being answered when it's cited.
+* **Wackiest title**: scores rare words, a title that doesn't match its abstract, questions, exclamations, catchy
+  "X:" prefixes, first person, alliteration and unusual length. It shows its top 2 plus 1 exploratory pick. Your votes
+  (`feedback.json` → `wacky_votes`) train its weights on every run (`data/awards_model.json`).
 
 ### Changing categories
 

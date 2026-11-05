@@ -39,6 +39,9 @@ summary:
   model: google/flan-t5-base
   top_k: 20
 
+awards:
+  enabled: true            # fetch all of arXiv for the daily awards (adds ~1–2 min)
+
 citations:
   enabled: true
   max_citing_works: 200

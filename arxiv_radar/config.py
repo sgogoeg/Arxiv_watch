@@ -59,6 +59,12 @@ class InspireConfig(BaseModel):
     recheck_days: int = 3  # re-check recent days for papers that were not in INSPIRE yet
 
 
+class AwardsConfig(BaseModel):
+    # Fetch every arXiv archive so longest paper / most submissions / drama cover all of arXiv.
+    # The extra papers are used only for the awards.
+    enabled: bool = True
+
+
 class Config(BaseModel):
     categories: list[str]
     topics: list[Topic]
@@ -73,6 +79,7 @@ class Config(BaseModel):
     summary: SummaryConfig = Field(default_factory=SummaryConfig)
     citations: CitationsConfig = Field(default_factory=CitationsConfig)
     inspire: InspireConfig = Field(default_factory=InspireConfig)
+    awards: AwardsConfig = Field(default_factory=AwardsConfig)
     # "owner/repo" and branch the dashboard commits edits to. Defaults to $GITHUB_REPOSITORY.
     github_repo: str | None = None
     github_branch: str = "main"
