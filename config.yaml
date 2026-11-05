@@ -1,0 +1,40 @@
+# arXiv Radar configuration. See config.example.yaml for every option.
+
+categories:
+  - hep-ph
+  - astro-ph
+  - gr-qc
+
+topics:
+  # Seeded from the three papers you sent. Split this into several named topics
+  # (each with its own seeds and description) once you know how you want to group them.
+  - name: My research
+    description: Papers similar to my seed papers in particle physics, astrophysics and gravitation.
+    seed_ids: ["2305.02357v3", "2501.15649v2", "2403.09816"]
+    keywords: []
+    negative_keywords: []
+
+authors: []
+
+prefilter_top_n: 150
+score_threshold: 0.5
+author_backfill_days: 30
+
+embedding:
+  backend: sentence-transformers
+  model: allenai/specter2_base
+
+classifier:
+  backend: setfit
+  min_positives_per_topic: 3
+  random_negatives: 100
+
+summary:
+  backend: flan-t5
+  model: google/flan-t5-base
+  top_k: 20
+
+citations:
+  enabled: true
+
+github_branch: main

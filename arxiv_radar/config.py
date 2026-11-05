@@ -16,6 +16,14 @@ class Topic(BaseModel):
     negative_keywords: list[str] = Field(default_factory=list)
 
 
+    @field_validator("seed_ids", mode="before")
+    @classmethod
+    def _strip_versions(cls, v):
+        from .fetch import normalize_id
+
+        return [normalize_id(str(x)) for x in (v or [])]
+
+
 class EmbeddingConfig(BaseModel):
     # "sentence-transformers" (SPECTER2 by default) or "hashing" (no download, for tests/dry runs)
     backend: str = "sentence-transformers"

@@ -85,3 +85,9 @@ def test_example_config_requires_categories(tmp_path):
 
     with pytest.raises(ValueError, match="categories"):
         load_config("config.example.yaml")
+
+
+def test_seed_ids_drop_versions():
+    from arxiv_radar.config import Topic
+
+    assert Topic(name="t", seed_ids=["2305.02357v3", "arXiv:2403.09816"]).seed_ids == ["2305.02357", "2403.09816"]
