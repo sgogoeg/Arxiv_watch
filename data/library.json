@@ -2,8 +2,35 @@
  "folders": {
   "Interesting": {
    "topic": null,
-   "papers": []
+   "papers": [
+    "2611.05504"
+   ]
   }
  },
- "papers": {}
+ "papers": {
+  "2611.05504": {
+   "id": "2611.05504",
+   "title": "Gravitational waves flooding the Universe after wall domination",
+   "authors": [
+    "Sabir Ramazanov",
+    "Zhen-Min Zeng"
+   ],
+   "abstract": "We discuss a possible early Universe scenario, where radiation era is interrupted by the epoch of domination of domain walls eventually annihilating into particles. During this period the Universe undergoes accelerated expansion, while the comoving correlation length of the domain wall network remains constant. The network serves as a source of tensor modes, which get frozen upon exiting the horizon similarly to the case of inflationary fluctuations. The modes re-enter the horizon during the subsequent stage of radiation domination and since then contribute to the gravitational wave background. The spectral shape of gravitational waves predicted in this scenario is markedly different compared to the case of domain walls remaining sub-dominant all the way till annihilation. These gravitational waves are strong enough to be observed with present-day and future facilities in a broad range of frequencies. In particular, their energy density is sufficient to produce a significant impact on the effective number of neutrino species, unless the duration of wall domination is suitably constrained.",
+   "abs_url": "https://arxiv.org/abs/2611.05504",
+   "pdf_url": "https://arxiv.org/pdf/2611.05504v1",
+   "primary_category": "astro-ph.CO",
+   "categories": [
+    "astro-ph.CO",
+    "hep-ph",
+    "hep-th"
+   ],
+   "published": "2026-11-03T19:02:26Z",
+   "date": "2026-11-05",
+   "tldr": "A possible early Universe scenario, where the epoch of domination of domain walls eventually annihilating into particles is interrupted by the epoch of radiation era.",
+   "topics": [
+    "My research"
+   ],
+   "saved": "2026-11-05"
+  }
+ }
 }
