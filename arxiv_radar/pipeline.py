@@ -10,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import prefilter
+from . import inspire, prefilter, stats
 from .authors import AuthorMatcher, backfill, update_matches
 from .citations import update_citations
 from .classify import build_training_set, classify
@@ -107,10 +107,11 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     log.info("%s: %d papers fetched", day, len(papers))
 
     deleted = store.deleted_papers()
-    saved = store.saved_papers()
+    saved = store.positive_papers()  # saved in a folder or marked "I care"
     saved_where: dict[str, list[str]] = {}
     for paper, _, folder in saved:
-        saved_where.setdefault(paper["id"], []).append(folder)
+        if folder:
+            saved_where.setdefault(paper["id"], []).append(folder)
     papers = [p for p in papers if p["id"] not in deleted]
 
     followed = store.followed_author_names(cfg.authors)
@@ -174,8 +175,12 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
         entries.append(p)
     entries.sort(key=lambda p: (p["score"], bool(p["followed_authors"])), reverse=True)
 
-    # 6. summaries for the top papers
+    # 6. INSPIRE links, summaries for the top papers, analytics
+    if cfg.inspire.enabled and client:
+        inspire.add_links(entries)
     summarize(entries, cfg.summary)
+    best_sim = pre.raw.max(axis=1).tolist() if len(papers) else []
+    day_stats = stats.compute(papers, best_sim, entries, names, cfg.score_threshold)
 
     # 7. write
     short = set(idx)
@@ -189,6 +194,7 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
         "topics": names,
         "score_source": dict(zip(names, sources)),
         "counts": {"fetched": len(papers), "shortlisted": len(entries)},
+        "stats": day_stats,
         "papers": entries,
         "background": background,
     }
@@ -209,6 +215,8 @@ def _finish_side_tasks(cfg: Config, store: Store, writer: Store, client, followe
     if client:
         backfill(client, followed, matches, date.fromisoformat(day), cfg.author_backfill_days)
     writer.write("author_matches.json", matches)
+    if cfg.inspire.enabled and client:
+        inspire.recheck_recent(store, writer, cfg.inspire.recheck_days, skip=day)
     if cfg.citations.enabled and not skip_citations:
         refresh_citations(cfg, store, writer, day)
 
@@ -230,15 +238,32 @@ def refresh(cfg: Config) -> None:
     today = datetime.now(timezone.utc).date()
     backfill(client, followed, matches, today, cfg.author_backfill_days)
     store.write("author_matches.json", matches)
+    if cfg.inspire.enabled:
+        inspire.recheck_recent(store, store, cfg.inspire.recheck_days)
     if cfg.citations.enabled:
         refresh_citations(cfg, store, store)
+
+
+def restat(cfg: Config, day: str) -> dict:
+    """Compute analytics for a day processed before stats existed (from its stored papers)."""
+    store = Store(cfg.data_dir)
+    doc = store.read_day(day)
+    if doc is None:
+        raise SystemExit(f"no data for {day}")
+    entries = doc.get("papers", [])
+    background = doc.get("background", [])  # only id/title/abstract were kept for these
+    sims = [(p.get("why") or {}).get("similarity") for p in entries] + [None] * len(background)
+    doc["stats"] = stats.compute(entries + background, sims, entries, doc.get("topics", cfg.topic_names),
+                                 cfg.score_threshold)
+    store.write_day(day, doc)
+    return doc["stats"]
 
 
 def retrain(cfg: Config) -> None:
     """Train (or reuse) the classifier without fetching new papers."""
     store = Store(cfg.data_dir)
     seeds = ensure_seeds(cfg, store, ArxivClient(), None)
-    examples = build_training_set(cfg.topics, seeds, store.saved_papers(), store.deleted_papers(),
+    examples = build_training_set(cfg.topics, seeds, store.positive_papers(), store.deleted_papers(),
                                   recent_background(store), cfg.classifier.random_negatives, random.Random(0))
     dummy = np.zeros((0, len(cfg.topics)), dtype=np.float32)
     _, sources = classify(cfg, cfg.topics, examples, [], dummy, Path(cfg.cache_dir) / "model")

@@ -6,6 +6,9 @@
 <title>arXiv Radar</title>
 <meta name="description" content="Personalized daily arXiv papers, followed authors, citation tracking and a reading library.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%23b31b1b' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%23b31b1b'/></svg>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,13 +16,14 @@
   <div class="brand"><span class="dot" aria-hidden="true"></span>arXiv Radar</div>
   <nav class="tabs" role="tablist">
     <a href="#daily" data-tab="daily">Daily</a>
+    <a href="#stats" data-tab="stats">Stats</a>
     <a href="#authors" data-tab="authors">Authors</a>
     <a href="#my-papers" data-tab="my-papers">My papers</a>
     <a href="#library" data-tab="library">Library</a>
   </nav>
   <div class="top-actions">
     <button id="sync-btn" class="btn" title="Commit your changes to the repository">Sync <span id="pending-count" class="badge" hidden>0</span></button>
-    <button id="settings-btn" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+    <button id="settings-btn" class="btn" title="Settings">Settings</button>
   </div>
 </header>
 
@@ -28,7 +32,7 @@
 <dialog id="settings">
   <form method="dialog" class="settings-form">
     <h2>Settings</h2>
-    <p class="muted small">Edits (deletes, folders, authors, my papers) are saved in this browser and committed to the repo when you press <b>Sync</b>.
+    <p class="muted small">Edits (deletes, "I care" marks, folders, authors, my papers) are saved in this browser and committed to the repo when you press <b>Sync</b>.
       Use a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> limited to this repository with <i>Contents: read and write</i>.
       It is stored only in this browser.</p>
     <label>Repository <input id="set-repo" placeholder="owner/repo" autocomplete="off"></label>

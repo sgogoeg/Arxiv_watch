@@ -8,13 +8,13 @@
 
 const EDIT_FILES = ["feedback.json", "library.json", "authors.json", "my_papers.json"];
 const DEFAULTS = {
-  "feedback.json": { deleted: {} },
+  "feedback.json": { deleted: {}, cared: {} },
   "library.json": { folders: {}, papers: {} },
   "authors.json": { authors: [] },
   "my_papers.json": { papers: [] },
 };
 const OP_FILE = {
-  delete: "feedback.json", undelete: "feedback.json",
+  delete: "feedback.json", undelete: "feedback.json", care: "feedback.json", uncare: "feedback.json",
   save: "library.json", unsave: "library.json", folder_create: "library.json",
   folder_rename: "library.json", folder_delete: "library.json", folder_topic: "library.json",
   author_add: "authors.json", author_remove: "authors.json",
@@ -25,7 +25,7 @@ const S = {
   cfg: {}, index: { days: [], topics: [] }, dayCache: {}, day: null,
   base: {}, view: {}, matches: { authors: {} }, citations: { papers: {} },
   pending: [], filters: { topic: "all", min: null, q: "", showDeleted: false, followedOnly: false },
-  folder: null, openAuthor: null, openCite: null,
+  folder: null, openAuthor: null, openCite: null, statsDay: null, statsTab: "general",
 };
 
 // ------------------------------------------------------------------ utils
@@ -63,10 +63,29 @@ function nameKey(name) {
 }
 const lastName = (n) => { const t = nameKey(n); return t[t.length - 1] || ""; };
 
+// INSPIRE record when the pipeline found one, arXiv otherwise.
+const arxivUrl = (p) => p.abs_url || `https://arxiv.org/abs/${p.id}`;
+const paperUrl = (p) => p.inspire_url || arxivUrl(p);
+
+// LaTeX in titles, summaries and abstracts (KaTeX auto-render, loaded from the CDN).
+const TEX_OPTS = {
+  delimiters: [
+    { left: "$$", right: "$$", display: true }, { left: "\\[", right: "\\]", display: true },
+    { left: "$", right: "$", display: false }, { left: "\\(", right: "\\)", display: false },
+  ],
+  throwOnError: false,
+};
+function typeset(root) {
+  if (!window.renderMathInElement) return;
+  root.querySelectorAll(".tex").forEach((el) => {
+    try { window.renderMathInElement(el, TEX_OPTS); } catch (e) { /* leave the raw text */ }
+  });
+}
+
 // ------------------------------------------------------------------ ops
 function paperMeta(p) {
   const topics = (p.topics && p.topics.length) ? p.topics : (p.best_topic ? [p.best_topic] : []);
-  const keep = ["id", "title", "authors", "abstract", "abs_url", "pdf_url", "primary_category", "categories", "published", "date", "doi", "tldr"];
+  const keep = ["id", "title", "authors", "abstract", "abs_url", "pdf_url", "primary_category", "categories", "published", "date", "doi", "tldr", "inspire_url"];
   const m = {};
   keep.forEach((k) => { if (p[k] != null) m[k] = p[k]; });
   m.topics = topics;
@@ -82,8 +101,14 @@ function applyOp(f, op) {
   switch (op.type) {
     case "delete":
       fb.deleted[op.id] = { date: op.date, title: op.paper.title, abstract: op.paper.abstract, topics: op.paper.topics || [] };
+      delete fb.cared[op.id];
       break;
     case "undelete": delete fb.deleted[op.id]; break;
+    case "care":
+      fb.cared[op.id] = { date: op.date, title: op.paper.title, abstract: op.paper.abstract, topics: op.paper.topics || [] };
+      delete fb.deleted[op.id];
+      break;
+    case "uncare": delete fb.cared[op.id]; break;
     case "folder_create":
       if (!lib.folders[op.name]) lib.folders[op.name] = { topic: op.topic || null, papers: [] };
       break;
@@ -142,11 +167,11 @@ function recompute() {
 }
 
 // An undo that exactly reverses the last unsynced edit removes that edit instead of queuing a new one.
-const CANCELS = { undelete: "delete", unsave: "save", author_remove: "author_add", mypaper_remove: "mypaper_add" };
+const CANCELS = { undelete: "delete", uncare: "care", unsave: "save", author_remove: "author_add", mypaper_remove: "mypaper_add" };
 function cancelsLast(op) {
   const last = S.pending[S.pending.length - 1];
   if (!last || CANCELS[op.type] !== last.type) return false;
-  if (op.type === "undelete") return last.id === op.id;
+  if (op.type === "undelete" || op.type === "uncare") return last.id === op.id;
   if (op.type === "unsave") return last.id === op.id && last.folder === op.folder;
   if (op.type === "author_remove") return last.names.length === 1 && last.names[0] === op.name;
   return last.query === op.query;
@@ -259,7 +284,7 @@ async function sync() {
 function summarizeOps(ops) {
   const n = {};
   ops.forEach((o) => { n[o.type] = (n[o.type] || 0) + 1; });
-  const label = { delete: "deleted", undelete: "restored", save: "saved", unsave: "removed from folder", folder_create: "new folder",
+  const label = { delete: "deleted", undelete: "restored", care: "marked I care", uncare: "unmarked I care", save: "saved", unsave: "removed from folder", folder_create: "new folder",
     folder_rename: "renamed folder", folder_delete: "deleted folder", folder_topic: "folder topic", author_add: "author add",
     author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed" };
   return Object.entries(n).map(([k, v]) => `${v} ${label[k] || k}`).join(", ");
@@ -300,11 +325,12 @@ function followedSet() {
 
 function card(p, opts = {}) {
   const deleted = !!S.view["feedback.json"].deleted[p.id];
+  const cared = !!S.view["feedback.json"].cared[p.id];
   const folders = Object.entries(S.view["library.json"].folders).filter(([, f]) => f.papers.includes(p.id)).map(([k]) => k);
   const followedNames = new Set((p.followed_authors || []).map(lastName));
   const authors = (p.authors || []).slice(0, 12).map((a) => (followedNames.has(lastName(a)) ? `<b>${esc(a)}</b>` : esc(a))).join(", ")
     + ((p.authors || []).length > 12 ? `, … (+${p.authors.length - 12})` : "");
-  const topics = S.index.topics || [];
+  const topics = Object.keys(p.scores || {});
   const thr = S.index.threshold ?? 0.5;
   const scores = p.scores ? topics.map((t) => {
     const v = p.scores[t] ?? 0;
@@ -316,24 +342,28 @@ function card(p, opts = {}) {
     if (p.why.closest && p.why.closest.title) why.push(`similar to <a href="https://arxiv.org/abs/${esc(p.why.closest.id)}" target="_blank" rel="noopener">${esc(p.why.closest.title)}</a>`);
   }
   return `<article class="card ${deleted ? "deleted" : ""}" data-id="${esc(p.id)}">
-    <h3><a href="${esc(p.abs_url || `https://arxiv.org/abs/${p.id}`)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3>
+    <h3><a class="tex" href="${esc(paperUrl(p))}" target="_blank" rel="noopener" title="${p.inspire_url ? "Open on INSPIRE" : "Open on arXiv"}">${esc(p.title)}</a></h3>
     <div class="authors">${authors}</div>
     <div class="meta">
       <span>${esc(p.id)}</span>
       ${p.primary_category ? `<span class="pill">${esc(p.primary_category)}</span>` : ""}
       ${p.announce_type === "cross" ? `<span class="pill">cross-list</span>` : ""}
       ${(p.followed_authors || []).length ? `<span class="pill follow">followed: ${p.followed_authors.map(esc).join(", ")}</span>` : ""}
-      ${folders.map((f) => `<span class="pill saved">📁 ${esc(f)}</span>`).join("")}
+      ${cared ? `<span class="pill cared">★ I care</span>` : ""}
+      ${folders.map((f) => `<span class="pill saved">▸ ${esc(f)}</span>`).join("")}
       ${opts.date ? `<span>${esc(opts.date)}</span>` : ""}
     </div>
     ${scores ? `<div class="scores">${scores}</div>` : ""}
-    ${p.tldr ? `<p class="tldr">${esc(p.tldr)}</p>` : ""}
+    ${p.tldr ? `<p class="tldr tex">${esc(p.tldr)}</p>` : ""}
     ${why.length ? `<div class="why">${why.join(" · ")}</div>` : ""}
-    ${p.abstract ? `<details class="abs"><summary>Abstract</summary><p>${esc(p.abstract)}</p></details>` : ""}
+    ${p.abstract ? `<details class="abs"><summary>Abstract</summary><p class="tex">${esc(p.abstract)}</p></details>` : ""}
     <div class="actions">
-      <span class="save-menu"><button class="btn small" data-act="save-open">📁 Save</button></span>
+      <span class="save-menu"><button class="btn small" data-act="save-open">+ Save</button></span>
+      <button class="btn small ${cared ? "on" : ""}" data-act="${cared ? "uncare" : "care"}" aria-pressed="${cared}"
+        title="Train the classifier on this paper without adding it to a folder">${cared ? "★" : "☆"} I care</button>
       ${opts.inFolder ? `<button class="btn small" data-act="unsave" data-folder="${esc(opts.inFolder)}">Remove from folder</button>`
-        : deleted ? `<button class="btn small" data-act="undelete">Restore</button>` : `<button class="btn small" data-act="delete">🗑 Delete</button>`}
+        : deleted ? `<button class="btn small" data-act="undelete">Restore</button>` : `<button class="btn small" data-act="delete">× Delete</button>`}
+      ${p.inspire_url ? `<a class="btn small" href="${esc(arxivUrl(p))}" target="_blank" rel="noopener">arXiv</a>` : ""}
       <a class="btn small" href="${esc(p.pdf_url || `https://arxiv.org/pdf/${p.id}`)}" target="_blank" rel="noopener">PDF</a>
     </div>
   </article>`;
@@ -349,7 +379,9 @@ function bindCards(root) {
       b.onclick = (ev) => {
         ev.stopPropagation();
         const act = b.dataset.act;
-        if (act === "delete") {
+        if (act === "care") { push({ type: "care", id: p.id, paper: paperMeta(p) }); toast("Marked: the classifier will learn from it"); }
+        else if (act === "uncare") push({ type: "uncare", id: p.id });
+        else if (act === "delete") {
           push({ type: "delete", id: p.id, paper: paperMeta(p) });
           toast("Deleted", { label: "Undo", run: () => push({ type: "undelete", id: p.id }) });
         } else if (act === "undelete") push({ type: "undelete", id: p.id });
@@ -413,7 +445,9 @@ async function renderDaily(v) {
   const q = f.q.toLowerCase();
   const all = d.papers;
   const counts = { all: all.filter((p) => !deleted[p.id]).length };
-  (S.index.topics || []).forEach((t) => { counts[t] = all.filter((p) => !deleted[p.id] && (p.scores?.[t] ?? 0) >= thr).length; });
+  const dayTopics = d.topics || S.index.topics || [];
+  if (f.topic !== "all" && !dayTopics.includes(f.topic)) f.topic = "all";
+  dayTopics.forEach((t) => { counts[t] = all.filter((p) => !deleted[p.id] && (p.scores?.[t] ?? 0) >= thr).length; });
   const list = all.filter((p) => {
     if (!f.showDeleted && deleted[p.id]) return false;
     if (f.followedOnly && !(p.followed_authors || []).length) return false;
@@ -437,7 +471,7 @@ async function renderDaily(v) {
     </div>
     <div class="chips">
       <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all">All<span class="n">${counts.all}</span></button>
-      ${(S.index.topics || []).map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
+      ${dayTopics.map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
     </div>
     <div class="toolbar">
       <label class="check">Min score <input type="range" id="min" min="0" max="1" step="0.05" value="${f.min}"> <span id="minv">${Number(f.min).toFixed(2)}</span></label>
@@ -635,14 +669,108 @@ function renderLibrary(v) {
   bindCards(v);
 }
 
+// ------------------------------------------------------------------ stats
+const fmt = (n) => Number(n).toLocaleString();
+const pct = (a, b) => (b ? `${Math.round((100 * a) / b)}%` : "–");
+
+function tiles(items) {
+  return `<div class="kpis">${items.map(([label, value, sub]) =>
+    `<div class="tile"><div class="tile-label">${esc(label)}</div><div class="tile-value">${esc(value)}</div>${sub ? `<div class="tile-sub">${esc(sub)}</div>` : ""}</div>`).join("")}</div>`;
+}
+
+// Horizontal bars: one row per item, value printed at the end (doubles as the table view).
+function barList(title, rows, opts = {}) {
+  if (!rows || !rows.length) return `<section class="panel chart"><h3>${esc(title)}</h3><p class="muted small">No data.</p></section>`;
+  const max = Math.max(...rows.map((r) => (opts.value ? opts.value(r) : r[1]))) || 1;
+  return `<section class="panel chart"><h3>${esc(title)}</h3>${opts.note ? `<p class="muted small">${esc(opts.note)}</p>` : ""}
+    <div class="bars">${rows.map((r) => {
+      const v = opts.value ? opts.value(r) : r[1];
+      const label = opts.label ? opts.label(r) : fmt(r[1]);
+      return `<div class="bar-row" title="${esc(r[0])}: ${esc(label)}">
+        <span class="bar-name ${opts.tex ? "tex" : ""}">${esc(r[0])}</span>
+        <span class="bar-track"><i style="width:${Math.max(1, (100 * v) / max)}%"></i></span>
+        <span class="bar-val">${esc(label)}</span></div>`;
+    }).join("")}</div></section>`;
+}
+
+// Vertical histogram; series = [{key, label, cls}] stacked bottom-up. Threshold draws a marker line.
+function histogram(title, bins, series, opts = {}) {
+  if (!bins || !bins.length) return "";
+  const total = (b) => series.reduce((a, s) => a + (b[s.key] || 0), 0);
+  const max = Math.max(...bins.map(total)) || 1;
+  const legend = series.length > 1 ? `<div class="legend">${series.map((s) => `<span><i class="sw ${s.cls}"></i>${esc(s.label)}</span>`).join("")}</div>` : "";
+  const cols = bins.map((b, i) => {
+    const tip = `${b.label}: ${series.map((s) => `${s.label} ${b[s.key] || 0}`).join(", ")}`;
+    const segs = series.map((s) => (b[s.key] ? `<i class="seg ${s.cls}" style="height:${(100 * b[s.key]) / max}%"></i>` : "")).join("");
+    const mark = opts.markAt != null && i === opts.markAt ? `<span class="mark" title="threshold"></span>` : "";
+    return `<div class="col" title="${esc(tip)}" tabindex="0">${mark}<div class="stack">${segs}</div></div>`;
+  }).join("");
+  const ticks = bins.map((b, i) => `<span>${i === 0 || i === bins.length - 1 || i === Math.floor(bins.length / 2) ? esc(b.tick ?? b.label) : ""}</span>`).join("");
+  return `<section class="panel chart"><h3>${esc(title)}</h3>${opts.note ? `<p class="muted small">${esc(opts.note)}</p>` : ""}${legend}
+    <div class="hist" role="img" aria-label="${esc(title)}">${cols}</div><div class="ticks">${ticks}</div>
+    ${opts.xlabel ? `<div class="muted small center">${esc(opts.xlabel)}</div>` : ""}</section>`;
+}
+
+async function renderStats(v) {
+  if (!S.index.days.length) { v.innerHTML = `<div class="empty">No days yet.</div>`; return; }
+  S.statsDay = S.statsDay || S.index.days[0].date;
+  const d = await loadDay(S.statsDay);
+  const head = `<div class="toolbar">
+      <select id="stats-day">${S.index.days.map((x) => `<option ${x.date === S.statsDay ? "selected" : ""}>${esc(x.date)}</option>`).join("")}</select>
+      <div class="seg-ctl" role="tablist">
+        <button role="tab" aria-selected="${S.statsTab === "general"}" data-st="general">General</button>
+        <button role="tab" aria-selected="${S.statsTab === "personal"}" data-st="personal">Personalized</button>
+      </div></div>`;
+  let body;
+  if (!d || !d.stats) {
+    body = `<div class="empty">No analytics for this day. Days processed from now on include them.</div>`;
+  } else if (S.statsTab === "general") {
+    const g = d.stats.general, pers = d.stats.personal;
+    body = tiles([
+      ["Papers fetched", fmt(g.count), (d.categories || []).join(", ")],
+      ["New submissions", fmt(g.new), pct(g.new, g.count)],
+      ["Cross-lists", fmt(g.cross), pct(g.cross, g.count)],
+      ["Passed your filters", fmt(pers.count), pct(pers.count, g.count)],
+    ]) + `<div class="chart-grid">
+      ${histogram("Similarity to your topics", (g.similarity_hist || []).map((b) => ({ ...b, label: `${b.lo.toFixed(2)}–${b.hi.toFixed(2)}`, tick: b.lo.toFixed(2) })),
+        [{ key: "passed", label: "Passed filters", cls: "s-hit" }, { key: "other", label: "Other papers", cls: "s-other" }],
+        { note: "Every fetched paper by its closest match to any topic (cosine similarity).", xlabel: "similarity" })}
+      ${barList("Primary category", g.by_category)}
+      ${barList("Common title terms", g.top_terms, { tex: true })}
+      ${histogram("Authors per paper", g.authors_per_paper.map(([label, n]) => ({ label, n })), [{ key: "n", label: "Papers", cls: "s-hit" }], { xlabel: "authors" })}
+      ${barList("Most active authors", g.top_authors, { note: "Authors with more than one paper today." })}
+    </div>`;
+  } else {
+    const p = d.stats.personal, g = d.stats.general;
+    const thrBin = Math.min(9, Math.floor((p.threshold ?? 0.5) * 10));
+    body = tiles([
+      ["Passed your filters", fmt(p.count), `${pct(p.count, g.count)} of ${fmt(g.count)}`],
+      ...p.by_topic.map(([t, n]) => [t, fmt(n), "at or above threshold"]),
+      ["Followed authors", fmt(p.followed), "papers"],
+    ]) + `<div class="chart-grid">
+      ${histogram("Score distribution (shortlist)", p.score_hist.map(([lo, n]) => ({ label: `${lo}–${(Number(lo) + 0.1).toFixed(1)}`, tick: lo, n })),
+        [{ key: "n", label: "Papers", cls: "s-hit" }], { markAt: thrBin, note: `Best topic score of each shortlisted paper. The marker shows the threshold (${p.threshold}).`, xlabel: "score" })}
+      ${barList("Pass rate by category", p.hit_rate_by_category, { value: (r) => r[1] / r[2], label: (r) => `${r[1]}/${r[2]} · ${pct(r[1], r[2])}`, note: "Share of each category's papers that passed (categories with 3+ papers)." })}
+      ${barList("Common title terms", p.top_terms, { tex: true })}
+      ${barList("Primary category", p.by_category)}
+      <section class="panel chart"><h3>Top papers</h3><ol class="top-list">${(p.top || []).map((x) =>
+        `<li><a class="tex" href="${esc(paperUrl(x))}" target="_blank" rel="noopener">${esc(x.title)}</a> <span class="muted small">${x.score != null ? Number(x.score).toFixed(2) : ""}</span></li>`).join("")}</ol></section>
+    </div>`;
+  }
+  v.innerHTML = head + body;
+  $("#stats-day").onchange = (e) => { S.statsDay = e.target.value; render(); };
+  v.querySelectorAll("[data-st]").forEach((b) => { b.onclick = () => { S.statsTab = b.dataset.st; render(); }; });
+}
+
 // ------------------------------------------------------------------ routing + settings
-const VIEWS = { daily: renderDaily, authors: renderAuthors, "my-papers": renderMyPapers, library: renderLibrary };
+const VIEWS = { daily: renderDaily, stats: renderStats, authors: renderAuthors, "my-papers": renderMyPapers, library: renderLibrary };
 
 async function render() {
   const tab = (location.hash || "#daily").slice(1);
   const name = VIEWS[tab] ? tab : "daily";
   document.querySelectorAll(".tabs a").forEach((a) => a.classList.toggle("active", a.dataset.tab === name));
   await VIEWS[name]($("#view"));
+  typeset($("#view"));
 }
 
 function applyTheme() {
@@ -692,6 +820,8 @@ async function init() {
     if (confirm(`Discard ${S.pending.length} unsynced edit(s)?`)) { S.pending = []; ls.set("pending", []); recompute(); render(); $("#settings").close(); }
   };
   await render();
+  // KaTeX loads with `defer`; typeset again once it is there.
+  window.addEventListener("load", () => typeset($("#view")));
 }
 
 init();

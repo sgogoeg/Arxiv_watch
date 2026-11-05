@@ -8,12 +8,15 @@ A personal daily arXiv feed. Every weekday a GitHub Action:
 4. tracks papers by **authors you follow** and **citations to your own papers**,
 5. publishes a dashboard to GitHub Pages.
 
-On the dashboard you **delete** papers you don't care about and **save** good ones into
-**folders**. Both are training signals: the classifier is retrained on them on the next run.
+On the dashboard you **delete** papers you don't care about, mark papers **I care** (a training signal
+that doesn't file the paper anywhere), and **save** good ones into **folders**. All three train the
+classifier on the next run. Paper links open the INSPIRE-HEP record when there is one, and arXiv otherwise.
+LaTeX in titles, summaries and abstracts is rendered with KaTeX.
 
 | Tab | What it does |
 | --- | --- |
 | **Daily** | Today's shortlisted papers with per-topic scores, why each matched, TL;DR, abstract. Filter by topic, score, followed authors, text. Delete (with undo) or save to a folder. |
+| **Stats** | Analytics for a day. *General*: everything fetched (categories, title terms, active authors, authors per paper, similarity to your topics). *Personalized*: what passed your filters (per-topic counts, score distribution, pass rate by category, top papers). |
 | **Authors** | Follow one name or paste a list. Their new papers are always shown in Daily; the last 30 days are backfilled when you add someone. |
 | **My papers** | Add your papers by arXiv ID, DOI or title. Shows citation counts over time, new citations since your last visit, and the citing papers. |
 | **Library** | Your folders. Rename, delete, link a folder to a topic, export BibTeX or JSON. |
@@ -70,6 +73,7 @@ python -m arxiv_radar run --dry-run --out out   # same, but write to out/
 python -m arxiv_radar refresh                   # backfill authors + citations only
 python -m arxiv_radar retrain                   # train from current feedback
 python -m arxiv_radar export-bib "Must read"    # BibTeX for a folder
+python -m arxiv_radar restat 2026-11-05         # analytics for a day processed before Stats existed
 python -m arxiv_radar build-site && python -m http.server -d _site   # dashboard at :8000
 ```
 

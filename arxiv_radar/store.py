@@ -1,7 +1,8 @@
 """JSON files under data/ shared between the pipeline and the dashboard.
 
 Files the dashboard edits (through GitHub commits):
-  feedback.json   {"deleted": {arxiv_id: {"date", "title", "abstract", "topics"}}}
+  feedback.json   {"deleted": {arxiv_id: {"date", "title", "abstract", "topics"}},
+                   "cared":   {arxiv_id: {...same fields}}}   ("I care": train on it, no folder)
   library.json    {"folders": {name: {"topic": str|None, "papers": [arxiv_id]}},
                    "papers": {arxiv_id: paper metadata}}
   authors.json    {"authors": [{"name", "openalex_id", "added"}]}
@@ -17,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULTS: dict[str, Any] = {
-    "feedback.json": {"deleted": {}},
+    "feedback.json": {"deleted": {}, "cared": {}},
     "library.json": {"folders": {}, "papers": {}},
     "authors.json": {"authors": []},
     "my_papers.json": {"papers": []},
@@ -68,6 +69,18 @@ class Store:
             for pid in info.get("papers", []):
                 if pid in papers:
                     out.append((papers[pid], info.get("topic"), folder))
+        return out
+
+    def cared_papers(self) -> dict[str, dict]:
+        return self.read("feedback.json").get("cared", {})
+
+    def positive_papers(self) -> list[tuple[dict, str | None, str | None]]:
+        """Saved papers plus "I care" papers, as (paper, folder topic, folder or None)."""
+        out = list(self.saved_papers())
+        saved_ids = {p["id"] for p, _, _ in out}
+        for pid, paper in self.cared_papers().items():
+            if pid not in saved_ids:
+                out.append(({**paper, "id": pid}, None, None))
         return out
 
     def deleted_papers(self) -> dict[str, dict]:

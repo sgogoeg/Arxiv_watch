@@ -24,6 +24,8 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("refresh", help="backfill newly followed authors and refresh citation counts")
     sub.add_parser("citations", help="refresh citation counts only")
     sub.add_parser("retrain", help="train the classifier from current feedback without fetching")
+    rs = sub.add_parser("restat", help="compute analytics for a day processed before they existed")
+    rs.add_argument("date")
 
     b = sub.add_parser("build-site", help="assemble the static dashboard into _site/")
     b.add_argument("--out", default="_site")
@@ -47,6 +49,9 @@ def main(argv: list[str] | None = None) -> int:
     elif args.cmd == "citations":
         store = Store(cfg.data_dir)
         pipeline.refresh_citations(cfg, store, store)
+    elif args.cmd == "restat":
+        st = pipeline.restat(cfg, args.date)
+        print(f"{args.date}: {st['general']['count']} papers, {st['personal']['count']} passed")
     elif args.cmd == "retrain":
         pipeline.retrain(cfg)
     elif args.cmd == "build-site":

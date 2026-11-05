@@ -54,6 +54,11 @@ class CitationsConfig(BaseModel):
     max_citing_works: int = 200
 
 
+class InspireConfig(BaseModel):
+    enabled: bool = True
+    recheck_days: int = 3  # re-check recent days for papers that were not in INSPIRE yet
+
+
 class Config(BaseModel):
     categories: list[str]
     topics: list[Topic]
@@ -67,6 +72,7 @@ class Config(BaseModel):
     classifier: ClassifierConfig = Field(default_factory=ClassifierConfig)
     summary: SummaryConfig = Field(default_factory=SummaryConfig)
     citations: CitationsConfig = Field(default_factory=CitationsConfig)
+    inspire: InspireConfig = Field(default_factory=InspireConfig)
     # "owner/repo" and branch the dashboard commits edits to. Defaults to $GITHUB_REPOSITORY.
     github_repo: str | None = None
     github_branch: str = "main"

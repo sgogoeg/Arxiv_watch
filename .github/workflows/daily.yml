@@ -11,10 +11,13 @@ on:
         type: choice
         options: [run, refresh]
         default: run
-  # Dashboard syncs commit these files; refresh citations/authors and redeploy the site.
+  # Dashboard syncs commit the data files; code and config changes also redeploy the site.
   push:
     branches: [main]
     paths:
+      - site/**
+      - arxiv_radar/**
+      - config.yaml
       - data/authors.json
       - data/my_papers.json
       - data/library.json

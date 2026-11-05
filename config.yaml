@@ -6,10 +6,10 @@ categories:
   - gr-qc
 
 topics:
-  # Seeded from the three papers you sent. Split this into several named topics
-  # (each with its own seeds and description) once you know how you want to group them.
-  - name: My research
-    description: Papers similar to my seed papers in particle physics, astrophysics and gravitation.
+  - name: Phase transitions & GWs
+    description: >-
+      Cosmological first-order phase transitions, domain walls and other early-universe sources of a
+      stochastic gravitational-wave background, and their signals at pulsar timing arrays such as NANOGrav.
     seed_ids: ["2305.02357v3", "2501.15649v2", "2403.09816"]
     keywords: []
     negative_keywords: []
