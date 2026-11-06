@@ -32,7 +32,9 @@ classifier:
   min_positives_per_topic: 3       # a topic is trained once it has this many seeds + saved papers
   random_negatives: 100
   num_iterations: 10
-  max_steps: 400
+  max_steps: 400                   # cap; training makes at most one pass over its pairs
+  max_seq_length: 256              # tokens per paper during training and scoring
+  time_budget_seconds: 900         # stop training after 15 min and use the model as trained so far
 
 summary:
   backend: flan-t5                 # "first-sentence" or "none" to skip the model

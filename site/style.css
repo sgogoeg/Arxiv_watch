@@ -271,11 +271,6 @@ details.awards > p { margin: 6px 0 10px; }
 .award-papers summary { cursor: pointer; font-size: 13px; color: var(--muted); }
 .award-papers ul { margin: 4px 0 0; padding-left: 16px; font-size: 13px; }
 .drama + .drama { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
-.wacky { display: flex; flex-direction: column; gap: 8px; }
-.wacky-cand { display: flex; gap: 10px; align-items: center; justify-content: space-between; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; }
-.wacky-cand > div { min-width: 0; }
-.wacky-cand.picked { border-color: var(--accent); background: var(--accent-soft); }
-.wacky-cand .btn { flex-shrink: 0; }
 
 /* topics editor + combined */
 dialog { max-height: calc(100vh - 32px); overflow: auto; }

@@ -37,8 +37,10 @@ class ClassifierConfig(BaseModel):
     min_positives_per_topic: int = 3
     random_negatives: int = 100
     num_iterations: int = 10
-    max_steps: int = 400
+    max_steps: int = 400            # upper bound; training never repeats its pairs (one pass at most)
     batch_size: int = 16
+    max_seq_length: int = 256       # tokens of "title [SEP] abstract" seen by the classifier
+    time_budget_seconds: int = 900  # stop training after this long; the partly trained model is used
 
 
 class SummaryConfig(BaseModel):

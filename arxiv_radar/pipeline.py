@@ -203,7 +203,7 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     summarize(entries, cfg.summary)
     best_sim = pre.raw.max(axis=1).tolist() if len(papers) else []
     day_stats = stats.compute(papers, best_sim, entries, names, cfg.score_threshold)
-    day_awards = compute_awards(cfg, store, writer, all_papers, papers, vecs, embedder, client, seed)
+    day_awards = compute_awards(cfg, all_papers, papers, client)
 
     # 7. write
     short = set(idx)
@@ -232,26 +232,22 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     return day_doc
 
 
-def compute_awards(cfg: Config, store: Store, writer: Store, all_papers: list[dict], papers: list[dict],
-                   vecs, embedder, client, seed: int = 0) -> dict | None:
+def compute_awards(cfg: Config, all_papers: list[dict], papers: list[dict], client) -> dict | None:
     if not cfg.awards.enabled:
         return None
     try:
-        weights = awards.retrain(store, writer)
-        title_vecs = embedder.encode([p.get("title", "") for p in papers])
-        sims = [float(a @ b) for a, b in zip(title_vecs, vecs)]
-        result = awards.compute(all_papers, papers, sims, weights, seed)
+        result = awards.compute(all_papers, papers)
     except Exception:  # awards are a bonus; never fail the day over them
         log.exception("awards failed")
         return None
     if cfg.inspire.enabled and client:
         shown = []
-        for key in ("longest", "most_submissions"):
+        for key in ("longest", "most_submissions", "wacky"):
             block = result.get(key) or {}
             shown += [block["winner"]] if "winner" in block else []
             shown += block.get("runners_up", [])
             shown += [p for w in block.get("winners", []) for p in w["papers"]]
-        shown += result.get("drama", []) + ((result.get("wacky") or {}).get("candidates") or [])
+        shown += result.get("drama", [])
         inspire.add_links(shown)
     return result
 
@@ -291,8 +287,6 @@ def refresh(cfg: Config) -> None:
         inspire.recheck_recent(store, store, cfg.inspire.recheck_days)
     if cfg.citations.enabled:
         refresh_citations(cfg, store, store)
-    if cfg.awards.enabled:
-        awards.retrain(store, store)  # pick up new wackiest-title votes
 
 
 def restat(cfg: Config, day: str) -> dict:
