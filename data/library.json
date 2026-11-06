@@ -3,6 +3,7 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.08422",
     "2611.08382",
     "2611.07416",
     "2611.07447",
@@ -274,6 +275,29 @@
     "gr-qc"
    ],
    "published": "2026-11-05T17:59:53Z",
+   "date": "2026-11-06",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.08422": {
+   "id": "2611.08422",
+   "title": "Torsion talks only to spin: the CMB temperature as a test of energy exchange in Einstein-Cartan cosmology",
+   "authors": [
+    "Fernando Izaurieta",
+    "Samuel Lepe",
+    "Cristian Quinzacara"
+   ],
+   "abstract": "The cosmic microwave background temperature at $z=0.886$ is known to $2\\%$ from molecular absorption towards PKS~1830$-$211; CO absorbers and Sunyaev-Zel'dovich clusters extend the measurement to $z\\simeq3$. We use them on a question that cosmologies with torsion leave open. When the geometry exchanges energy with several matter components, which of them receives it? In Einstein-Cartan theory the Noether identities of each sector fix the answer. A sector's energy-momentum fails to be conserved only in proportion to its own spin, so minimally coupled light, which has none, is conserved whatever the torsion does. A metric-affine cosmology fitted to DESI DR2 distributes the exchange ``universally'' among all fluids, radiation included; the photons then gain almost a third of their energy. If the photons stay a blackbody, as FIRAS requires of any source set by local conditions, the model predicts a background colder than $T_{0}(1+z)$ by $7\\%$ at $z\\simeq0.9$ and by $8.5\\%$ at $z\\gtrsim3$, with no free parameter. PKS~1830$-$211 gives $5.08\\pm0.10\\,\\mathrm{K}$ against a predicted $4.78\\,\\mathrm{K}$; with the CO absorbers it favours the standard scaling by $Δχ^{2}=13$, and 18 Planck cluster bins give $χ^{2}=50.8$ versus $15.5$. Under the same reading the primary anisotropies would change their spectral shape by amounts Planck excludes. If dark matter carries the spin instead, $H(z)$ moves by less than $10^{-4}$ below $z=3$ at the fitted parameters and $T(z)$ is standard again.",
+   "abs_url": "https://arxiv.org/abs/2611.08422",
+   "pdf_url": "https://arxiv.org/pdf/2611.08422v1",
+   "primary_category": "gr-qc",
+   "categories": [
+    "gr-qc",
+    "astro-ph.CO"
+   ],
+   "published": "2026-11-05T18:19:36Z",
    "date": "2026-11-06",
    "topics": [
     "Phase transitions & GWs"
