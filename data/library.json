@@ -3,6 +3,16 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.08382",
+    "2611.07416",
+    "2611.07447",
+    "2611.07195",
+    "2611.07312",
+    "2611.08187",
+    "2611.07852",
+    "2607.23253",
+    "2611.07136",
+    "2611.07877",
     "2611.05504"
    ]
   }
@@ -31,6 +41,244 @@
     "My research"
    ],
    "saved": "2026-11-05"
+  },
+  "2611.07877": {
+   "id": "2611.07877",
+   "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?",
+   "authors": [
+    "Guangshang Chen",
+    "Jianpeng Dai",
+    "Yang Xiao"
+   ],
+   "abstract": "Sound waves are expected to be a dominant source of gravitational waves (GWs) from cosmological first-order phase transitions. Their spectrum is commonly predicted using the fluid velocity two-point correlation function under the Gaussian approximation. However, since the GW source is quadratic in velocity, connected four-point correlations may also contribute to the GW spectrum. Through two analytical toy examples, we demonstrate that velocity two-point correlations alone does not always uniquely determine the GW spectrum. Moving beyond these idealized examples, we investigate a realistic acoustic source based on stochastic bubble nucleation and growth, proving that the connected contribution becomes subleading during subsequent linear acoustic propagation, although cosmic expansion limits this suppression. These results clarify when two-point reconstruction is reliable and how higher-order velocity correlations and the duration of acoustic emission affect GW predictions.",
+   "abs_url": "https://arxiv.org/abs/2611.07877",
+   "pdf_url": "https://arxiv.org/pdf/2611.07877v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "gr-qc"
+   ],
+   "published": "2026-11-05T11:58:30Z",
+   "date": "2026-11-06",
+   "tldr": "Two-Point Correlations Do Not Always Determine Gravitational Waves from Sound Waves",
+   "inspire_url": "https://inspirehep.net/literature/3224082",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.07136": {
+   "id": "2611.07136",
+   "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter",
+   "authors": [
+    "Boris Betancourt Kamenetskaia",
+    "Chris Kouvaris"
+   ],
+   "abstract": "Asymmetric dark matter may form self-gravitating macroscopic structures called dark stars if its microscopic properties give rise to sufficient effective pressure to counteract gravity. We study low-mass baryonic stars embedded within such dark stars, treating the baryonic and dark components as two gravitating fluids. The dark sector is assumed to be non-luminous and to interact with the baryonic star only through gravity, while the baryonic structure is computed using a realistic equation of state, opacity tables, and proton-proton-chain energy production. We find that the additional gravitational potential increases the luminosity at fixed baryonic mass, as the baryons must reach higher temperatures to maintain hydrostatic equilibrium. This lowers the minimum baryonic mass for hydrogen-burning configurations below the standard value of $\\sim0.085M_\\odot$. The resulting increase in luminosity can reduce the estimated main-sequence lifetime significantly, bringing low-mass configurations that would otherwise remain on the main sequence for hundreds of Gyr to cosmologically relevant timescales. We further show that photons escaping from the stellar surface undergo gravitational redshift determined by the global dark matter mass distribution. Consequently, extended dark star configurations can produce distinct observational signatures even when their outer regions have little effect on the intrinsic baryonic stellar structure, providing a potential probe of otherwise hidden dark structures.",
+   "abs_url": "https://arxiv.org/abs/2611.07136",
+   "pdf_url": "https://arxiv.org/pdf/2611.07136v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.SR"
+   ],
+   "published": "2026-11-04T21:04:41Z",
+   "date": "2026-11-06",
+   "inspire_url": "https://inspirehep.net/literature/3223988",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2607.23253": {
+   "id": "2607.23253",
+   "title": "On the Nucleon Effective Mass in Neutron Stars Cooling",
+   "authors": [
+    "Yuuki Sugiyama",
+    "Akira Dohi"
+   ],
+   "abstract": "The cooling of neutrons stars, which are composed of ultra-high-density nuclear matter, strongly depends on the equation of state because the dominant cooling sources are neutrinos produced in their interiors. Here, we investigate the cooling properties of neutron stars, focusing on effective nucleon masses, whose impacts have been recently examined in supernova explosion and proto-neutron star cooling. The uncertainties of effective masses originate from the difference in the attractive interaction of scalar meson and the definition of the Dirac and Landau masses. At first, we employ so-called Walecka models that allow these two masses to be introduced within a unified framework and evaluate the resulting cooling curves. Based on the Walecka model, we compute the emissivity of the neutrons and the direct Urca process and their cooling curves. We demonstrate that the Dirac and Landau masses affect cooling of massive neutron stars, although most previous cooling simulations do not distinguish them. We also perform cooling simulations with two realistic equation of states based on relativistic mean-field (RMF) theory, whose differences arise from properties of only effective masses among characteristic parameters. These results are broadly consistent with those obtained from the Walecka models, indicating that the treatment of effective nucleon masses may be an important source of uncertainty in neutron-star cooling.",
+   "abs_url": "https://arxiv.org/abs/2607.23253",
+   "pdf_url": "https://arxiv.org/pdf/2607.23253v1",
+   "primary_category": "hep-th",
+   "categories": [
+    "hep-th",
+    "astro-ph.HE",
+    "nucl-th"
+   ],
+   "published": "2026-07-25T15:28:48Z",
+   "date": "2026-11-06",
+   "tldr": "We investigate the cooling properties of neutron stars, focusing on effective nucleon masses, whose impacts have been recently examined in supernova explosion and proto-neutron star cooling.",
+   "inspire_url": "https://inspirehep.net/literature/3183513",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.07852": {
+   "id": "2611.07852",
+   "title": "Long lived MeV scale bound state dark matter alleviates the ${}^7 Li$ tension",
+   "authors": [
+    "Pa. Gokhula Prasad",
+    "V. Suryanarayana Mummidi"
+   ],
+   "abstract": "We investigate the impact of MeV scale unstable bound state dark matter on both thermal and non thermal Big Bang nucleosynthesis. Focusing on the weakly self interacting regime, we find that this framework can reproduce the theoretically predicted abundances through both short and long lived bound states. While long lived bound states can alleviate the cosmological ${}^7$Li problem, they simultaneously lead to discrepancies with other light element abundances. We show that this tension is resolved by incorporating non thermal nucleosynthesis, which act on these non standard initial light element abundances to alleviate the ${}^7 Li$ tension without violating observational constraints on the other elements. Remarkably, across the range of $\\widetildeρ_B$ and $m_χ$ considered, long lived bound states with lifetimes $10^0\\,{\\rm s}\\lesssimτ\\lesssim10^2\\,{\\rm s}$ can simultaneously resolve the ${}^7$Li problem and a large parameter space remain consistent with the observed abundances of the other light elements. Our results demonstrate that non thermal effects are essential for obtaining a consistent nucleosynthesis history in unstable bound state dark matter scenarios.",
+   "abs_url": "https://arxiv.org/abs/2611.07852",
+   "pdf_url": "https://arxiv.org/pdf/2611.07852v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.CO"
+   ],
+   "published": "2026-11-05T11:30:45Z",
+   "date": "2026-11-06",
+   "inspire_url": "https://inspirehep.net/literature/3224042",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.08187": {
+   "id": "2611.08187",
+   "title": "Light Primordial Black Holes from a First-Order Phase Transition near the End of Inflation: Baryogenesis and Gravitational Wave Signatures",
+   "authors": [
+    "Zihong Cheng",
+    "Fa Peng Huang"
+   ],
+   "abstract": "We investigate the formation and cosmological consequences of light primordial black holes (PBHs) from vacuum bubbles nucleated during a spectator sector first-order phase transition in inflation. We construct a phenomenological model in which the spectator potential evolves with the rolling inflaton, allowing vacuum bubbles to nucleate and grow during inflation. The vacuum ordering subsequently reverses near the end of inflation, leaving the bubble interiors in a metastable false vacuum state. We examine their stability against reverse vacuum tunneling and impose benchmark conditions to suppress this process before and after reheating. Sufficiently large bubbles can subsequently undergo supercritical evolution and form PBHs. In this framework, the PBH abundance is determined by the vacuum tunneling history, while the characteristic mass depends on the nucleation epoch and bubble growth during inflation. For sufficiently light PBHs that evaporate before big bang nucleosynthesis, Hawking radiation can create locally superheated regions in which electroweak symmetry is restored, potentially generating a baryon asymmetry in the presence of additional CP-violating interactions. We also investigate the direct gravitational wave (GW) signals from Hawking radiation and the induced GWs from PBH density fluctuations, the latter arising if an early PBH dominated epoch occurs. For representative benchmark parameters, the resulting baryon asymmetry can reach the ten-percent level of the observed value, while the induced GW signal can reach a peak amplitude of $Ω_{\\rm GW,0}h^2\\sim10^{-7}$ at frequencies of order $10$-$10^2\\,{\\rm Hz}$.",
+   "abs_url": "https://arxiv.org/abs/2611.08187",
+   "pdf_url": "https://arxiv.org/pdf/2611.08187v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph"
+   ],
+   "published": "2026-11-05T15:45:03Z",
+   "date": "2026-11-06",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.07312": {
+   "id": "2611.07312",
+   "title": "Background Effects on Thermal Free Energy in Conformal Field Theories",
+   "authors": [
+    "Shuichi Yokoyama",
+    "Ibuki Yoshida",
+    "Hiroki Yunoto"
+   ],
+   "abstract": "We compute background corrections to the thermal free energy of free conformal field theories (CFTs) with a global abelian symmetry defined on a box with all sides infinitely long by turning on a flat gauge field in general dimensions. This result is applied to the U(N) maximally supersymmetric Yang-Mills theory, the ABJ(M) theory, and the free U(N) vector model in four, three, and two spacetime dimensions, respectively. In these examples, the thermal free energies monotonically increase as the background field does, and cross a zero within the valid range. We argue that the systems undergo a phase transition at the zero, where the effective degrees of freedom fall off similarly to the color-confinement one, and that it always occurs if the number of matter fields is greater than a critical value. We comment for this phase transition to circumvent the Mermin-Wagner-Coleman theorem in two spacetime dimensions.",
+   "abs_url": "https://arxiv.org/abs/2611.07312",
+   "pdf_url": "https://arxiv.org/pdf/2611.07312v1",
+   "primary_category": "hep-th",
+   "categories": [
+    "hep-th",
+    "cond-mat.stat-mech",
+    "cond-mat.str-el",
+    "nucl-th"
+   ],
+   "published": "2026-11-05T01:57:27Z",
+   "date": "2026-11-06",
+   "inspire_url": "https://inspirehep.net/literature/3223993",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.07195": {
+   "id": "2611.07195",
+   "title": "Nuclear Atomic Dark Matter",
+   "authors": [
+    "Pouya Asadi",
+    "Zackaria Chacko",
+    "David Curtin",
+    "Micah Mellors",
+    "Ethan T. Neil"
+   ],
+   "abstract": "The matter coincidence, $Ω_{\\rm DM}\\simeq5Ω_b$, suggests a common origin for visible and dark matter (DM). We show that this motivates the study of nuclear atomic DM (naDM), which is composed of $\\sim5\\,\\mathrm{GeV}$ mirror-neutron DM and a subdominant population of mirror elements. We realize naDM in the Mirror Twin Higgs, employing a twin Froggatt--Nielsen mechanism to generate fermion masses and realize spontaneous $\\mathbb{Z}_2$ symmetry breaking. However, the low-energy mirror framework is more general and can emerge from other ultraviolet completions. naDM gives rise to a novel two-stage dark acoustic oscillation signature, multiple correlated direct-detection signals, and highly exotic twin astrophysics.",
+   "abs_url": "https://arxiv.org/abs/2611.07195",
+   "pdf_url": "https://arxiv.org/pdf/2611.07195v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph"
+   ],
+   "published": "2026-11-04T22:36:09Z",
+   "date": "2026-11-06",
+   "inspire_url": "https://inspirehep.net/literature/3223995",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.07447": {
+   "id": "2611.07447",
+   "title": "Demystifying Graviton Detection",
+   "authors": [
+    "Igor Pikovski"
+   ],
+   "abstract": "Detecting single gravitons is possible through the extraction of discrete energy quanta from passing gravitational waves. For decades, this was considered hopeless, with estimates suggesting a detector the size of Jupiter. Here, I explain how these earlier estimates relied on the highly inefficient electron ionization process, while the absorption through the full mass quadrupole of a macroscopic system can bring graviton detection within experimental reach. Operating in the LIGO frequency band solves the challenges of graviton sources and noise suppression, allowing gravitons to be extracted from known passing gravitational waves and detection events to be heralded by classical gravitational-wave observations. Combined with the ability to resolve single energy quanta in macroscopic systems, such as in quantum acoustics, this opens a realistic path toward graviton detection. I also discuss the general limitations of particle detection in establishing an underlying quantum theory, illustrated by an energy-nonconserving semiclassical alternative. Nevertheless, the semiclassical alternative is not standard classical wave physics, and extracting $E=\\hbarω$ from a passing wave constitutes bona fide particle detection. This opens the way not only to the first detection of individual gravitons, but also to experimentally probing linearized quantum gravity and the graviton counting statistics of gravitational waves.",
+   "abs_url": "https://arxiv.org/abs/2611.07447",
+   "pdf_url": "https://arxiv.org/pdf/2611.07447v1",
+   "primary_category": "gr-qc",
+   "categories": [
+    "gr-qc",
+    "hep-th",
+    "quant-ph"
+   ],
+   "published": "2026-11-05T04:45:42Z",
+   "date": "2026-11-06",
+   "doi": "10.1063/pt.f006e25db0",
+   "inspire_url": "https://inspirehep.net/literature/3224030",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.07416": {
+   "id": "2611.07416",
+   "title": "Enhancing Gravitational Waves from Global Strings via a First-Order Phase Transition",
+   "authors": [
+    "Yongtao Jia",
+    "Ligong Bian",
+    "Huai-Ke Guo"
+   ],
+   "abstract": "We perform the first (3+1)-dimensional lattice simulations of a cosmological first-order phase transition (PT) in which true-vacuum bubbles with random phases nucleate, expand, and collide, producing a network of global strings. We find that the string network enters the scaling regime, and the coefficient of the logarithmic growth is smaller than the value obtained for a second-order PT. From the axion spectrum, we derive the dark-matter relic abundance and the dark-radiation bound from big bang nucleosynthesis on the axion decay constant $f_a$ and mass $m_a$. The ratio of the gravitational wave emission rate to the axion emission rate is found to be about two orders of magnitude larger than in the second-order case, and the resulting gravitational wave spectrum can be probed by pulsar timing arrays as well as by space- and ground-based interferometers.",
+   "abs_url": "https://arxiv.org/abs/2611.07416",
+   "pdf_url": "https://arxiv.org/pdf/2611.07416v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.CO",
+    "hep-th"
+   ],
+   "published": "2026-11-05T04:11:20Z",
+   "date": "2026-11-06",
+   "inspire_url": "https://inspirehep.net/literature/3224005",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
+  },
+  "2611.08382": {
+   "id": "2611.08382",
+   "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?",
+   "authors": [
+    "Kun Zhou",
+    "Jin Li"
+   ],
+   "abstract": "A weak longitudinal background can imitate the angular response of a gravitational-wave propagation mass. We quantify this ambiguity in a compressed Gaussian experiment constructed from the NANOGrav 15-year timing data. At a false-alarm probability of $10^{-3}$, allowing a weak longitudinal component in a massless background costs at least 16.29 percentage points of optimal rejection power for a specified source in a 20-pulsar subarray. Expanding the array to 40 pulsars at the same background level recovers at least 7.62 points. In a separate low-background experiment, we allow the same continuous range of longitudinal amplitudes at zero and positive mass. Across that range and three injected background levels, one test rejects zero mass with at least 97.38\\% power at either of two masses separated by 1.08\\%. With false assignment limited to $10^{-3}$ at the other mass, the power to identify either mass is at most 1.584\\%. A cutoff can thus be identifiable before its position within a frequency cell can be resolved.",
+   "abs_url": "https://arxiv.org/abs/2611.08382",
+   "pdf_url": "https://arxiv.org/pdf/2611.08382v1",
+   "primary_category": "gr-qc",
+   "categories": [
+    "gr-qc"
+   ],
+   "published": "2026-11-05T17:59:53Z",
+   "date": "2026-11-06",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-06"
   }
  }
 }
