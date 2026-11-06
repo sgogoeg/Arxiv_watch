@@ -1,0 +1,70 @@
+{
+ "deleted": {
+  "2611.07418": {
+   "date": "2026-11-06",
+   "title": "Dynamical and Cosmological Perspectives on Symmetric Teleparallel Gravity and its Extensions",
+   "abstract": "This thesis investigates the late-time accelerated expansion of the Universe within modified gravity theories, with particular emphasis on symmetric teleparallel gravity and its extensions, including $f(Q)$, $f(Q, B)$, and $f(Q, φ)$ gravity. It explores the cosmological dynamics of these theories using dynamical systems analysis, stability techniques, and the Noether symmetry approach. The study examines the existence and stability of cosmological critical points, background evolution, and linear cosmological perturbations to understand the different phases of cosmic evolution. It also investigates the role of observational constraints and Big Bang nucleosynthesis in assessing the viability of modified gravity models. Furthermore, the application of Noether symmetries provides a systematic approach to identifying viable functional forms and deriving exact cosmological solutions. Overall, this thesis examines the theoretical and cosmological viability of modified teleparallel gravity as an alternative framework for describing the observed accelerated expansion of the Universe.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.07010": {
+   "date": "2026-11-06",
+   "title": "On Entanglement Dynamics in Holographic Theories",
+   "abstract": "Entanglement entropy (EE) is central to modern theoretical physics, yet its calculation in interacting theories with nontrivial time dependence remains challenging. In this thesis, we investigate the real-time dynamics of EE in strongly coupled quantum field theories (QFTs) using the Anti-de Sitter/Conformal Field Theory (AdS/CFT) correspondence. We first examine EE evolution in an exactly solvable two-dimensional conformal field theory (CFT) with an inhomogeneous sine-square deformation (SSD). We argue that the unconventional time evolution driven by the SSD Hamiltonian can be viewed as a change in spacetime foliation, producing new horizons in the dual three-dimensional bulk. Holographic EE calculations agree with CFT results in all comparable cases. We then study entanglement dynamics in generic chaotic quantum many-body systems. In the limit of late time and large regions, these dynamics are believed to admit an effective entanglement membrane description. In 2d CFTs, a degenerate membrane tension reproduces several entropy dynamics results, unlike the non-degenerate tension in higher dimensions. Using holography, we show that capturing reflected entropy in 2d CFT requires an additional degree of freedom in the membrane description. We further show that a conventional non-degenerate tension emerges when the CFT undergoes a relevant deformation, holographically dual to a planar Banados-Teitelboim-Zanelli (BTZ) black hole with scalar hair and an interior Kasner universe. We then develop a membrane effective theory for reflected entropy dynamics in higher dimensions. Finally, we apply the membrane theories for reflected entropy to study the time evolution of multipartite entanglement signals. We found that scrambling dynamics generate multipartite entanglement with rich structures.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.07002": {
+   "date": "2026-11-06",
+   "title": "Asymptotic safety is not generic",
+   "abstract": "Asymptotically safe quantum gravity proposes a non-perturbative ultraviolet completion of gravity in which the high-energy behavior is controlled by an ultraviolet fixed point---the Reuter fixed point---for which there is robust evidence from a wide range of settings and truncations. The existence of asymptotic safety requires non-trivial zeros of beta functions, raising the question of how generic such fixed-point solutions are. In this work, we tackle this issue by investigating chiral perturbation theories. We focus on SU(2) and SU(3) chiral models, which share key features with gravity such as perturbative non-renormalizability or nonlinear interactions, but which are known to admit a different ultraviolet completion via new degrees of freedom. Using the functional renormalization group, we study these theories within a quartic-derivative truncation and find no evidence for an interacting fixed point. This result suggests that asymptotic safety is not generic, but rather a feature pertaining to certain special systems.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.08102": {
+   "date": "2026-11-06",
+   "title": "Accessing Fractional Wilson Lines from U(1) Monodromy Defects on the Fuzzy Sphere",
+   "abstract": "Wilson lines are gauge-invariant probes of charge screening and deconfinement, which can detect the response of quantum critical matter to an external charge, but their universal information at strongly-coupled critical points remains hard to access. Here we investigate a continuous family of $U(1)$ monodromy defects of the three-dimensional $O(2)$ Wilson--Fisher conformal field theory, which is dual to fractional Wilson lines in the critical noncompact Abelian Higgs model with one unit-charged scalar. We realize this continuous family of defects within the fuzzy-sphere framework by threading a fractional Aharonov--Bohm flux through the two poles of the sphere. We observe the emergence of charged operators carrying fractional transverse spins, as a characteristic signature of the imposed monodromy. The appearance of displacement operator at its protected dimension supports the conformal nature of this defect line. Crucially, we resolve no relevant symmetry-preserving defect scalar, and identify charge-one monopole operators as relevant symmetry-breaking deformations. Assuming the duality, these results provide non-perturbative evidence that fractional Wilson lines of the critical Abelian Higgs model are stable conformal lines.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.08038": {
+   "date": "2026-11-06",
+   "title": "The stochastic Ginzburg-Landau equation with harmonic potential in the full subcritical regime",
+   "abstract": "In this paper, we construct the complex Ginzburg-Landau dynamic associated with the harmonic oscillator, with a random force which is white in time and covers the full subcritical range in space. We are able to renormalise the non-linearity using the same constant as the one used to renormalise the problem associated to the Laplacian. By an extension of the problem to complex times, we are able to prove that the solution of the complex Ginzburg-Landau is equal in law to the solution of the purely dissipative case, i.e. the associated complex $Φ^4$ model, but along a complex axis of time.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.07005": {
+   "date": "2026-11-06",
+   "title": "To Infinity and Beyond: Maximizing Entanglement and Emergent Symmetries in $N$ Higgs Doublet Models",
+   "abstract": "In this paper, we explore the recent observation that maximizing flavor entanglement in Higgs boson scattering in a two Higgs doublet model leads to parameter space where the potential, if bounded from below, has an enhanced mirror symmetry $U(2)^2$. Looking at $N$ Higgs doublet models, we find a generalization of the mirror models, with $U(2)^N$ symmetry. Focusing on three Higgs doublet models, we determine that there is also a bounded potential solution that maximally entangles but has only the minimal $U(2)$ symmetry. This counterexample demonstrates that additional constraints must be imposed to maintain the connection between maximal entanglement and extended symmetries. As a potential constraint, for the three Higgs doublet model, we show that requiring maximal entanglement still occurs after gauging the symmetries eliminates the counterexample, thus restoring the connection.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.08384": {
+   "date": "2026-11-06",
+   "title": "Space of Geometric Gibbs Measures: Uniqueness, Ergodicity, and Teichmüller Complex Manifold Structure",
+   "abstract": "Building on our previous work, in which geometric Gibbs measures were introduced to complete the space of classical Gibbs measures under the Teichmüller metric, we establish the uniqueness of geometric Gibbs measures in this paper. This result completes the construction of a Teichmüller complex manifold structure on the space of all geometric Gibbs measures. Using the welding technique, we uncover a connection between geometric Gibbs measures and harmonic measures on dynamical quasicircles. This connection allows us to establish asymptotic conformal rigidity for these dynamical quasicircles. Finally, we establish a foundation for the systematic study of the ergodic properties of geometric Gibbs measures.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  }
+ },
+ "cared": {
+  "2611.08183": {
+   "date": "2026-11-06",
+   "title": "Investigating bottom quark effects in Higgs boson pair production",
+   "abstract": "We investigate different effects of bottom quark masses in Higgs boson pair production, considering both bottom quark loops and bottom quarks in the initial state. While the effects are negligible at total cross section level, the situation is different for the Higgs boson pair invariant mass distribution close to the production threshold of the two Higgs bosons.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  }
+ }
+}
