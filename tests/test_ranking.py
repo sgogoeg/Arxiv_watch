@@ -75,7 +75,7 @@ def test_embedding_cache_roundtrip(tmp_path):
 
 
 def test_training_steps_never_repeat_pairs():
-    c = ClassifierConfig()  # 10 iterations, batch 16, cap 400
+    c = ClassifierConfig(num_iterations=10, batch_size=16, max_steps=400)
     assert training_steps(9, c) == 12      # 180 pairs: one pass, not 400 steps over the same pairs
     assert training_steps(110, c) == 138
     assert training_steps(1000, c) == 400  # the cap still applies

@@ -32,7 +32,8 @@ classifier:
   min_positives_per_topic: 3       # a topic is trained once it has this many seeds + saved papers
   random_negatives: 100
   num_iterations: 10
-  max_steps: 400                   # cap; training makes at most one pass over its pairs
+  max_steps: 100                   # cap (~7 s each on a GitHub runner); at most one pass over the pairs
+  batch_size: 8                    # 16 at 512 tokens runs out of memory on a 16 GB runner
   max_seq_length: 256              # tokens per paper during training and scoring
   time_budget_seconds: 900         # stop training after 15 min and use the model as trained so far
 
