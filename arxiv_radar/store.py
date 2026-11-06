@@ -2,8 +2,7 @@
 
 Files the dashboard edits (through GitHub commits):
   feedback.json   {"deleted": {arxiv_id: {"date", "title", "abstract", "topics"}},
-                   "cared":   {arxiv_id: {...same fields}},   ("I care": train on it, no folder)
-                   "wacky_votes": {date: {"winner": arxiv_id | None, "candidates": [ids]}}}
+                   "cared":   {arxiv_id: {...same fields}}}   ("I care": train on it, no folder)
   library.json    {"folders": {name: {"topic": str|None, "papers": [arxiv_id]}},
                    "papers": {arxiv_id: paper metadata}}
   authors.json    {"authors": [{"name", "openalex_id", "added"}]}
@@ -21,7 +20,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULTS: dict[str, Any] = {
-    "feedback.json": {"deleted": {}, "cared": {}, "wacky_votes": {}},
+    "feedback.json": {"deleted": {}, "cared": {}},
     "library.json": {"folders": {}, "papers": {}},
     "authors.json": {"authors": []},
     "my_papers.json": {"papers": []},

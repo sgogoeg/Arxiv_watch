@@ -1,8 +1,5 @@
-import random
-
 from arxiv_radar import awards
 from arxiv_radar.fetch import filter_by_categories, in_categories
-from arxiv_radar.store import Store
 
 
 def P(i, **kw):
@@ -54,33 +51,12 @@ def test_drama_detection():
     assert set(ids) == {"2611.00001", "2611.00002", "2611.00003", "2611.00004"}
 
 
-def test_wacky_candidates_and_training():
+def test_wacky_title():
     ps = [P(i, title=t) for i, t in enumerate([
         "Spectral bounds for operators", "Spectral analysis of operators", "Do androids dream of electric sheep?",
         "Operators and spectral bounds revisited", "Bounds on spectral operators", "Spectral operators II"])]
     corpus = [p["title"] for p in ps] * 5
-    r = awards.wacky(ps, [0.9] * len(ps), corpus, awards.PRIOR, random.Random(0))
-    cands = r["candidates"]
-    assert len(cands) == 3 and sum(c["explore"] for c in cands) == 1
-    assert "2611.00002" in {c["id"] for c in cands}  # the question title is a top pick
-    assert set(cands[0]["features"]) == set(awards.FEATURES)
-    # Votes that always pick the title with alliteration push that weight up
-    a, b = {f: 0.0 for f in awards.FEATURES}, {f: 0.0 for f in awards.FEATURES}
-    a["alliteration"] = 1.5
-    w = awards.train_weights([(a, b)] * 20)
-    assert w["alliteration"] > awards.PRIOR["alliteration"]
-    assert abs(w["rarity"] - awards.PRIOR["rarity"]) < 1e-6
-
-
-def test_retrain_from_votes(tmp_path):
-    store = Store(tmp_path)
-    feats = {f: 0.0 for f in awards.FEATURES}
-    win = {**feats, "question": 2.0}
-    store.write_day("2026-11-05", {"awards": {"wacky": {"candidates": [
-        {"id": "a", "features": win}, {"id": "b", "features": feats}, {"id": "c", "features": feats}]}}})
-    store.write("feedback.json", {"wacky_votes": {"2026-11-05": {"winner": "a"}, "2026-11-04": {"winner": "z"}}})
-    w = awards.retrain(store, store)
-    assert w["question"] > awards.PRIOR["question"]
-    model = store.read("awards_model.json")
-    assert model["votes"] == 2 and model["pairs"] == 2
-    assert awards.load_weights(store)["question"] == w["question"]
+    r = awards.wacky(ps, corpus)
+    assert r["winner"]["id"] == "2611.00002"  # the rare-word question title
+    assert len(r["runners_up"]) == 2 and r["winner"]["score"] >= r["runners_up"][0]["score"]
+    assert awards.wacky(ps[:2], corpus) is None

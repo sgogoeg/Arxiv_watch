@@ -54,15 +54,13 @@ Training signals, all read through `Store`:
 - **Negatives:** deleted papers, plus each recent day's `background` sample (never-shortlisted papers). The current
   day's background is excluded.
 
-The model is cached in `.cache/model` and retrained only when `classify.training_hash` changes. The wackiest-title
-award has its own small pairwise model (`awards.retrain`), trained from `feedback.json → wacky_votes` joined with the
-candidate features stored in each day file.
+The model is cached in `.cache/model` and retrained only when `classify.training_hash` changes. The awards use no
+model: they are rules and a fixed-weight title score (`awards.WEIGHTS`).
 
 ### Data contract between pipeline and dashboard
 - **Dashboard-owned** (edited in the browser, committed on Sync): `feedback.json`, `library.json`, `authors.json`,
   `my_papers.json`, `settings.json`.
-- **Pipeline-owned:** `days/*`, `index.json`, `author_matches.json`, `citations.json`, `seeds.json`,
-  `awards_model.json`.
+- **Pipeline-owned:** `days/*`, `index.json`, `author_matches.json`, `citations.json`, `seeds.json`.
 - `store.py`'s docstring documents the shapes.
 - `settings.json` `categories` and `topics` override `config.yaml`. Go through `Store.categories()` and
   `pipeline.effective_config()`; don't read `cfg.categories` / `cfg.topics` directly in run paths. `cfg.categories`
@@ -88,7 +86,7 @@ candidate features stored in each day file.
 `.github/workflows/daily.yml` has two modes:
 - `run`: scheduled, or `workflow_dispatch`.
 - `refresh`: on pushes to `main` that touch `site/**`, `arxiv_radar/**`, `config.yaml`, or the dashboard-owned data
-  files. It backfills authors, rechecks INSPIRE, refreshes citations, retrains the awards scorer and redeploys,
+  files. It backfills authors, rechecks INSPIRE, refreshes citations and redeploys,
   without fetching papers.
 
 The bot's own data commits use `GITHUB_TOKEN`, so they don't retrigger the workflow. `test.yml` runs pytest and

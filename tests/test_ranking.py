@@ -3,7 +3,8 @@ import random
 import numpy as np
 
 from arxiv_radar import prefilter
-from arxiv_radar.classify import build_training_set, classify, positives_per_topic, training_hash
+from arxiv_radar.classify import build_training_set, classify, positives_per_topic, training_hash, training_steps
+from arxiv_radar.config import ClassifierConfig
 from arxiv_radar.config import Topic
 from arxiv_radar.embed import EmbeddingCache, HashingEmbedder, paper_text
 
@@ -71,3 +72,10 @@ def test_embedding_cache_roundtrip(tmp_path):
     c2 = EmbeddingCache(tmp_path / "e.npz", "hashing")
     assert np.allclose(c2.vecs["a"], v[0])
     assert EmbeddingCache(tmp_path / "e.npz", "other-model").vecs == {}
+
+
+def test_training_steps_never_repeat_pairs():
+    c = ClassifierConfig(num_iterations=10, batch_size=16, max_steps=400)
+    assert training_steps(9, c) == 12      # 180 pairs: one pass, not 400 steps over the same pairs
+    assert training_steps(110, c) == 138
+    assert training_steps(1000, c) == 400  # the cap still applies

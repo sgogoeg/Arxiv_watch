@@ -7,24 +7,18 @@ filtered down to yours:
   drama         comments, replies and rebuttals aimed at other papers
 
 Picked from your categories:
-  wacky         three "wackiest title" candidates; your votes retrain the scorer
+  wacky         wackiest title (fixed heuristic score), with runners-up
 """
 from __future__ import annotations
 
-import json
-import logging
 import math
-import random
 import re
 from collections import Counter, defaultdict
-from pathlib import Path
 
 import numpy as np
 
 from .authors import name_key
 from .stats import STOP
-
-log = logging.getLogger(__name__)
 
 # arXiv archives; their RSS feeds together list every new paper of the day.
 ALL_ARCHIVES = [
@@ -174,10 +168,10 @@ def drama(papers: list[dict], n: int = 3) -> list[dict]:
 
 # ------------------------------------------------------------------ wackiest title
 
-FEATURES = ["rarity", "title_gap", "question", "exclaim", "catchy_colon", "quotes", "person", "length_extreme",
-            "alliteration"]
-PRIOR = {"rarity": 1.0, "title_gap": 0.6, "question": 0.4, "exclaim": 0.8, "catchy_colon": 0.4, "quotes": 0.3,
-         "person": 0.5, "length_extreme": 0.3, "alliteration": 0.7}
+# Fixed weights on per-day z-scores of each feature.
+WEIGHTS = {"rarity": 1.0, "question": 0.4, "exclaim": 0.8, "catchy_colon": 0.4, "quotes": 0.3, "person": 0.5,
+           "length_extreme": 0.3, "alliteration": 0.7}
+FEATURES = list(WEIGHTS)
 _PERSON = {"you", "your", "we", "our", "i", "my", "me", "us", "let", "lets", "let's"}
 
 
@@ -186,7 +180,7 @@ def _words(text: str) -> list[str]:
     return re.findall(r"[a-z][a-z'\-]+", text)
 
 
-def raw_features(p: dict, df: Counter, n_docs: int, title_sim: float | None) -> dict:
+def raw_features(p: dict, df: Counter, n_docs: int) -> dict:
     title = p.get("title", "")
     words = _words(title)
     content = [w for w in words if w not in STOP and len(w) > 2]
@@ -195,7 +189,6 @@ def raw_features(p: dict, df: Counter, n_docs: int, title_sim: float | None) -> 
     allit = sum(1 for a, b in zip(content, content[1:]) if a[0] == b[0])
     return {
         "rarity": float(np.mean(idf[:2])) if idf else 0.0,
-        "title_gap": 1.0 - title_sim if title_sim is not None else 0.0,
         "question": float("?" in title),
         "exclaim": float("!" in title),
         "catchy_colon": float(bool(prefix) and len(prefix.split()) <= 4),
@@ -223,82 +216,28 @@ def standardize(rows: list[dict]) -> list[dict]:
     return out
 
 
-def train_weights(pairs: list[tuple[dict, dict]], prior: dict = PRIOR, l2: float = 1.0,
-                  steps: int = 300, lr: float = 0.1) -> dict:
-    """Pairwise logistic regression (picked title beats the others), pulled toward the prior."""
-    w0 = np.array([prior[f] for f in FEATURES])
-    if not pairs:
-        return dict(prior)
-    X = np.array([[a[f] - b[f] for f in FEATURES] for a, b in pairs])
-    w = w0.copy()
-    for _ in range(steps):
-        p = 1 / (1 + np.exp(-X @ w))
-        grad = -X.T @ (1 - p) / len(X) + l2 * (w - w0) / len(X)
-        w -= lr * grad
-    return {f: round(float(v), 4) for f, v in zip(FEATURES, w)}
-
-
-def collect_votes(votes: dict, day_docs: dict[str, dict]) -> list[tuple[dict, dict]]:
-    """Votes from feedback.json ({date: {"winner": id}}) joined with each day's stored candidate features."""
-    pairs = []
-    for day, v in votes.items():
-        cands = ((day_docs.get(day) or {}).get("awards") or {}).get("wacky", {}).get("candidates", [])
-        feats = {c["id"]: c["features"] for c in cands}
-        win = v.get("winner")
-        if win not in feats:
-            continue
-        pairs.extend((feats[win], f) for cid, f in feats.items() if cid != win)
-    return pairs
-
-
-def wacky(papers: list[dict], title_sims: list[float | None], corpus: list[str], weights: dict,
-          rng: random.Random, explore_from: int = 20) -> dict | None:
-    if len(papers) < 3:
+def wacky(papers: list[dict], corpus: list[str], n: int = 3) -> dict | None:
+    """Wackiest title among your papers, with runners-up. Word rarity is measured against the whole day."""
+    if len(papers) < n:
         return None
     df: Counter = Counter()
     for doc in corpus:
         df.update(set(_words(doc)))
-    rows = standardize([raw_features(p, df, len(corpus), s) for p, s in zip(papers, title_sims)])
-    scores = [sum(weights[f] * r[f] for f in FEATURES) for r in rows]
-    order = sorted(range(len(papers)), key=lambda i: -scores[i])
-    picks = order[:2]
-    pool = order[2:explore_from]
-    if pool:  # one exploratory candidate so the scorer can learn what it underrates
-        picks.append(rng.choice(pool))
-    cands = [{**_brief(papers[i]), "features": rows[i], "score": round(scores[i], 3), "explore": k == 2}
-             for k, i in enumerate(picks)]
-    rng.shuffle(cands)  # don't reveal the ranking
-    return {"candidates": cands}
+    rows = standardize([raw_features(p, df, len(corpus)) for p in papers])
+    scores = [sum(WEIGHTS[f] * r[f] for f in FEATURES) for r in rows]
+    order = sorted(range(len(papers)), key=lambda i: -scores[i])[:n]
+    ranked = [{**_brief(papers[i]), "score": round(scores[i], 3)} for i in order]
+    return {"winner": ranked[0], "runners_up": ranked[1:]}
 
 
 # ------------------------------------------------------------------ all together
 
-def compute(all_papers: list[dict], mine: list[dict], title_sims: list[float | None], weights: dict,
-            seed: int = 0) -> dict:
+def compute(all_papers: list[dict], mine: list[dict]) -> dict:
     corpus = [f"{p.get('title', '')} {p.get('abstract', '')}" for p in all_papers]
     return {
         "pool": len(all_papers),
         "longest": longest(all_papers),
         "most_submissions": most_submissions(all_papers),
         "drama": drama(all_papers),
-        "wacky": wacky(mine, title_sims, corpus, weights, random.Random(seed)),
+        "wacky": wacky(mine, corpus),
     }
-
-
-def load_weights(store) -> dict:
-    model = store.read("awards_model.json") if store.path("awards_model.json").exists() else {}
-    return {**PRIOR, **(model.get("weights") or {})}
-
-
-def retrain(store, writer) -> dict:
-    votes = store.read("feedback.json").get("wacky_votes", {})
-    docs = {}
-    for day in votes:
-        doc = store.read_day(day)
-        if doc:
-            docs[day] = doc
-    pairs = collect_votes(votes, docs)
-    weights = train_weights(pairs)
-    writer.write("awards_model.json", {"weights": weights, "votes": len(votes), "pairs": len(pairs)})
-    log.info("wackiest-title scorer trained on %d votes (%d pairs)", len(votes), len(pairs))
-    return weights

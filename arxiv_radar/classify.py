@@ -15,7 +15,9 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import math
 import random
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -81,6 +83,31 @@ def training_hash(examples: list[Example], topics: list[str], model: str) -> str
     return hashlib.sha256(payload.encode()).hexdigest()[:16]
 
 
+def training_steps(n_examples: int, cfg) -> int:
+    """Steps for one pass over SetFit's pairs (2 per example per iteration), capped at cfg.max_steps.
+
+    SetFit's max_steps overrides the epoch count, so a larger value would cycle over the same pairs again.
+    """
+    one_pass = math.ceil(2 * cfg.num_iterations * n_examples / cfg.batch_size)
+    return max(1, min(cfg.max_steps, one_pass))
+
+
+def _time_budget(seconds: float):
+    from transformers import TrainerCallback
+
+    class TimeBudget(TrainerCallback):
+        def on_train_begin(self, args, state, control, **kw):
+            self.start = time.monotonic()
+
+        def on_step_end(self, args, state, control, **kw):
+            if time.monotonic() - self.start > seconds:
+                log.warning("SetFit time budget (%ds) reached after %d/%d steps; using the model as trained so far",
+                            seconds, state.global_step, state.max_steps)
+                control.should_training_stop = True
+
+    return TimeBudget()
+
+
 class SetFitTopicClassifier:
     def __init__(self, model_name: str, model_dir: str | Path, cfg):
         self.model_name = model_name
@@ -117,17 +144,25 @@ class SetFitTopicClassifier:
         else:
             labels = [[1 if t in e.labels else 0 for t in topics] for e in examples]
             model = SetFitModel.from_pretrained(self.model_name, multi_target_strategy="one-vs-rest")
+        model.model_body.max_seq_length = self.cfg.max_seq_length
         ds = Dataset.from_dict({"text": [e.text for e in examples], "label": labels})
+        steps = training_steps(len(examples), self.cfg)
         args = TrainingArguments(
             output_dir=str(self.dir.parent / "setfit-checkpoints"),
             save_strategy="no",
+            report_to="none",
             batch_size=self.cfg.batch_size,
             num_iterations=self.cfg.num_iterations,
             num_epochs=1,
-            max_steps=self.cfg.max_steps,
+            max_steps=steps,
             seed=0,
         )
-        Trainer(model=model, args=args, train_dataset=ds).train()
+        log.info("SetFit: %d steps, batch %d, %d tokens, time budget %ds",
+                 steps, self.cfg.batch_size, self.cfg.max_seq_length, self.cfg.time_budget_seconds)
+        start = time.monotonic()
+        Trainer(model=model, args=args, train_dataset=ds,
+                callbacks=[_time_budget(self.cfg.time_budget_seconds)]).train()
+        log.info("SetFit trained in %.0fs", time.monotonic() - start)
         self.dir.mkdir(parents=True, exist_ok=True)
         model.save_pretrained(str(self.dir))
         self._meta_path().write_text(json.dumps({"hash": h, "topics": topics}))
