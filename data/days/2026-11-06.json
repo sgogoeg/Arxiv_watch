@@ -1447,7 +1447,8 @@
     "similarity": 0.872
    },
    "tldr": "The effects of bottom quark masses in Higgs boson pair production are negligible at total cross section level.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3225481"
   },
   {
    "id": "2611.08102",
@@ -1489,7 +1490,8 @@
     "similarity": 0.917
    },
    "tldr": "We investigate a continuous family of U(1) monodromy defects of the three-dimensional $O(2)$ Wilson--Fisher conformal field theory, which is dual to fractional Wilson lines in the critical noncompact Abelian Higgs model with one unit-charge",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3225472"
   },
   {
    "id": "2611.08038",
@@ -2336,7 +2338,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.957
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225487"
   },
   {
    "id": "2611.07389",
@@ -2410,7 +2413,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.886
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225456"
   },
   {
    "id": "2611.08241",
@@ -2521,7 +2525,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.88
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225460"
   },
   {
    "id": "2611.07004",
@@ -2636,7 +2641,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.873
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225532"
   },
   {
    "id": "2611.07317",
@@ -2715,7 +2721,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.883
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225462"
   },
   {
    "id": "2611.07557",
@@ -3176,7 +3183,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225500"
   },
   {
    "id": "2611.07341",
@@ -3383,7 +3391,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225480"
   },
   {
    "id": "2611.08322",
@@ -3420,7 +3429,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.913
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225530"
   },
   {
    "id": "2611.07193",
@@ -3688,7 +3698,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.886
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225505"
   },
   {
    "id": "2611.08064",
@@ -3724,7 +3735,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.873
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225457"
   },
   {
    "id": "2611.07574",
@@ -3877,7 +3889,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.918
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225492"
   },
   {
    "id": "2611.06999",
@@ -4110,7 +4123,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.892
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225521"
   },
   {
    "id": "2611.08195",
@@ -4219,7 +4233,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.889
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225494"
   },
   {
    "id": "2611.07672",
@@ -4341,7 +4356,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225499"
   },
   {
    "id": "2611.08027",
@@ -4685,7 +4701,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.897
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225486"
   },
   {
    "id": "2611.07016",
@@ -4910,7 +4927,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.904
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225516"
   },
   {
    "id": "2611.08221",
@@ -4949,7 +4967,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.903
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225490"
   },
   {
    "id": "2611.07366",
@@ -5353,7 +5372,8 @@
     "keywords": {},
     "closest": null,
     "similarity": 0.874
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225454"
   },
   {
    "id": "2611.08033",
@@ -5393,7 +5413,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.868
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225455"
   },
   {
    "id": "2611.07281",
@@ -5595,7 +5616,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225482"
   },
   {
    "id": "2611.08422",
@@ -5633,7 +5655,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.898
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225510"
   },
   {
    "id": "2611.07869",
@@ -5837,7 +5860,8 @@
     "keywords": {},
     "closest": null,
     "similarity": 0.884
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225475"
   },
   {
    "id": "2611.08145",
@@ -5872,7 +5896,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225484"
   },
   {
    "id": "2611.08163",
@@ -5910,7 +5935,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225483"
   },
   {
    "id": "2611.07023",
@@ -5984,7 +6010,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.886
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225501"
   },
   {
    "id": "2611.07039",
@@ -6131,7 +6158,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.922
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225489"
   },
   {
    "id": "2611.07006",
@@ -6287,7 +6315,8 @@
     "keywords": {},
     "closest": null,
     "similarity": 0.918
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225504"
   },
   {
    "id": "2611.07875",
@@ -6643,7 +6672,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.884
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225497"
   },
   {
    "id": "2611.07563",
@@ -6740,7 +6770,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225528"
   },
   {
    "id": "2611.08272",
@@ -6775,7 +6806,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.871
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225479"
   },
   {
    "id": "2611.07326",
@@ -7045,7 +7077,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225546"
   },
   {
    "id": "2611.07363",
