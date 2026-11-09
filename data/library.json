@@ -3,6 +3,12 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.08583",
+    "2611.09628",
+    "2611.08604",
+    "2611.08880",
+    "2611.08642",
+    "2611.08680",
     "2611.08422",
     "2611.08382",
     "2611.07416",
@@ -15,6 +21,13 @@
     "2611.07136",
     "2611.07877",
     "2611.05504"
+   ]
+  },
+  "I need this": {
+   "topic": null,
+   "papers": [
+    "2611.09483",
+    "2611.09106"
    ]
   }
  },
@@ -303,6 +316,204 @@
     "Phase transitions & GWs"
    ],
    "saved": "2026-11-06"
+  },
+  "2611.08680": {
+   "id": "2611.08680",
+   "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation",
+   "authors": [
+    "Peisi Huang",
+    "Anibal D. Medina",
+    "Carlos E. M. Wagner",
+    "Kairui Zhang"
+   ],
+   "abstract": "We present a thermal dark matter (DM) scenario in which a phase transition after freeze-out changes both the DM spectrum and the dominant annihilation process, allowing an enhanced present day annihilation rate with suppressed direct detection. We realize this mechanism in a two-Higgs-doublet model extended by a complex scalar singlet, a Majorana fermion, and a heavier Dirac fermion. Before the transition, the Majorana state freezes out through $p$-wave annihilation into singlet scalars. The subsequent transition changes the dark fermion masses and mixing, enabling $s$-wave annihilation through a pseudoscalar portal. The surviving relic differs in mass and composition from the original state. We find relic compatible solutions with present day annihilation rates more than an order of magnitude above the canonical thermal value, without tuning to a mediator resonance, while satisfying direct detection bounds.",
+   "abs_url": "https://arxiv.org/abs/2611.08680",
+   "pdf_url": "https://arxiv.org/pdf/2611.08680v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph"
+   ],
+   "published": "2026-11-05T20:38:11Z",
+   "date": "2026-11-09",
+   "tldr": "We propose a phase-transition portal to Enhanced Dark Matter Annihilation.",
+   "inspire_url": "https://inspirehep.net/literature/3225670",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
+  },
+  "2611.09106": {
+   "id": "2611.09106",
+   "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data",
+   "authors": [
+    "Yang Yu",
+    "Lei Feng"
+   ],
+   "abstract": "Sub-GeV dark matter (DM) particles deposit little energy in conventional direct-detection experiments and are therefore difficult to probe, but the Migdal effect provides an electronic signal from atomic ionization accompanying the recoil. Using the new results of the LUX-ZEPLIN experiment with a 4.2 tonne-year exposure, we evaluate the sensitivity of the Migdal effect to the spin-independent DM--nucleon scattering cross section. For masses between $350~\\mathrm{MeV}$ and $10~\\mathrm{GeV}$, the projected 90\\% upper limits range from $6.5\\times10^{-37}$ to $9.6\\times10^{-42}~\\mathrm{cm^2}$. These limits are then used to constrain the minimal scalar- and vector-mediator DM models. For the light-mediator DM model, the constraint on the coupling reaches $α\\simeq 10^{-12}$, which is stronger than or comparable to the constraints from kaon decays, stellar cooling, and SN1987A.",
+   "abs_url": "https://arxiv.org/abs/2611.09106",
+   "pdf_url": "https://arxiv.org/pdf/2611.09106v1",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE"
+   ],
+   "published": "2026-11-06T07:38:27Z",
+   "date": "2026-11-09",
+   "tldr": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data",
+   "inspire_url": "https://inspirehep.net/literature/3225702",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
+  },
+  "2611.08642": {
+   "id": "2611.08642",
+   "title": "Testing influence of tides on gravitational wave emission with SPH code PHANTOM",
+   "authors": [
+    "Marat Sh. Potashov",
+    "Sergei I. Blinnikov",
+    "Aleksandra V. Mishakina"
+   ],
+   "abstract": "In this article, we demonstrate how a Newtonian SPH (Smoothed Particle Hydrodynamics) code PHANTOM can be used to estimate the tidal contribution to gravitational wave (GW) waveforms. Using a binary neutron star (NS+NS) system with typical masses of 1.5 + 1.5 Msun as an example, we show - by comparing our results with waveforms calibrated against full numerical General Relativity (GR) simulations - that the tidal contribution to GWs can be reliably extracted using as few as about 10$^4$ smoothed particles. Naturally, one must account for the difference in neutron star compactness between Newtonian gravity and general relativity. At separations greater than 100 km, the relative tidal contribution falls below the level of numerical noise inherent in SPH; however, at such distances, GW waveforms for point-like sources are sufficient for detection purposes. For a white dwarf-neutron star (WD+NS) binary with typical masses of 0.6 Msun and 1.5 Msun respectively, a much larger number of smoothed particles is required, along with a separation on the order of tens of thousands of kilometers, as tidal mass transfer and the disruption of the white dwarf begin quite rapidly. Nevertheless, these challenges can be overcome, but the approach is not capable of yielding useful results due to the richness of Newtonian effects. In all cases, it is crucial to perform a hydrostatic/hydrodynamic relaxation (HPR) of the initial models; otherwise, the entire GW signal is lost in the numerical noise.",
+   "abs_url": "https://arxiv.org/abs/2611.08642",
+   "pdf_url": "https://arxiv.org/pdf/2611.08642v1",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE",
+    "gr-qc"
+   ],
+   "published": "2026-11-05T19:39:33Z",
+   "date": "2026-11-09",
+   "tldr": "A Newtonian SPH code PHANTOM can be used to estimate the tidal contribution to gravitational wave waveforms.",
+   "inspire_url": "https://inspirehep.net/literature/3225655",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
+  },
+  "2611.08880": {
+   "id": "2611.08880",
+   "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data",
+   "authors": [
+    "Aryamann Rao",
+    "Jess McIver",
+    "Rhiannon Udall",
+    "Natalia Korsakova",
+    "Malvina Bellotti"
+   ],
+   "abstract": "The Laser Interferometer Space Antenna (LISA) is a space-based gravitational wave detector scheduled for launch in the 2030s by the European Space Agency. Operating in the 0.1 mHz to 0.1 Hz band, LISA will observe a variety of astrophysical sources including but not limited to supermassive black hole mergers, extreme mass ratio inspirals, and white dwarf binaries. LISA will yield new insights, including supermassive black hole formation, new tests of general relativity, population studies of white dwarfs and others. Like all interferometric gravitational wave detectors, LISA data is expected to contain non-astrophysical transients, commonly referred to as glitches. We introduce a two step pipeline that consists of a search algorithm for detecting potential transients in simulated LISA data followed by a machine learning model that classifies the detected transients as gravitational waves or instrumental glitches. This is important for MBHBs with very high masses (around $10^6\\ M_{\\odot}$) which are transients that could be morphologically similar to LISA glitches in the data. Initial results demonstrate a promising ability to classify detected events with an accuracy close to $98\\%$. The pipeline also shows the ability to analyze a month of data in under 2 minutes on a laptop. This shows an eventual utility of our pipeline for enabling accurate rapid alerts from low latency searches. It could also support model selection in global-fit analyses by providing an initial summary of the location and type of individual signals. This paper also discusses challenges encountered during training, including limitations of the current framework.",
+   "abs_url": "https://arxiv.org/abs/2611.08880",
+   "pdf_url": "https://arxiv.org/pdf/2611.08880v1",
+   "primary_category": "gr-qc",
+   "categories": [
+    "gr-qc",
+    "astro-ph.HE",
+    "astro-ph.IM"
+   ],
+   "published": "2026-11-06T02:15:57Z",
+   "date": "2026-11-09",
+   "tldr": "A pipeline for detecting astrophysical signals and instrumental glitches in LISA data.",
+   "inspire_url": "https://inspirehep.net/literature/3225661",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
+  },
+  "2611.08604": {
+   "id": "2611.08604",
+   "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries",
+   "authors": [
+    "Edwin Santiago-Leandro",
+    "Clarissa Avilés-Niebla",
+    "Aldo Batta"
+   ],
+   "abstract": "The observation of over 300 Gravitational Wave (GW) events by the LIGO-Virgo-KAGRA collaboration, has yielded information of the merger of compact object binaries, such as their individual masses and spins. However, the effective spin parameter obtained from the GW signal provides important information that could be used to discern the binary's formation channel. Overall, binaries formed from dynamic interactions in dense stellar environments are expected to have a random distribution of effective spins between -1 and 1. Meanwhile, binaries formed from the evolution of isolated stellar binaries are expected to have positive effective spins unless there is a large enough natal kick during the compact object formation that could significantly alter the orientation of the individual spins with respect to the binary's angular momentum. We study the viability of obtaining large natal kicks during the formation of massive Black Holes by studying the asymmetric mild explosion of $13\\text{M}_{\\odot}$, $21\\text{M}_{\\odot}$, $28\\text{M}_{\\odot}$ and $34\\text{M}_{\\odot}$ pre-supernova stellar models, by means of 3D Smooth Particle Hydrodynamics simulations. Our results show that, even kicks in the order of $\\sim$ 1000 km/s, which are among the highest values observed for natal kicks, can't consistently change the orientation of the orbit. Physical setups where the orientation of the orbit changes require the kick to be directed correctly, and they would also require for the supernova explosion energy to be quite high.",
+   "abs_url": "https://arxiv.org/abs/2611.08604",
+   "pdf_url": "https://arxiv.org/pdf/2611.08604v1",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE"
+   ],
+   "published": "2026-11-05T19:00:27Z",
+   "date": "2026-11-09",
+   "tldr": "Large natal kicks during the formation of massive Black Hole binaries can't change the orientation of the orbit.",
+   "inspire_url": "https://inspirehep.net/literature/3225652",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
+  },
+  "2611.09628": {
+   "id": "2611.09628",
+   "title": "Fundamental Noise Processes in Pulsar Timing",
+   "authors": [
+    "James M. Cordes",
+    "Stella Koch Ocker",
+    "Shami Chatterjee",
+    "Timothy Dolch",
+    "Ross J. Jennings",
+    "Michael T. Lam",
+    "Jacob E. Turner"
+   ],
+   "abstract": "The stability of spin rates and emission regions of radio-emitting neutron stars (pulsars) has enabled remarkable advances, including the detection of exoplanets, testing theories of gravity, and stimulating the vigorous exploration of a new window in gravitational wave astronomy an nanohertz frequencies. An ideal astrophysical clock would emit identical pulses at a constant rate, propagating along single geodesics through a perfect vacuum. In reality, the timing precision achievable with pulsars is limited by spin noise, variability in the beam produced in a complex magnetosphere, and multipath propagation through a turbulent interstellar medium, with additional limitations from uncertainties in the changing pulsar -- observatory vector and instrumental effects. Here we present the fundamentals of pulsar timing, its current limitations, and prospects for improvements in timing precision. We develop metrics to assess the timing quality of a pulsar and use them to evaluate sources currently included in pulsar timing arrays (PTAs) as a means for characterizing the quality of future pulsar discoveries. With increases in telescope sensitivity, pulsar timing precision will increasingly be limited by propagation effects in the interstellar medium. We identify sources of non-Gaussianity in timing residuals and separate out effects that are chromatic or achromatic, as well as effects that vary on short (seconds to minutes) and longer (days to months) timescales. Modern wide-bandwidth receivers provide simultaneous arrival times across a range of frequencies, enabling the robust mitigation of chromatic interstellar effects and the identification of non-Gaussian events superimposed on random fluctuations. We recommend changes to timing procedures that leverage instrumentation advances to improve timing precision.",
+   "abs_url": "https://arxiv.org/abs/2611.09628",
+   "pdf_url": "https://arxiv.org/pdf/2611.09628v1",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE"
+   ],
+   "published": "2026-11-06T15:47:33Z",
+   "date": "2026-11-09",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
+  },
+  "2611.08583": {
+   "id": "2611.08583",
+   "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature",
+   "authors": [
+    "Ioana A. Zelko",
+    "Jo Bovy",
+    "Nolan Koblischke"
+   ],
+   "abstract": "To use a dark-matter model one needs to know what defines it, which observables it affects, which codes and likelihoods evaluate it, and under what assumptions a published bound applies. That information is scattered across tens of thousands of papers. We present DarkMatterFM-Registry, a machine-readable registry of dark-matter models extracted from arXiv full texts by a staged large-language-model (LLM) pipeline: 6,145 structured model cards, validated against a seven-file JSON Schema suite, ranked by expected value for observational follow-up, and enriched for the top ~2,000 with observables, constraints, and theory-to-observable routes. Schema checks pass 97.8% of cards, and an LLM-judged accuracy study on a stratified card sample finds 81% of section verdicts correct, 18% partially correct, and none hallucinated. As a first application we turn the registry into a priority-weighted roadmap of 25 concrete projects the community could build. The roadmap is built by judging every computational step of every enriched model's theory-to-observable routes as available, partial, or missing, and aggregating the resulting typed gaps weighted by model priority. We find that what blocks the most high-priority models is not missing theory but missing shared infrastructure: model files for existing relic-abundance solvers, a general non-cold Boltzmann-code framework, reusable indirect-detection likelihoods, and a Lyman-$α$ forest likelihood for non-cold dark matter (the largest gap for structure-formation probes). The model cards, schemas, roadmap, and ranking are released making the project reproducible and the cards available for the community.",
+   "abs_url": "https://arxiv.org/abs/2611.08583",
+   "pdf_url": "https://arxiv.org/pdf/2611.08583v1",
+   "primary_category": "astro-ph.CO",
+   "categories": [
+    "astro-ph.CO",
+    "astro-ph.IM",
+    "hep-ph"
+   ],
+   "published": "2026-11-05T19:00:01Z",
+   "date": "2026-11-09",
+   "inspire_url": "https://inspirehep.net/literature/3225621",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
+  },
+  "2611.09483": {
+   "id": "2611.09483",
+   "title": "Thermal Field Theory for General Equilibrium Density Matrices",
+   "authors": [
+    "Alberto Salvio"
+   ],
+   "abstract": "Thermal field theory (TFT) is the combination of statistical mechanics and relativistic quantum field theory. This (book) chapter provides a pedagogical introduction to (and a review of) TFT for general equilibrium density matrices, which allow arbitrary values not only of temperature and chemical potentials, but also of average angular momentum. A general technique to compute ensemble averages is illustrated. Path-integral methods are developed to study the partition function and the thermal Green's functions of general operators, with an arbitrary number of points, in all field theories of physical relevance.",
+   "abs_url": "https://arxiv.org/abs/2611.09483",
+   "pdf_url": "https://arxiv.org/pdf/2611.09483v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "hep-th"
+   ],
+   "published": "2026-11-06T14:04:26Z",
+   "date": "2026-11-09",
+   "inspire_url": "https://inspirehep.net/literature/3225746",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-09"
   }
  }
 }

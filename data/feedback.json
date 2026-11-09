@@ -65,6 +65,54 @@
    "topics": [
     "Phase transitions & GWs"
    ]
+  },
+  "2611.09037": {
+   "date": "2026-11-09",
+   "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos",
+   "abstract": "High-energy astrophysical neutrinos probe non-standard neutrino interactions over cosmological distances. We study flavor-dependent interactions between neutrinos and dark matter (DM) for neutrinos produced inside the dense DM spike surrounding the supermassive black hole of the blazar TXS~0506+056. A flavor-diagonal potential $V_α=A_α\\,ρ_χ(r)$ induced by coherent forward scattering modifies the mixing in the medium, and the flavor-dependent scattering cross section attenuates the neutrino flux along the line of sight. We show that the propagation is adiabatic throughout the spike and the halo, so that the matter eigenstates produced at the source are conserved and only re-projected onto flavors at Earth. Two regimes emerge. For $A\\ll 10^{-38}\\,{\\rm cm^3}$ the mixing is unaffected and the IceCube three-flavor composition limits the cross section to $σ_{νχ}/m_χ\\lesssim 10^{-28}\\,{\\rm cm^2/GeV}$. For larger $A$ the interacting flavor is isolated into a single matter eigenstate at the source; the two remaining eigenstates escape without attenuation, producing a survival plateau that relaxes the limits by up to four orders of magnitude. The sign of the potential can differ between neutrinos and antineutrinos, so that the isolated state connects to different vacuum mass eigenstates for $ν$ and $\\barν$, which leaves a characteristic imprint on the flavor composition even without attenuation. The requirement that the potential induced by the dark matter density around Earth do not affect the observed PMNS matrix, so that the flavor projection at Earth is performed with the local matter mixing, gives A$\\lesssim 10^{-30}\\text{cm} ^3$. The combined constraints are presented in the $(A,σ_{νχ}/m_χ)$ plane and compared with a vector-mediator benchmark.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.09106": {
+   "date": "2026-11-09",
+   "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data",
+   "abstract": "Sub-GeV dark matter (DM) particles deposit little energy in conventional direct-detection experiments and are therefore difficult to probe, but the Migdal effect provides an electronic signal from atomic ionization accompanying the recoil. Using the new results of the LUX-ZEPLIN experiment with a 4.2 tonne-year exposure, we evaluate the sensitivity of the Migdal effect to the spin-independent DM--nucleon scattering cross section. For masses between $350~\\mathrm{MeV}$ and $10~\\mathrm{GeV}$, the projected 90\\% upper limits range from $6.5\\times10^{-37}$ to $9.6\\times10^{-42}~\\mathrm{cm^2}$. These limits are then used to constrain the minimal scalar- and vector-mediator DM models. For the light-mediator DM model, the constraint on the coupling reaches $α\\simeq 10^{-12}$, which is stronger than or comparable to the constraints from kaon decays, stellar cooling, and SN1987A.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.08880": {
+   "date": "2026-11-09",
+   "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data",
+   "abstract": "The Laser Interferometer Space Antenna (LISA) is a space-based gravitational wave detector scheduled for launch in the 2030s by the European Space Agency. Operating in the 0.1 mHz to 0.1 Hz band, LISA will observe a variety of astrophysical sources including but not limited to supermassive black hole mergers, extreme mass ratio inspirals, and white dwarf binaries. LISA will yield new insights, including supermassive black hole formation, new tests of general relativity, population studies of white dwarfs and others. Like all interferometric gravitational wave detectors, LISA data is expected to contain non-astrophysical transients, commonly referred to as glitches. We introduce a two step pipeline that consists of a search algorithm for detecting potential transients in simulated LISA data followed by a machine learning model that classifies the detected transients as gravitational waves or instrumental glitches. This is important for MBHBs with very high masses (around $10^6\\ M_{\\odot}$) which are transients that could be morphologically similar to LISA glitches in the data. Initial results demonstrate a promising ability to classify detected events with an accuracy close to $98\\%$. The pipeline also shows the ability to analyze a month of data in under 2 minutes on a laptop. This shows an eventual utility of our pipeline for enabling accurate rapid alerts from low latency searches. It could also support model selection in global-fit analyses by providing an initial summary of the location and type of individual signals. This paper also discusses challenges encountered during training, including limitations of the current framework.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.08604": {
+   "date": "2026-11-09",
+   "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries",
+   "abstract": "The observation of over 300 Gravitational Wave (GW) events by the LIGO-Virgo-KAGRA collaboration, has yielded information of the merger of compact object binaries, such as their individual masses and spins. However, the effective spin parameter obtained from the GW signal provides important information that could be used to discern the binary's formation channel. Overall, binaries formed from dynamic interactions in dense stellar environments are expected to have a random distribution of effective spins between -1 and 1. Meanwhile, binaries formed from the evolution of isolated stellar binaries are expected to have positive effective spins unless there is a large enough natal kick during the compact object formation that could significantly alter the orientation of the individual spins with respect to the binary's angular momentum. We study the viability of obtaining large natal kicks during the formation of massive Black Holes by studying the asymmetric mild explosion of $13\\text{M}_{\\odot}$, $21\\text{M}_{\\odot}$, $28\\text{M}_{\\odot}$ and $34\\text{M}_{\\odot}$ pre-supernova stellar models, by means of 3D Smooth Particle Hydrodynamics simulations. Our results show that, even kicks in the order of $\\sim$ 1000 km/s, which are among the highest values observed for natal kicks, can't consistently change the orientation of the orbit. Physical setups where the orientation of the orbit changes require the kick to be directed correctly, and they would also require for the supernova explosion energy to be quite high.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.09628": {
+   "date": "2026-11-09",
+   "title": "Fundamental Noise Processes in Pulsar Timing",
+   "abstract": "The stability of spin rates and emission regions of radio-emitting neutron stars (pulsars) has enabled remarkable advances, including the detection of exoplanets, testing theories of gravity, and stimulating the vigorous exploration of a new window in gravitational wave astronomy an nanohertz frequencies. An ideal astrophysical clock would emit identical pulses at a constant rate, propagating along single geodesics through a perfect vacuum. In reality, the timing precision achievable with pulsars is limited by spin noise, variability in the beam produced in a complex magnetosphere, and multipath propagation through a turbulent interstellar medium, with additional limitations from uncertainties in the changing pulsar -- observatory vector and instrumental effects. Here we present the fundamentals of pulsar timing, its current limitations, and prospects for improvements in timing precision. We develop metrics to assess the timing quality of a pulsar and use them to evaluate sources currently included in pulsar timing arrays (PTAs) as a means for characterizing the quality of future pulsar discoveries. With increases in telescope sensitivity, pulsar timing precision will increasingly be limited by propagation effects in the interstellar medium. We identify sources of non-Gaussianity in timing residuals and separate out effects that are chromatic or achromatic, as well as effects that vary on short (seconds to minutes) and longer (days to months) timescales. Modern wide-bandwidth receivers provide simultaneous arrival times across a range of frequencies, enabling the robust mitigation of chromatic interstellar effects and the identification of non-Gaussian events superimposed on random fluctuations. We recommend changes to timing procedures that leverage instrumentation advances to improve timing precision.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.09483": {
+   "date": "2026-11-09",
+   "title": "Thermal Field Theory for General Equilibrium Density Matrices",
+   "abstract": "Thermal field theory (TFT) is the combination of statistical mechanics and relativistic quantum field theory. This (book) chapter provides a pedagogical introduction to (and a review of) TFT for general equilibrium density matrices, which allow arbitrary values not only of temperature and chemical potentials, but also of average angular momentum. A general technique to compute ensemble averages is illustrated. Path-integral methods are developed to study the partition function and the thermal Green's functions of general operators, with an arbitrary number of points, in all field theories of physical relevance.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
   }
  }
 }
