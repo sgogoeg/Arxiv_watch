@@ -1,6 +1,11 @@
 {
  "days": [
   {
+   "date": "2026-11-10",
+   "count": 150,
+   "fetched": 324
+  },
+  {
    "date": "2026-11-09",
    "count": 150,
    "fetched": 183
@@ -20,5 +25,5 @@
   "Phase transitions & GWs"
  ],
  "threshold": 0.5,
- "generated": "2026-11-09T08:47:33+00:00"
+ "generated": "2026-11-10T09:05:33+00:00"
 }

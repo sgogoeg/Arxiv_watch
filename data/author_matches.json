@@ -2,6 +2,55 @@
  "authors": {
   "Felix Kling": [
    {
+    "id": "2611.10465",
+    "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering",
+    "authors": [
+     "A. P. Furmanski",
+     "J. G. Morf\\'in",
+     "L. Alvarez-Ruso",
+     "A. M. Ankowski",
+     "A. Ashkenazi",
+     "M. Sajjad Athar",
+     "S. Dolan",
+     "S. Dytman",
+     "S. Gardiner",
+     "R. Gonz\\'alez-Jim\\'enez",
+     "R. J. Hill",
+     "M. Hostert",
+     "J. Isaacson",
+     "N. Jachowicz",
+     "M. Kabirnezhad",
+     "T. Katori",
+     "S. R. Klein",
+     "F. Kling",
+     "M. Martini",
+     "G. D. Megias",
+     "B. A. Messerly",
+     "K. Niewczas",
+     "A. Nikolakopoulos",
+     "J. Nowak",
+     "J. M. Paley",
+     "V. Pandey",
+     "A. Papadopoulou",
+     "L. Pickering",
+     "N. Rocco",
+     "J. T. Sobczyk",
+     "J. E. Sobczyk",
+     "C. Thorpe",
+     "C. Wret"
+    ],
+    "date": "2026-11-10",
+    "abs_url": "https://arxiv.org/abs/2611.10465",
+    "pdf_url": "https://arxiv.org/pdf/2611.10465",
+    "abstract": "The precise measurement of neutrino properties is among the highest priorities in fundamental particle physics, involving many experimental and theoretical efforts worldwide. Since the experiments rely on the interactions of neutrinos in the nuclear environment, the planned advances in the scope and precision of these experiments require a commensurate effort in understanding and modeling the hadronic and nuclear physics of these interactions, as incorporated in neutrino event generators. This modeling is essential to every phase of the experimental analyses, and the theoretical uncertainties play an important role in interpreting experimental results. In this Review of current challenges, we summarize the open questions in neutrino-nucleus interactions at GeV-scale energies, and discuss in detail the potential impacts of these unknowns on the measurement of neutrino properties, using the determination of oscillation parameters as a central example. After an Executive Summary and a concise Overview of the issues, we address how the neutrino event generators treat these challenges, how electron-nucleus interactions can help understanding these challenges and the important unanswered questions for each underlying physics process---from quasi-elastic to deep-inelastic scattering. Across every topic, we find that current challenges can be met only through active support and collaboration among specialists in strong interactions and electroweak physics, including theorists and experimentalists from both the nuclear and high-energy physics communities.",
+    "categories": [
+     "hep-ex",
+     "hep-ph",
+     "nucl-ex",
+     "nucl-th"
+    ]
+   },
+   {
     "id": "2611.03904",
     "title": "Constraints on a Long-Lived X17 Vector Boson with FASER",
     "authors": [
