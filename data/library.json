@@ -3,6 +3,8 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.10465",
+    "2611.11694",
     "2611.08583",
     "2611.09628",
     "2611.08604",
@@ -514,6 +516,81 @@
     "Phase transitions & GWs"
    ],
    "saved": "2026-11-09"
+  },
+  "2611.11694": {
+   "id": "2611.11694",
+   "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition",
+   "authors": [
+    "Wonsub Cho",
+    "Ki-Young Choi"
+   ],
+   "abstract": "We study the connection between asymmetric dark matter and nanohertz gravitational waves from a supercooled first-order phase transition in a classically conformal dark sector. The dark sector contains a real scalar, a complex scalar and a Dirac fermion, whose mass arises from radiative symmetry breaking. An additional Affleck--Dine condensate generates a fermion asymmetry and heats the dark bath before nucleation. The conserved dark charge fixes the asymmetry between fermions and antifermions, while entropy production during delayed visible-sector reheating dilutes the relic and determines the redshift of the gravitational-wave spectrum. We calculate the thermal nucleation rate in a three-dimensional effective theory with finite-density corrections, next-to-leading-order contributions and fluctuation determinants (NLOdet). We follow the coupled thermal evolution of the dark and visible sectors. For a benchmark chosen to match the observed dark-matter abundance, the transition completes at MeV-scale temperatures and produces a nanohertz signal under the adopted dynamical and thermal assumptions. We compare the predicted collision-dominated gravitational-wave spectra with free-spectrum posteriors from pulsar timing arrays. For a benchmark point and variations of the dark-sector parameters, the gravitational-wave spectra and dark matter relic abundances are compared, and compatibility with Big Bang nucleosynthesis is assessed.",
+   "abs_url": "https://arxiv.org/abs/2611.11694",
+   "pdf_url": "https://arxiv.org/pdf/2611.11694",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph"
+   ],
+   "date": "2026-11-10",
+   "tldr": "We study the connection between asymmetric dark matter and nanohertz gravitational waves from a supercooled first-order phase transition in a classically conformal dark sector.",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-10"
+  },
+  "2611.10465": {
+   "id": "2611.10465",
+   "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering",
+   "authors": [
+    "A. P. Furmanski",
+    "J. G. Morf\\'in",
+    "L. Alvarez-Ruso",
+    "A. M. Ankowski",
+    "A. Ashkenazi",
+    "M. Sajjad Athar",
+    "S. Dolan",
+    "S. Dytman",
+    "S. Gardiner",
+    "R. Gonz\\'alez-Jim\\'enez",
+    "R. J. Hill",
+    "M. Hostert",
+    "J. Isaacson",
+    "N. Jachowicz",
+    "M. Kabirnezhad",
+    "T. Katori",
+    "S. R. Klein",
+    "F. Kling",
+    "M. Martini",
+    "G. D. Megias",
+    "B. A. Messerly",
+    "K. Niewczas",
+    "A. Nikolakopoulos",
+    "J. Nowak",
+    "J. M. Paley",
+    "V. Pandey",
+    "A. Papadopoulou",
+    "L. Pickering",
+    "N. Rocco",
+    "J. T. Sobczyk",
+    "J. E. Sobczyk",
+    "C. Thorpe",
+    "C. Wret"
+   ],
+   "abstract": "The precise measurement of neutrino properties is among the highest priorities in fundamental particle physics, involving many experimental and theoretical efforts worldwide. Since the experiments rely on the interactions of neutrinos in the nuclear environment, the planned advances in the scope and precision of these experiments require a commensurate effort in understanding and modeling the hadronic and nuclear physics of these interactions, as incorporated in neutrino event generators. This modeling is essential to every phase of the experimental analyses, and the theoretical uncertainties play an important role in interpreting experimental results. In this Review of current challenges, we summarize the open questions in neutrino-nucleus interactions at GeV-scale energies, and discuss in detail the potential impacts of these unknowns on the measurement of neutrino properties, using the determination of oscillation parameters as a central example. After an Executive Summary and a concise Overview of the issues, we address how the neutrino event generators treat these challenges, how electron-nucleus interactions can help understanding these challenges and the important unanswered questions for each underlying physics process---from quasi-elastic to deep-inelastic scattering. Across every topic, we find that current challenges can be met only through active support and collaboration among specialists in strong interactions and electroweak physics, including theorists and experimentalists from both the nuclear and high-energy physics communities.",
+   "abs_url": "https://arxiv.org/abs/2611.10465",
+   "pdf_url": "https://arxiv.org/pdf/2611.10465",
+   "primary_category": "hep-ex",
+   "categories": [
+    "hep-ex",
+    "hep-ph",
+    "nucl-ex",
+    "nucl-th"
+   ],
+   "date": "2026-11-10",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-10"
   }
  }
 }
