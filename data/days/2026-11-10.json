@@ -1473,7 +1473,8 @@
     "similarity": 0.964
    },
    "tldr": "We study the connection between asymmetric dark matter and nanohertz gravitational waves from a supercooled first-order phase transition in a classically conformal dark sector.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226515"
   },
   {
    "id": "2611.12123",
@@ -1510,7 +1511,8 @@
     "similarity": 0.94
    },
    "tldr": "The gravitational interaction between primordial radiation and the cosmic microwave background and its imprint on the anisotropies of the cosmic microwave background.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226541"
   },
   {
    "id": "2611.10090",
@@ -1586,7 +1588,8 @@
     "similarity": 0.919
    },
    "tldr": "Coupled dark energy and apparent phantom crossing: a potential-independent lower bound",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226697"
   },
   {
    "id": "2611.11211",
@@ -1628,7 +1631,8 @@
     "similarity": 0.955
    },
    "tldr": "The gravitational-wave consequences of the right-handed gauge symmetry breaking $SU(2)_R_1times SU(2)_R_2to SU(2)_R$ in a Pati-Salam effective theory.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226463"
   },
   {
    "id": "2611.12148",
@@ -1667,7 +1671,8 @@
     "similarity": 0.953
    },
    "tldr": "The late-time decay of the lightest inert doublet scalar can produce CMB spectral imprints, detectable shifts in the effective number of relativistic species, or both simultaneously.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226582"
   },
   {
    "id": "2611.10662",
@@ -1705,7 +1710,8 @@
     "similarity": 0.931
    },
    "tldr": "Self-bound quantum dark fermion stars: saturation, a coupling-capped maximum mass, and tidal signatures",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226415"
   },
   {
    "id": "2611.12234",
@@ -1745,7 +1751,8 @@
     "similarity": 0.919
    },
    "tldr": "Constraints on the Real Singlet Scalar Dark Matter Model from Higgs Self-Couplings",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226588"
   },
   {
    "id": "2611.09106",
@@ -1826,7 +1833,8 @@
     "similarity": 0.952
    },
    "tldr": "The Closed-Time-Path formulation of non-equilibrium Quantum Field Theory provides a first-principles treatment of $s$-channel dark matter freeze-in with unstable mediators.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226331"
   },
   {
    "id": "2611.11835",
@@ -1865,7 +1873,8 @@
     "similarity": 0.933
    },
    "tldr": "A late-time energy exchange between the vacuum and the dark sector alleviates the $H_0$-$S_8$ seesaw.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226524"
   },
   {
    "id": "2611.11094",
@@ -1903,7 +1912,8 @@
     "similarity": 0.927
    },
    "tldr": "A phenomenological framework that distinguishes genuine dark energy deficiencies from ordinary matter voids.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226460"
   },
   {
    "id": "2611.11380",
@@ -1941,7 +1951,8 @@
     "similarity": 0.926
    },
    "tldr": "Dark matter spikes around rotating massive black holes can drive negative dynamical friction, supplying orbital energy to secondary black holes on stable prograde circular orbits.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226494"
   },
   {
    "id": "2611.09988",
@@ -1980,7 +1991,8 @@
     "similarity": 0.937
    },
    "tldr": "A pedagogical account of stellar evolution and the properties of matter, this pedagogical paper discusses white dwarfs, neutron stars, and black holes.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226338"
   },
   {
    "id": "2611.12282",
@@ -2019,7 +2031,8 @@
     "similarity": 0.931
    },
    "tldr": "A Self-Interacting Dark-Matter Route to Supermassive Kerr Black Holes via Super-Eddington Bondi Accretion: Mass-Spin Evolution",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226591"
   },
   {
    "id": "2611.12363",
@@ -2059,7 +2072,8 @@
     "similarity": 0.92
    },
    "tldr": "Electroweak naturalness may be epoch dependent.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226592"
   },
   {
    "id": "2611.12774",
@@ -2103,7 +2117,8 @@
     "similarity": 0.931
    },
    "tldr": "Search for Dark Photon Dark Matter at 74--159 $mu$eV/$c2$ using Broadband Cryogenic Receivers",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226694"
   },
   {
    "id": "2611.10218",
@@ -2139,7 +2154,8 @@
     "similarity": 0.927
    },
    "tldr": "The invisible decays of $Bto can be used as a probe of light new physics.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226389"
   },
   {
    "id": "2611.10114",
@@ -2177,7 +2193,8 @@
     "similarity": 0.916
    },
    "tldr": "The curvaton mechanism remains under control throughout its cosmological evolution, and the curvaton dissipates through off-shell processes in the Standard Model plasma.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226324"
   },
   {
    "id": "2611.11458",
@@ -2213,7 +2230,8 @@
     "similarity": 0.93
    },
    "tldr": "After the Higgs: Looking for the Universe Behind the Particle",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3226560"
   },
   {
    "id": "2611.12179",
@@ -2249,7 +2267,8 @@
      "title": "Fundamental Noise Processes in Pulsar Timing"
     },
     "similarity": 0.947
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226583"
   },
   {
    "id": "2611.12625",
@@ -2285,7 +2304,8 @@
      "title": "Nuclear Atomic Dark Matter"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226667"
   },
   {
    "id": "2611.11254",
@@ -2321,7 +2341,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226467"
   },
   {
    "id": "2611.10320",
@@ -2359,7 +2380,8 @@
      "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter"
     },
     "similarity": 0.919
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226330"
   },
   {
    "id": "2611.10133",
@@ -2396,7 +2418,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.945
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226349"
   },
   {
    "id": "2611.11099",
@@ -2431,7 +2454,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226459"
   },
   {
    "id": "2611.11584",
@@ -2466,7 +2490,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.941
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226501"
   },
   {
    "id": "2611.12861",
@@ -2508,7 +2533,8 @@
      "title": "Light Primordial Black Holes from a First-Order Phase Transition near the End of Inflation: Baryogenesis and Gravitational Wave Signatures"
     },
     "similarity": 0.934
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226720"
   },
   {
    "id": "2611.10934",
@@ -2545,7 +2571,8 @@
      "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226426"
   },
   {
    "id": "2611.10465",
@@ -2616,7 +2643,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.924
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226471"
   },
   {
    "id": "2611.11449",
@@ -2654,7 +2682,8 @@
      "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries"
     },
     "similarity": 0.932
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226507"
   },
   {
    "id": "2611.10079",
@@ -2689,7 +2718,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.907
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3225579"
   },
   {
    "id": "2611.12335",
@@ -2726,7 +2756,8 @@
      "title": "On the Nucleon Effective Mass in Neutron Stars Cooling"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226603"
   },
   {
    "id": "2611.09975",
@@ -2763,7 +2794,8 @@
      "title": "Testing influence of tides on gravitational wave emission with SPH code PHANTOM"
     },
     "similarity": 0.921
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226334"
   },
   {
    "id": "2611.10084",
@@ -2797,7 +2829,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.921
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226364"
   },
   {
    "id": "2611.10326",
@@ -2834,7 +2867,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.925
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226340"
   },
   {
    "id": "2611.12793",
@@ -2873,7 +2907,8 @@
      "title": "Investigating bottom quark effects in Higgs boson pair production"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226719"
   },
   {
    "id": "2611.10231",
@@ -2910,7 +2945,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.908
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226323"
   },
   {
    "id": "2611.12765",
@@ -2948,7 +2984,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.913
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226684"
   },
   {
    "id": "2611.10203",
@@ -2986,7 +3023,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226325"
   },
   {
    "id": "2611.10942",
@@ -3024,7 +3062,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226441"
   },
   {
    "id": "2611.10228",
@@ -3101,7 +3140,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.937
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226730"
   },
   {
    "id": "2611.12772",
@@ -3141,7 +3181,8 @@
      "title": "Light Primordial Black Holes from a First-Order Phase Transition near the End of Inflation: Baryogenesis and Gravitational Wave Signatures"
     },
     "similarity": 0.918
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226652"
   },
   {
    "id": "2611.11351",
@@ -3179,7 +3220,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226525"
   },
   {
    "id": "2611.12811",
@@ -3219,7 +3261,8 @@
      "title": "On the Nucleon Effective Mass in Neutron Stars Cooling"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226696"
   },
   {
    "id": "2611.10745",
@@ -3256,7 +3299,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.917
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226409"
   },
   {
    "id": "2611.12831",
@@ -3292,7 +3336,8 @@
      "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries"
     },
     "similarity": 0.92
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226709"
   },
   {
    "id": "2611.11033",
@@ -3326,7 +3371,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.898
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226439"
   },
   {
    "id": "2611.11323",
@@ -3361,7 +3407,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.925
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226509"
   },
   {
    "id": "2611.12556",
@@ -3394,7 +3441,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226656"
   },
   {
    "id": "2611.10661",
@@ -3429,7 +3477,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226406"
   },
   {
    "id": "2611.10271",
@@ -3461,7 +3510,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.93
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226345"
   },
   {
    "id": "2611.10596",
@@ -3499,7 +3549,8 @@
      "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226416"
   },
   {
    "id": "2611.10933",
@@ -3532,7 +3583,8 @@
      "title": "Demystifying Graviton Detection"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226456"
   },
   {
    "id": "2611.12482",
@@ -3567,7 +3619,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.911
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226783"
   },
   {
    "id": "2611.12609",
@@ -3602,7 +3655,8 @@
      "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?"
     },
     "similarity": 0.899
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226650"
   },
   {
    "id": "2611.10431",
@@ -3636,7 +3690,8 @@
      "title": "On the Nucleon Effective Mass in Neutron Stars Cooling"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226408"
   },
   {
    "id": "2611.12839",
@@ -3669,7 +3724,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.937
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226708"
   },
   {
    "id": "2611.11241",
@@ -3702,7 +3758,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.918
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226457"
   },
   {
    "id": "2611.11895",
@@ -3738,7 +3795,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.907
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3196106"
   },
   {
    "id": "2611.11202",
@@ -3772,7 +3830,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.927
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226479"
   },
   {
    "id": "2611.11943",
@@ -3807,7 +3866,8 @@
      "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226564"
   },
   {
    "id": "2611.10287",
@@ -3841,7 +3901,8 @@
      "title": "Background Effects on Thermal Free Energy in Conformal Field Theories"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226413"
   },
   {
    "id": "2611.10273",
@@ -3873,7 +3934,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.92
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226319"
   },
   {
    "id": "2611.10075",
@@ -3909,7 +3971,8 @@
      "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data"
     },
     "similarity": 0.913
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226343"
   },
   {
    "id": "2611.12105",
@@ -3943,7 +4006,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.921
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226562"
   },
   {
    "id": "2611.10773",
@@ -3977,7 +4041,8 @@
      "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?"
     },
     "similarity": 0.908
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226417"
   },
   {
    "id": "2611.12730",
@@ -4019,7 +4084,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226653"
   },
   {
    "id": "2611.12093",
@@ -4057,7 +4123,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226576"
   },
   {
    "id": "2611.11775",
@@ -4090,7 +4157,8 @@
      "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226536"
   },
   {
    "id": "2611.11422",
@@ -4126,7 +4194,8 @@
      "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226554"
   },
   {
    "id": "2611.12372",
@@ -4170,7 +4239,8 @@
      "title": "Fundamental Noise Processes in Pulsar Timing"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226594"
   },
   {
    "id": "2611.12857",
@@ -4205,7 +4275,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226707"
   },
   {
    "id": "2611.12698",
@@ -4239,7 +4310,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226670"
   },
   {
    "id": "2611.11889",
@@ -4272,7 +4344,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.926
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226534"
   },
   {
    "id": "2611.11606",
@@ -4304,7 +4377,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226526"
   },
   {
    "id": "2611.10121",
@@ -4340,7 +4414,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226329"
   },
   {
    "id": "2611.12496",
@@ -4376,7 +4451,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.939
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226637"
   },
   {
    "id": "2611.11474",
@@ -4412,7 +4488,8 @@
      "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226511"
   },
   {
    "id": "2611.11795",
@@ -4447,7 +4524,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.905
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226547"
   },
   {
    "id": "2611.09216",
@@ -4516,7 +4594,8 @@
      "title": "Investigating bottom quark effects in Higgs boson pair production"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226510"
   },
   {
    "id": "2611.12673",
@@ -4579,7 +4658,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226659"
   },
   {
    "id": "2611.12265",
@@ -4612,7 +4692,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226577"
   },
   {
    "id": "2611.10584",
@@ -4646,7 +4727,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226394"
   },
   {
    "id": "2611.09979",
@@ -4679,7 +4761,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.911
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226374"
   },
   {
    "id": "2611.11612",
@@ -4713,7 +4796,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.922
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226543"
   },
   {
    "id": "2611.11686",
@@ -4748,7 +4832,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226523"
   },
   {
    "id": "2611.10783",
@@ -4782,7 +4867,8 @@
      "title": "Demystifying Graviton Detection"
     },
     "similarity": 0.907
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226428"
   },
   {
    "id": "2611.10525",
@@ -4816,7 +4902,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.905
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3202614"
   },
   {
    "id": "2611.12845",
@@ -4858,7 +4945,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226654"
   },
   {
    "id": "2611.10604",
@@ -4891,7 +4979,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.919
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226404"
   },
   {
    "id": "2611.10112",
@@ -4926,7 +5015,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.936
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226332"
   },
   {
    "id": "2611.11642",
@@ -4999,7 +5089,8 @@
      "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter"
     },
     "similarity": 0.928
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226346"
   },
   {
    "id": "2611.10057",
@@ -5036,7 +5127,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226728"
   },
   {
    "id": "2611.10741",
@@ -5068,7 +5160,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.913
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226462"
   },
   {
    "id": "2611.10407",
@@ -5101,7 +5194,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226378"
   },
   {
    "id": "2611.11917",
@@ -5135,7 +5229,8 @@
      "title": "Demystifying Graviton Detection"
     },
     "similarity": 0.903
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226557"
   },
   {
    "id": "2611.10116",
@@ -5170,7 +5265,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226344"
   },
   {
    "id": "2611.12745",
@@ -5211,7 +5307,8 @@
      "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226692"
   },
   {
    "id": "2611.11879",
@@ -5245,7 +5342,8 @@
      "title": "Demystifying Graviton Detection"
     },
     "similarity": 0.898
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226549"
   },
   {
    "id": "2611.11347",
@@ -5280,7 +5378,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226480"
   },
   {
    "id": "2611.11920",
@@ -5315,7 +5414,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226240"
   },
   {
    "id": "2611.10006",
@@ -5350,7 +5450,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226478"
   },
   {
    "id": "2611.10126",
@@ -5384,7 +5485,8 @@
      "title": "Background Effects on Thermal Free Energy in Conformal Field Theories"
     },
     "similarity": 0.906
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226335"
   },
   {
    "id": "2611.11922",
@@ -5423,7 +5525,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.906
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226544"
   },
   {
    "id": "2611.11095",
@@ -5459,7 +5562,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226447"
   },
   {
    "id": "2611.11006",
@@ -5491,7 +5595,8 @@
      "title": "Torsion talks only to spin: the CMB temperature as a test of energy exchange in Einstein-Cartan cosmology"
     },
     "similarity": 0.921
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226461"
   },
   {
    "id": "2611.10303",
@@ -5525,7 +5630,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.917
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226322"
   },
   {
    "id": "2611.12220",
@@ -5976,7 +6082,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226579"
   },
   {
    "id": "2611.11655",
@@ -6012,7 +6119,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226237"
   },
   {
    "id": "2611.07331",
@@ -6082,7 +6190,8 @@
      "title": "Enhancing Gravitational Waves from Global Strings via a First-Order Phase Transition"
     },
     "similarity": 0.908
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226573"
   },
   {
    "id": "2611.10140",
@@ -6148,7 +6257,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.908
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226363"
   },
   {
    "id": "2611.11594",
@@ -6184,7 +6294,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.919
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226235"
   },
   {
    "id": "2611.12404",
@@ -6219,7 +6330,8 @@
      "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data"
     },
     "similarity": 0.918
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226633"
   },
   {
    "id": "2611.11587",
@@ -6256,7 +6368,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226529"
   },
   {
    "id": "2611.11182",
@@ -6326,7 +6439,8 @@
      "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter"
     },
     "similarity": 0.906
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226605"
   },
   {
    "id": "2611.10703",
@@ -6358,7 +6472,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.905
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226414"
   },
   {
    "id": "2611.11617",
@@ -6403,7 +6518,8 @@
      "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter"
     },
     "similarity": 0.905
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226530"
   },
   {
    "id": "2611.12594",
@@ -6497,7 +6613,8 @@
      "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226710"
   },
   {
    "id": "2611.12086",
@@ -6533,7 +6650,8 @@
      "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226578"
   },
   {
    "id": "2610.31699",
@@ -6603,7 +6721,8 @@
      "title": "Torsion talks only to spin: the CMB temperature as a test of energy exchange in Einstein-Cartan cosmology"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226247"
   },
   {
    "id": "2611.11999",
@@ -6674,7 +6793,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.92
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226663"
   },
   {
    "id": "2609.01665",
@@ -6743,7 +6863,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.913
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226341"
   },
   {
    "id": "2611.11534",
@@ -6814,7 +6935,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226492"
   },
   {
    "id": "2611.10074",
@@ -6850,7 +6972,8 @@
      "title": "Background Effects on Thermal Free Energy in Conformal Field Theories"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226218"
   },
   {
    "id": "2611.12133",
@@ -6882,7 +7005,8 @@
      "title": "Background Effects on Thermal Free Energy in Conformal Field Theories"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226572"
   },
   {
    "id": "2611.10118",
@@ -6917,7 +7041,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.907
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226348"
   },
   {
    "id": "2611.10998",
@@ -6949,7 +7074,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.907
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226458"
   },
   {
    "id": "2611.12656",
@@ -7021,7 +7147,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.905
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226245"
   },
   {
    "id": "2611.12810",
@@ -7056,7 +7183,8 @@
      "title": "Torsion talks only to spin: the CMB temperature as a test of energy exchange in Einstein-Cartan cosmology"
     },
     "similarity": 0.904
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226250"
   },
   {
    "id": "2611.12660",
@@ -7090,7 +7218,8 @@
      "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?"
     },
     "similarity": 0.904
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226686"
   },
   {
    "id": "2611.12881",
@@ -7248,7 +7377,8 @@
      "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226443"
   },
   {
    "id": "2611.12390",
@@ -7403,7 +7533,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.899
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226610"
   },
   {
    "id": "2611.11723",
@@ -8204,7 +8335,8 @@
      "title": "Probing Dark Matter via the Migdal Effect in LUX-ZEPLIN Data"
     },
     "similarity": 0.899
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3226528"
   }
  ],
  "background": [
