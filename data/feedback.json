@@ -113,6 +113,22 @@
    "topics": [
     "Phase transitions & GWs"
    ]
+  },
+  "2611.13266": {
+   "date": "2026-11-11",
+   "title": "Challenging the hoop conjecture with spinning pancakes and baguettes",
+   "abstract": "Understanding when gravitational collapse produces a black hole remains a central challenge in general relativity. Black-hole uniqueness results characterize the stationary endpoint under suitable assumptions, while singularity theorems establish geodesic incompleteness in the presence of trapped surfaces and appropriate energy and global conditions. Neither, however, provides a general criterion for horizon formation. The hoop conjecture offers such a criterion by relating the enclosed mass to the compactness of a matter distribution in every direction. We construct axisymmetric families of initial data describing rotating dust and test a formulation of the conjecture adapted to this setting. We explore highly prolate and oblate configurations with both constant and differential rescaled angular-velocity profiles, including configurations near the threshold for apparent-horizon formation. We find that the conjecture holds for rotating configurations, with a coefficient within 14% of unity as in the nonrotating case, provided the quasilocal mass includes the rotational energy. If the irreducible mass of the apparent horizon is used instead, the deviations grow with spin, as they do for Kerr black holes. For horizonless configurations, the conjecture likewise holds when the mass is restricted to the energy enclosed by the matter surface, whereas using the ADM mass, which also includes rotational field energy outside the matter, leads to apparent violations of up to $\\approx$25%. We also discuss the possible evolution of compact configurations without apparent horizons, their relation to weak cosmic censorship, and their implications for horizonless compact objects.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.14039": {
+   "date": "2026-11-11",
+   "title": "Thermodynamics of words",
+   "abstract": "We introduce the word thermalization hypothesis according to which in a literary work there are effective interactions between words that drive them to thermalization where their word frequency distribution is the same as for the phenomenon of Rayleigh-Jeans (RJ) thermalization and condensation. In this concept, the different words play a role of classical oscillators (particles) and their word frequencies, or related tokens, are analogous to certain filling factors over energy state levels. The thermalization process is characterized by the conservation of total system energy, or total number of words/tokens, and total probability norm, or total number of different words. We apply this approach to analyze 16 literary works, including Bible, complete works of Shakespeare, and data from American National Corpus. We show that for these cases the effective system energy is very low and thus there is the RJ condensation phenomenon with a big fraction of total probability concentrated at the lowest energy states corresponding to a big fraction of rare words appearing only once or twice in the whole text. Such a RJ condensation is observed for light propagation in multimode optical fibers and other physical systems. We relate the thermalization of words to the recently proposed wealth thermalization for households in world countries. The economy concepts of Lorenz and Pareto curves, and also Zipf curves, are applied to the word frequency distributions of the selected 16 cases and it is shown that the thermalization theory gives a strikingly good description of real data.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
   }
  }
 }

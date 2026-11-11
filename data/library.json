@@ -3,6 +3,9 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.14039",
+    "2611.13105",
+    "2611.13733",
     "2611.10465",
     "2611.11694",
     "2611.08583",
@@ -591,6 +594,83 @@
     "Phase transitions & GWs"
    ],
    "saved": "2026-11-10"
+  },
+  "2611.13733": {
+   "id": "2611.13733",
+   "title": "Scalar-Induced Gravitational Waves Probing Phase Transitions in the Standard Model and Beyond",
+   "authors": [
+    "Peizhi Du",
+    "Xiang-Xi Zeng",
+    "Jiahang Zhong"
+   ],
+   "abstract": "Scalar-induced gravitational waves (SIGWs) are unique messengers of physics in the early Universe and possible sources for the observed data from pulsar timing arrays (PTAs). It has been demonstrated that SIGWs have the potential to probe cosmological phase transitions via measurement of the equation of state and sound speed of the cosmic thermal bath, which have non-trivial time dependence during phase transitions. In this work, we improve on existing studies of SIGWs in a time-dependent background with time-dependent initial conditions and an entropy-conserving thermal history of the Standard Model (SM). We provide possible physical explanations for features of the gravitational wave spectrum from phase transitions, the most prominent of which for a scale-invariant curvature spectrum is a step due to entropy dilution. We show that current and future gravitational wave observations across a wide range of frequencies can probe phase transitions in the SM and physics beyond the Standard Model (BSM). Signals from the QCD crossover appear around 10 nHz, inside the observable window of PTAs. We perform data analyses using NANOGrav 15-year data, showing a mild preference for the QCD crossover over standard radiation domination for two choices of curvature spectra. BSM phase transitions in the TeV range lead to signals around mHz, which are accessible in future space-based experiments such as LISA, Taiji and TianQin.",
+   "abs_url": "https://arxiv.org/abs/2611.13733",
+   "pdf_url": "https://arxiv.org/pdf/2611.13733v1",
+   "primary_category": "astro-ph.CO",
+   "categories": [
+    "astro-ph.CO",
+    "hep-ph"
+   ],
+   "published": "2026-11-10T08:36:39Z",
+   "date": "2026-11-11",
+   "tldr": "We propose a time-dependent background with time-dependent initial conditions and an entropy-conserving thermal history of the Standard Model. We show that current and future gravitational wave observations across a wide range of frequencies can probe phase transitions in the SM and beyond",
+   "inspire_url": "https://inspirehep.net/literature/3227047",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-11"
+  },
+  "2611.13105": {
+   "id": "2611.13105",
+   "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves",
+   "authors": [
+    "Francesca Lecce",
+    "Francisco R. Candòn",
+    "Alessandro Lella",
+    "Alessandro Mirizzi",
+    "Julia K. Vogel",
+    "Tiziano Zanzarella"
+   ],
+   "abstract": "High-frequency Gravitational Waves (HFGW)($f \\gtrsim 1$ MHz) offer a distinctive probe of exotic physics. In the absence of dedicated detectors targeting this frequency range, indirect probes based on graviton-photon conversions in astrophysical magnetic fields become particularly relevant. In this work we show that the extended magnetic fields permeating Galaxy Clusters may act as cosmic lenses, leading to a strong enhancement of graviton-photon conversions. In this context, X- and $γ$-ray observations of the Virgo Cluster through large field-of-view instruments such as eROSITA and COMPTEL yield novel limits on the amplitude of stochastic HFGW backgrounds in the frequency range $10^{17}-10^{22}$ Hz, improving upon constraints derived from the Galactic magnetic field by one to two orders of magnitude.",
+   "abs_url": "https://arxiv.org/abs/2611.13105",
+   "pdf_url": "https://arxiv.org/pdf/2611.13105v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.HE",
+    "gr-qc"
+   ],
+   "published": "2026-11-09T19:00:30Z",
+   "date": "2026-11-11",
+   "tldr": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves",
+   "inspire_url": "https://inspirehep.net/literature/3226921",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-11"
+  },
+  "2611.14039": {
+   "id": "2611.14039",
+   "title": "Thermodynamics of words",
+   "authors": [
+    "Klaus M. Frahm",
+    "Dima L. Shepelyansky"
+   ],
+   "abstract": "We introduce the word thermalization hypothesis according to which in a literary work there are effective interactions between words that drive them to thermalization where their word frequency distribution is the same as for the phenomenon of Rayleigh-Jeans (RJ) thermalization and condensation. In this concept, the different words play a role of classical oscillators (particles) and their word frequencies, or related tokens, are analogous to certain filling factors over energy state levels. The thermalization process is characterized by the conservation of total system energy, or total number of words/tokens, and total probability norm, or total number of different words. We apply this approach to analyze 16 literary works, including Bible, complete works of Shakespeare, and data from American National Corpus. We show that for these cases the effective system energy is very low and thus there is the RJ condensation phenomenon with a big fraction of total probability concentrated at the lowest energy states corresponding to a big fraction of rare words appearing only once or twice in the whole text. Such a RJ condensation is observed for light propagation in multimode optical fibers and other physical systems. We relate the thermalization of words to the recently proposed wealth thermalization for households in world countries. The economy concepts of Lorenz and Pareto curves, and also Zipf curves, are applied to the word frequency distributions of the selected 16 cases and it is shown that the thermalization theory gives a strikingly good description of real data.",
+   "abs_url": "https://arxiv.org/abs/2611.14039",
+   "pdf_url": "https://arxiv.org/pdf/2611.14039v1",
+   "primary_category": "cond-mat.stat-mech",
+   "categories": [
+    "cond-mat.stat-mech",
+    "cs.CL",
+    "physics.soc-ph"
+   ],
+   "published": "2026-11-10T13:09:11Z",
+   "date": "2026-11-11",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-11"
   }
  }
 }
