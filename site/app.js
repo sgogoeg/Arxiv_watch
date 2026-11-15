@@ -526,50 +526,6 @@ function dailySummary(d, deleted) {
     </div></details>`;
 }
 
-// ------------------------------------------------------------------ daily awards
-function awardLink(p) {
-  return `<a class="tex" href="${esc(paperUrl(p))}" target="_blank" rel="noopener">${esc(p.title)}</a>`;
-}
-function shortAuthors(p) {
-  const a = p.authors || [];
-  return esc(a.slice(0, 3).join(", ") + (a.length > 3 ? " et al." : ""));
-}
-
-function dailyAwards(d) {
-  const a = d.awards;
-  if (!a) return "";
-  const open = ls.get("awards-open", true);
-  const L = a.longest, M = a.most_submissions, D = a.drama || [], W = a.wacky;
-  const longest = L ? `${awardLink(L.winner)}<div class="award-meta">${L.winner.pages} pages · ${esc(L.winner.primary_category || "")} · ${shortAuthors(L.winner)}</div>
-      ${L.runners_up?.length ? `<div class="award-meta">Next: ${L.runners_up.map((r) => `<a href="${esc(paperUrl(r))}" target="_blank" rel="noopener">${r.pages} pp.</a>`).join(", ")}</div>` : ""}`
-    : `<p class="muted small">No paper stated its length today.</p>`;
-  const most = M ? M.winners.map((w) => `<div class="award-name">${esc(w.name)}</div>
-      <details class="award-papers"><summary>${M.count} papers</summary><ul>${w.papers.map((p) => `<li>${awardLink(p)}</li>`).join("")}</ul></details>`).join("")
-      + (M.tied > M.winners.length ? `<div class="award-meta">+${M.tied - M.winners.length} more tied</div>` : "")
-      + `<div class="award-meta">Ignoring ${M.excluded_collaborations} collaboration or 30+ author papers</div>`
-    : `<p class="muted small">Nobody submitted more than one paper.</p>`;
-  const drama = D.length ? D.map((p) => `<div class="drama">${awardLink(p)}
-      <div class="award-meta">${shortAuthors(p)}${p.target ? ` · responds to <a href="${esc(p.target.abs_url)}" target="_blank" rel="noopener">arXiv:${esc(p.target.id)}</a>` : ""}</div></div>`).join("")
-    : `<p class="muted small">No public disputes today.</p>`;
-  const wacky = W?.winner ? `${awardLink(W.winner)}<div class="award-meta">${esc(W.winner.primary_category || "")} · ${shortAuthors(W.winner)}</div>
-      ${(W.runners_up || []).map((r) => `<div class="award-meta">Runner-up: ${awardLink(r)}</div>`).join("")}`
-    : `<p class="muted small">Not enough papers to choose from.</p>`;
-  return `<details class="panel awards" ${open ? "open" : ""}><summary>Daily awards</summary>
-    <p class="muted small">Longest paper, most submissions and drama cover all of arXiv today (${fmt(a.pool)} papers). The wackiest title is from your categories.</p>
-    <div class="award-grid">
-      <section class="award"><h4>Longest paper</h4>${longest}</section>
-      <section class="award"><h4>Most submissions</h4>${most}</section>
-      <section class="award"><h4>arXiv drama</h4>${drama}</section>
-      <section class="award award-wide"><h4>Wackiest title</h4>${wacky}</section>
-    </div></details>`;
-}
-
-function bindAwards(v) {
-  const aw = v.querySelector("details.awards");
-  if (!aw) return;
-  aw.ontoggle = () => ls.set("awards-open", aw.open);
-}
-
 async function renderDaily(v) {
   if (!S.index.days.length) {
     v.innerHTML = `<div class="empty">No days yet. The daily GitHub Action writes the first one after its next run.</div>`;
@@ -624,7 +580,6 @@ async function renderDaily(v) {
       <input type="search" class="grow" id="q" placeholder="Search title, abstract, authors" value="${esc(f.q)}">
     </div>
     ${dailySummary(d, deleted)}
-    ${dailyAwards(d)}
     <div class="chips">
       <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all" title="All papers, ranked by how well they match any of your topics">Combined<span class="n">${counts.all}</span></button>
       ${dayTopics.map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
@@ -652,7 +607,6 @@ async function renderDaily(v) {
   v.querySelectorAll("[data-topic]").forEach((b) => { b.onclick = () => { f.topic = b.dataset.topic; render(); }; });
   const sum = v.querySelector("details.summary");
   if (sum) sum.ontoggle = () => ls.set("summary-open", sum.open);
-  bindAwards(v);
   bindCards(v);
 }
 

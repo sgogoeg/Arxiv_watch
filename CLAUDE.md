@@ -17,7 +17,7 @@ pip install -e '.[dev]'                       # enough for the fast tests
 pip install torch --index-url https://download.pytorch.org/whl/cpu && pip install -e '.[ml]'   # SetFit/SPECTER2/flan-t5
 
 python -m pytest -q                           # fast suite (slow tests are deselected by default in pyproject)
-python -m pytest -q tests/test_awards.py::test_drama_detection   # one test
+python -m pytest -q tests/test_fetch.py::test_normalize_id      # one test
 HF_HUB_OFFLINE=1 python -m pytest -q -m slow  # SetFit end to end with a tiny BERT built locally (needs the ml extra)
 node --check site/app.js                      # the only check for the dashboard script (CI runs it)
 
@@ -33,11 +33,9 @@ There is no linter configured.
 ## Architecture
 
 ### Pipeline (`pipeline.run`)
-1. **Fetch.** With `awards.enabled` it reads the RSS feed of every arXiv archive (`awards.ALL_ARCHIVES`). Otherwise it
-   reads only the user's categories. Metadata comes from the arXiv API in batches of 100. Every arXiv request goes
+1. **Fetch.** It reads the RSS feed of each of the user's categories. Metadata comes from the arXiv API in batches of 100. Every arXiv request goes
    through one `ArxivClient` with a shared 3 s `RateLimiter`; keep it that way.
 2. `fetch.filter_by_categories` narrows the listing to the user's categories and recomputes `announce_type`.
-   The full listing is only passed to `awards.compute`; it is never stored.
 3. Followed authors are matched by normalized name (`authors.name_key` / `same_person`).
 4. **Embed and pre-filter.** SPECTER2 embeddings, then `prefilter.score`: similarity to each topic's description,
    seed papers and positive papers, plus keyword nudges. The top N are shortlisted.
@@ -45,7 +43,7 @@ There is no linter configured.
    `min_positives_per_topic` positives. Other topics keep `prefilter.percentile_scores`, a within-day rank (relative,
    not absolute). The per-topic source is written to `score_source`.
 6. **Assemble.** Each entry gets `scores`, `score` (best topic), `combined` (noisy-OR across topics; Daily sorts by
-   it) and `why`. Then come INSPIRE links, TL;DRs, `stats.compute` and `awards.compute`.
+   it) and `why`. Then come INSPIRE links, TL;DRs and `stats.compute`.
 7. **Write.** `days/<date>.json` and `index.json`. Then the side tasks in `_finish_side_tasks`: author matches and
    backfill, INSPIRE recheck of recent days, citations.
 
@@ -54,8 +52,7 @@ Training signals, all read through `Store`:
 - **Negatives:** deleted papers, plus each recent day's `background` sample (never-shortlisted papers). The current
   day's background is excluded.
 
-The model is cached in `.cache/model` and retrained only when `classify.training_hash` changes. The awards use no
-model: they are rules and a fixed-weight title score (`awards.WEIGHTS`).
+The model is cached in `.cache/model` and retrained only when `classify.training_hash` changes.
 
 ### Data contract between pipeline and dashboard
 - **Dashboard-owned** (edited in the browser, committed on Sync): `feedback.json`, `library.json`, `authors.json`,

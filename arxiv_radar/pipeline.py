@@ -10,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import awards, inspire, prefilter, stats
+from . import inspire, prefilter, stats
 from .authors import AuthorMatcher, backfill, update_matches
 from .citations import update_citations
 from .classify import build_training_set, classify
@@ -116,11 +116,9 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     client = None if offline_dir else ArxivClient()
     categories = store.categories(cfg.categories)
 
-    # 1. fetch: the whole day's listing when awards are on (they cover all of arXiv), else your categories
+    # 1. fetch your categories' feeds
     if offline_dir:
         all_papers, announced = load_offline(offline_dir)
-    elif cfg.awards.enabled:
-        all_papers, announced = fetch_today(awards.ALL_ARCHIVES, client)
     else:
         all_papers, announced = fetch_today(categories, client)
     papers = filter_by_categories(all_papers, categories)
@@ -203,7 +201,6 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     summarize(entries, cfg.summary)
     best_sim = pre.raw.max(axis=1).tolist() if len(papers) else []
     day_stats = stats.compute(papers, best_sim, entries, names, cfg.score_threshold)
-    day_awards = compute_awards(cfg, all_papers, papers, client)
 
     # 7. write
     short = set(idx)
@@ -218,7 +215,6 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
         "score_source": dict(zip(names, sources)),
         "counts": {"fetched": len(papers), "shortlisted": len(entries)},
         "stats": day_stats,
-        "awards": day_awards,
         "papers": entries,
         "background": background,
     }
@@ -230,26 +226,6 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
     cache.save()
     log.info("wrote %s with %d papers (sources: %s)", day, len(entries), dict(zip(names, sources)))
     return day_doc
-
-
-def compute_awards(cfg: Config, all_papers: list[dict], papers: list[dict], client) -> dict | None:
-    if not cfg.awards.enabled:
-        return None
-    try:
-        result = awards.compute(all_papers, papers)
-    except Exception:  # awards are a bonus; never fail the day over them
-        log.exception("awards failed")
-        return None
-    if cfg.inspire.enabled and client:
-        shown = []
-        for key in ("longest", "most_submissions", "wacky"):
-            block = result.get(key) or {}
-            shown += [block["winner"]] if "winner" in block else []
-            shown += block.get("runners_up", [])
-            shown += [p for w in block.get("winners", []) for p in w["papers"]]
-        shown += result.get("drama", [])
-        inspire.add_links(shown)
-    return result
 
 
 def _finish_side_tasks(cfg: Config, store: Store, writer: Store, client, followed: list[str],

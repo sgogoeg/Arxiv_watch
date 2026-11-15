@@ -106,7 +106,6 @@ def test_dashboard_categories_override_config(cfg, sample_day):
     assert doc["counts"]["fetched"] == 5  # cs.CL primary or cross-listed papers only
     by = {p["id"]: p for p in doc["papers"]}
     assert by["2511.00106"]["announce_type"] == "new"  # primary cs.CL, even though it came via the cs.LG feed
-    assert doc["awards"]["pool"] == 11  # awards still see the whole listing
 
 
 def test_fetch_skips_failing_category(monkeypatch, sample_day):
