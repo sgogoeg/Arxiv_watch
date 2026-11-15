@@ -3,6 +3,8 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.15860",
+    "2611.14628",
     "2611.14039",
     "2611.13105",
     "2611.13733",
@@ -671,6 +673,57 @@
     "Phase transitions & GWs"
    ],
    "saved": "2026-11-11"
+  },
+  "2611.14628": {
+   "id": "2611.14628",
+   "title": "Impact of dynamical, quadratic, and higher-order tidal effects on gravitational-wave observations of binary neutron stars",
+   "authors": [
+    "Andrea Valletta",
+    "Francesco Crescimbeni",
+    "Takuya Katagiri",
+    "Francesco Pannarale",
+    "Paolo Pani"
+   ],
+   "abstract": "Neutron-star binaries are prime gravitational-wave sources for current and next-generation detectors, and provide a unique probe for the behaviour of nuclear matter at supranuclear densities. Extracting information about this requires accurate waveform models that capture tidal effects during the late inspiral. We incorporate state-of-the-art tidal corrections into a post-Newtonian inspiral waveform, including dynamical tides and nonlinear contributions from quadratic Love numbers through eighth post-Newtonian (8PN) order. Using Bayesian model comparison, we find that these corrections can significantly affect the gravitational-wave signal, with the 8PN tidal response becoming comparable to lower-PN tidal contributions in the subsolar-mass regime. For exceptionally loud GW170817-like binaries observed by third-generation detectors such as the Einstein Telescope, higher-order tidal effects can be distinguished with high statistical significance, while neglecting them can introduce substantial biases in the inferred tidal deformabilities and, consequently, in constraints on the neutron-star equation of state. These corrections are particularly relevant for putative subsolar-mass binaries: the lower compactness of their constituents enhances tidal effects and makes them potentially important even for current detectors. Our results highlight the importance of higher-order tidal corrections for precision gravitational-wave measurements of dense nuclear matter.",
+   "abs_url": "https://arxiv.org/abs/2611.14628",
+   "pdf_url": "https://arxiv.org/pdf/2611.14628",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE",
+    "gr-qc",
+    "hep-ph",
+    "nucl-th"
+   ],
+   "date": "2026-11-13",
+   "tldr": "The effects of dynamical, quadratic, and higher-order tidal corrections on gravitational-wave observations of binary neutron stars.",
+   "inspire_url": "https://inspirehep.net/literature/3227647",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-13"
+  },
+  "2611.15860": {
+   "id": "2611.15860",
+   "title": "Cosmological Signals from Finite-Lifetime Domain Wall Networks",
+   "authors": [
+    "Fengwei Yang",
+    "Kylar Greene",
+    "Aurora Ireland",
+    "Yuhsin Tsai"
+   ],
+   "abstract": "We study cosmological perturbations sourced by metastable domain wall (DW) networks. Using the unconnected segment model, we derive analytic expressions for the scalar and tensor power spectra in the long-wavelength regime, finding a fixed ratio between their amplitudes during the scaling regime. These spectra grow as the network evolves, driven by the increasing correlation length and slower redshifting of the wall energy density relative to radiation, and peak at a scale set by the network's collapse time. Comparing the scalar spectrum with observational constraints, we derive bounds on the DW energy density at collapse, which we apply to $\\mathbb{Z}_2$ and axion models. When these bounds are saturated, the resulting CMB $B$-mode signal can be comparable to or larger than the inflationary signal for a tensor-to-scalar ratio $r \\sim 0.03$, potentially bringing it within reach of future CMB polarization experiments.",
+   "abs_url": "https://arxiv.org/abs/2611.15860",
+   "pdf_url": "https://arxiv.org/pdf/2611.15860",
+   "primary_category": "astro-ph.CO",
+   "categories": [
+    "astro-ph.CO",
+    "hep-ph"
+   ],
+   "date": "2026-11-13",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-13"
   }
  }
 }
