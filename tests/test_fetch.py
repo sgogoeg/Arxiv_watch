@@ -1,4 +1,5 @@
-from arxiv_radar.fetch import RateLimiter, load_offline, normalize_id, parse_api, parse_rss
+from arxiv_radar.fetch import (RateLimiter, filter_by_categories, in_categories, load_offline, normalize_id,
+                               parse_api, parse_rss)
 
 
 def test_normalize_id():
@@ -48,3 +49,16 @@ def test_rate_limiter_spacing():
     t[0] += 5.0
     rl.wait()
     assert slept == [2.0]
+
+
+def P(i, **kw):
+    return {"id": f"2611.{i:05d}", "title": kw.pop("title", f"Paper {i}"), "authors": kw.pop("authors", ["A B"]),
+            "abstract": kw.pop("abstract", "We study things."), **kw}
+
+
+def test_in_categories_and_filter():
+    assert in_categories("astro-ph.CO", ["astro-ph"]) and in_categories("hep-ph", ["hep-ph"])
+    assert not in_categories("hep-phx", ["hep-ph"]) and not in_categories("astro-ph", ["astro-ph.CO"])
+    ps = [P(1, categories=["hep-th", "hep-ph"], primary_category="hep-th"), P(2, categories=["cs.LG"], primary_category="cs.LG")]
+    out = filter_by_categories(ps, ["hep-ph"])
+    assert [p["id"] for p in out] == ["2611.00001"] and out[0]["announce_type"] == "cross"
