@@ -875,7 +875,8 @@
     "similarity": 0.927
    },
    "tldr": "A joint, non-parametric reconstruction of the effective dark-energy contribution to the expansion and the gravitational responses governing clustering and lensing, complemented by a combined covariance-mode analysis.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3229354"
   },
   {
    "id": "2611.17676",
@@ -1048,7 +1049,8 @@
     "similarity": 0.933
    },
    "tldr": "Reconstruction of the effective dark energy density, _rm X(a)$, and the gravitational response functions $(a)$ and $(a)$.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3229364"
   },
   {
    "id": "2611.17344",
@@ -1817,7 +1819,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229366"
   },
   {
    "id": "2611.17374",
@@ -1939,7 +1942,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.93
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229353"
   },
   {
    "id": "2611.17552",
@@ -2333,7 +2337,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.921
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229363"
   },
   {
    "id": "2611.17807",
@@ -3086,7 +3091,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.899
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229365"
   },
   {
    "id": "2611.17416",
@@ -5333,7 +5339,8 @@
      "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition"
     },
     "similarity": 0.903
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229355"
   },
   {
    "id": "2611.17960",
@@ -6045,7 +6052,8 @@
      "title": "Thermal Field Theory for General Equilibrium Density Matrices"
     },
     "similarity": 0.9
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229358"
   },
   {
    "id": "2611.17380",
@@ -6426,7 +6434,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.895
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229362"
   },
   {
    "id": "2611.17413",
@@ -7147,7 +7156,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.886
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229329"
   },
   {
    "id": "2611.18441",
