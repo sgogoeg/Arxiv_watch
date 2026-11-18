@@ -1,4 +1,4 @@
-"""Daily run: fetch → match authors → embed → pre-filter → classify → summarize → write."""
+"""Daily run: fetch → match authors → embed → pre-filter → classify → write."""
 from __future__ import annotations
 
 import json
@@ -18,7 +18,6 @@ from .config import Config
 from .embed import EmbeddingCache, make_embedder, paper_text
 from .fetch import ArxivClient, fetch_metadata, fetch_today, filter_by_categories, load_offline, parse_api
 from .store import DEFAULTS, Store
-from .summarize import summarize
 
 log = logging.getLogger(__name__)
 
@@ -195,10 +194,9 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
         entries.append(p)
     entries.sort(key=lambda p: (p["combined"], bool(p["followed_authors"])), reverse=True)
 
-    # 6. INSPIRE links, summaries for the top papers, analytics
+    # 6. INSPIRE links, analytics
     if cfg.inspire.enabled and client:
         inspire.add_links(entries)
-    summarize(entries, cfg.summary)
     best_sim = pre.raw.max(axis=1).tolist() if len(papers) else []
     day_stats = stats.compute(papers, best_sim, entries, names, cfg.score_threshold)
 

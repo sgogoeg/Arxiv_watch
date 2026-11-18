@@ -8,7 +8,7 @@
 
 const EDIT_FILES = ["feedback.json", "library.json", "authors.json", "my_papers.json", "settings.json"];
 const DEFAULTS = {
-  "feedback.json": { deleted: {}, cared: {} },
+  "feedback.json": { deleted: {}, cared: {}, checked: {} },
   "library.json": { folders: {}, papers: {} },
   "authors.json": { authors: [] },
   "my_papers.json": { papers: [] },
@@ -16,6 +16,7 @@ const DEFAULTS = {
 };
 const OP_FILE = {
   delete: "feedback.json", undelete: "feedback.json", care: "feedback.json", uncare: "feedback.json",
+  day_check: "feedback.json", day_uncheck: "feedback.json",
   save: "library.json", unsave: "library.json", folder_create: "library.json",
   folder_rename: "library.json", folder_delete: "library.json", folder_topic: "library.json",
   author_add: "authors.json", author_remove: "authors.json",
@@ -27,7 +28,7 @@ const S = {
   cfg: {}, index: { days: [], topics: [] }, dayCache: {}, day: null,
   base: {}, view: {}, matches: { authors: {} }, citations: { papers: {} },
   pending: [], filters: { topic: "all", cat: "", min: null, q: "", showDeleted: false, followedOnly: false },
-  folder: null, openAuthor: null, openCite: null, statsDay: null, statsTab: "general",
+  calMonth: null, folder: null, openAuthor: null, openCite: null, statsDay: null, statsTab: "general",
 };
 
 // ------------------------------------------------------------------ utils
@@ -69,7 +70,7 @@ const lastName = (n) => { const t = nameKey(n); return t[t.length - 1] || ""; };
 const arxivUrl = (p) => p.abs_url || `https://arxiv.org/abs/${p.id}`;
 const paperUrl = (p) => p.inspire_url || arxivUrl(p);
 
-// LaTeX in titles, summaries and abstracts (KaTeX auto-render, loaded from the CDN).
+// LaTeX in titles and abstracts (KaTeX auto-render, loaded from the CDN).
 const TEX_OPTS = {
   delimiters: [
     { left: "$$", right: "$$", display: true }, { left: "\\[", right: "\\]", display: true },
@@ -97,7 +98,7 @@ const inCat = (p, cat) => paperCats(p).some((c) => c === cat || c.startsWith(cat
 // ------------------------------------------------------------------ ops
 function paperMeta(p) {
   const topics = (p.topics && p.topics.length) ? p.topics : (p.best_topic ? [p.best_topic] : []);
-  const keep = ["id", "title", "authors", "abstract", "abs_url", "pdf_url", "primary_category", "categories", "published", "date", "doi", "tldr", "inspire_url"];
+  const keep = ["id", "title", "authors", "abstract", "abs_url", "pdf_url", "primary_category", "categories", "published", "date", "doi", "inspire_url"];
   const m = {};
   keep.forEach((k) => { if (p[k] != null) m[k] = p[k]; });
   m.topics = topics;
@@ -121,6 +122,8 @@ function applyOp(f, op) {
       delete fb.deleted[op.id];
       break;
     case "uncare": delete fb.cared[op.id]; break;
+    case "day_check": fb.checked = fb.checked || {}; fb.checked[op.day] = op.date; break;
+    case "day_uncheck": if (fb.checked) delete fb.checked[op.day]; break;
     case "folder_create":
       if (!lib.folders[op.name]) lib.folders[op.name] = { topic: op.topic || null, papers: [] };
       break;
@@ -186,13 +189,16 @@ function recompute() {
   const c = $("#pending-count");
   c.textContent = S.pending.length;
   c.hidden = S.pending.length === 0;
+  const u = $("#unchecked-count");
+  if (u) { const n = uncheckedDays().length; u.textContent = n; u.hidden = n === 0; }
 }
 
 // An undo that exactly reverses the last unsynced edit removes that edit instead of queuing a new one.
-const CANCELS = { undelete: "delete", uncare: "care", unsave: "save", author_remove: "author_add", mypaper_remove: "mypaper_add" };
+const CANCELS = { day_uncheck: "day_check", day_check: "day_uncheck", undelete: "delete", uncare: "care", unsave: "save", author_remove: "author_add", mypaper_remove: "mypaper_add" };
 function cancelsLast(op) {
   const last = S.pending[S.pending.length - 1];
   if (!last || CANCELS[op.type] !== last.type) return false;
+  if (op.type === "day_check" || op.type === "day_uncheck") return last.day === op.day;
   if (op.type === "undelete" || op.type === "uncare") return last.id === op.id;
   if (op.type === "unsave") return last.id === op.id && last.folder === op.folder;
   if (op.type === "author_remove") return last.names.length === 1 && last.names[0] === op.name;
@@ -325,7 +331,7 @@ function summarizeOps(ops) {
   ops.forEach((o) => { n[o.type] = (n[o.type] || 0) + 1; });
   const label = { delete: "deleted", undelete: "restored", care: "marked I care", uncare: "unmarked I care", save: "saved", unsave: "removed from folder", folder_create: "new folder",
     folder_rename: "renamed folder", folder_delete: "deleted folder", folder_topic: "folder topic", author_add: "author add",
-    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed", topics_set: "topics changed" };
+    author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed", topics_set: "topics changed", day_check: "day checked", day_uncheck: "day unchecked" };
   return Object.entries(n).map(([k, v]) => `${v} ${label[k] || k}`).join(", ");
 }
 
@@ -395,7 +401,6 @@ function card(p, opts = {}) {
       ${opts.date ? `<span>${esc(opts.date)}</span>` : ""}
     </div>
     ${scores ? `<div class="scores">${scores}</div>` : ""}
-    ${p.tldr ? `<p class="tldr tex">${esc(p.tldr)}</p>` : ""}
     ${why.length ? `<div class="why">${why.join(" · ")}</div>` : ""}
     ${p.abstract ? `<details class="abs"><summary>Abstract</summary><p class="tex">${esc(p.abstract)}</p></details>` : ""}
     <div class="actions">
@@ -575,8 +580,10 @@ async function renderDaily(v) {
   v.innerHTML = `
     <div class="toolbar">
       <button class="btn small" id="prev" ${idx >= S.index.days.length - 1 ? "disabled" : ""} aria-label="Previous day">←</button>
-      <select id="day">${S.index.days.map((x) => `<option ${x.date === S.day ? "selected" : ""}>${esc(x.date)}</option>`).join("")}</select>
+      <select id="day">${S.index.days.map((x) => `<option value="${esc(x.date)}" ${x.date === S.day ? "selected" : ""}>${esc(x.date)}${isChecked(x.date) ? " ✓" : ""}</option>`).join("")}</select>
       <button class="btn small" id="next" ${idx <= 0 ? "disabled" : ""} aria-label="Next day">→</button>
+      <button class="btn small check-day ${isChecked(S.day) ? "on" : ""}" id="check-day" aria-pressed="${isChecked(S.day)}"
+        title="Keep track of which days you've gone through (see Calendar)">${isChecked(S.day) ? "✓ Checked" : "Mark checked"}</button>
       <input type="search" class="grow" id="q" placeholder="Search title, abstract, authors" value="${esc(f.q)}">
     </div>
     ${dailySummary(d, deleted)}
@@ -598,6 +605,14 @@ async function renderDaily(v) {
   $("#day").onchange = (e) => { S.day = e.target.value; render(); };
   $("#prev").onclick = () => { S.day = S.index.days[idx + 1].date; render(); };
   $("#next").onclick = () => { S.day = S.index.days[idx - 1].date; render(); };
+  $("#check-day").onclick = () => {
+    const was = isChecked(S.day);
+    push({ type: was ? "day_uncheck" : "day_check", day: S.day });
+    if (!was) {
+      const next = S.index.days.slice(0, idx).reverse().find((x) => !isChecked(x.date));  // oldest newer unchecked day
+      if (next) toast(`${S.day} checked`, { label: `Open ${next.date}`, run: () => { S.day = next.date; render(); scrollTo(0, 0); } });
+    }
+  };
   $("#q").oninput = debounce((e) => { f.q = e.target.value; render().then(() => { const el = $("#q"); el.focus(); el.setSelectionRange(el.value.length, el.value.length); }); }, 250);
   $("#min").oninput = (e) => { $("#minv").textContent = Number(e.target.value).toFixed(2); };
   $("#min").onchange = (e) => { f.min = Number(e.target.value); render(); };
@@ -879,8 +894,68 @@ async function renderStats(v) {
   v.querySelectorAll("[data-st]").forEach((b) => { b.onclick = () => { S.statsTab = b.dataset.st; render(); }; });
 }
 
+// ------------------------------------------------------------------ calendar (days you've checked)
+const isChecked = (day) => !!(S.view["feedback.json"]?.checked || {})[day];
+const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+// Announcement days in the last 30 days that you haven't marked as checked, oldest first.
+function uncheckedDays() {
+  const since = new Date(); since.setDate(since.getDate() - 30);
+  const from = isoDay(since);
+  return S.index.days.filter((x) => x.date >= from && !isChecked(x.date)).map((x) => x.date).reverse();
+}
+
+function renderCalendar(v) {
+  const byDay = Object.fromEntries(S.index.days.map((x) => [x.date, x]));
+  const latest = S.index.days[0]?.date || today();
+  S.calMonth = S.calMonth || latest.slice(0, 7);
+  const [y, m] = S.calMonth.split("-").map(Number);
+  const first = new Date(y, m - 1, 1);
+  const nDays = new Date(y, m, 0).getDate();
+  const lead = (first.getDay() + 6) % 7;  // weeks start on Monday
+  const monthName = first.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+  const shift = (k) => { const d = new Date(y, m - 1 + k, 1); return isoDay(d).slice(0, 7); };
+  const earliest = S.index.days[S.index.days.length - 1]?.date.slice(0, 7) || S.calMonth;
+  const now = today();
+  let cells = "";
+  for (let i = 0; i < lead; i++) cells += `<div class="cal-cell blank" aria-hidden="true"></div>`;
+  let shown = 0, done = 0;
+  for (let dnum = 1; dnum <= nDays; dnum++) {
+    const day = `${S.calMonth}-${String(dnum).padStart(2, "0")}`;
+    const info = byDay[day];
+    const cls = ["cal-cell", day === now ? "today" : ""];
+    if (!info) { cells += `<div class="${cls.join(" ")} none"><span class="cal-num">${dnum}</span></div>`; continue; }
+    const ok = isChecked(day);
+    shown++; if (ok) done++;
+    cls.push(ok ? "checked" : "unchecked");
+    cells += `<button class="${cls.join(" ")}" data-day="${day}" title="${day}: ${info.count} shortlisted of ${info.fetched} new · ${ok ? "checked" : "not checked yet"}">
+      <span class="cal-num">${dnum}</span><span class="cal-mark" aria-hidden="true">${ok ? "✓" : "•"}</span><span class="cal-n">${info.count}</span>
+      <span class="sr-only">${ok ? "checked" : "not checked"}</span></button>`;
+  }
+  const todo = uncheckedDays();
+  v.innerHTML = `
+    <div class="toolbar cal-head">
+      <button class="btn small" id="cal-prev" ${S.calMonth <= earliest ? "disabled" : ""} aria-label="Previous month">←</button>
+      <h2 class="cal-title">${esc(monthName)}</h2>
+      <button class="btn small" id="cal-next" ${S.calMonth >= latest.slice(0, 7) ? "disabled" : ""} aria-label="Next month">→</button>
+      ${todo.length ? `<button class="btn small primary ml-auto" id="cal-todo">Open oldest unchecked (${esc(todo[0])})</button>` : `<span class="muted small ml-auto">All caught up for the last 30 days.</span>`}
+    </div>
+    <div class="stat">${shown ? `${done} of ${shown} announcement days checked this month` : "No announcement days with data this month"} · ${todo.length} unchecked in the last 30 days</div>
+    <div class="cal-grid" role="grid">
+      ${["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((w) => `<div class="cal-wd">${w}</div>`).join("")}
+      ${cells}
+    </div>
+    <p class="muted small cal-legend"><span class="cal-key checked">✓</span> checked · <span class="cal-key unchecked">•</span> not checked yet · the number is how many papers were shortlisted.
+      Tap a day to open it in Daily, then press <b>Mark checked</b> when you're done.</p>`;
+  $("#cal-prev").onclick = () => { S.calMonth = shift(-1); render(); };
+  $("#cal-next").onclick = () => { S.calMonth = shift(1); render(); };
+  const open = (day) => { S.day = day; location.hash = "#daily"; scrollTo(0, 0); };
+  if (todo.length) $("#cal-todo").onclick = () => open(todo[0]);
+  v.querySelectorAll("[data-day]").forEach((b) => { b.onclick = () => open(b.dataset.day); });
+}
+
 // ------------------------------------------------------------------ routing + settings
-const VIEWS = { daily: renderDaily, stats: renderStats, authors: renderAuthors, "my-papers": renderMyPapers, library: renderLibrary };
+const VIEWS = { daily: renderDaily, calendar: renderCalendar, stats: renderStats, authors: renderAuthors, "my-papers": renderMyPapers, library: renderLibrary };
 
 async function render() {
   const tab = (location.hash || "#daily").slice(1);

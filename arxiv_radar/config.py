@@ -45,14 +45,6 @@ class ClassifierConfig(BaseModel):
     time_budget_seconds: int = 900  # stop training after this long; the partly trained model is used
 
 
-class SummaryConfig(BaseModel):
-    # "flan-t5" (local model), "first-sentence" or "none"
-    backend: str = "flan-t5"
-    model: str = "google/flan-t5-base"
-    top_k: int = 20
-    time_budget_seconds: int = 600
-
-
 class CitationsConfig(BaseModel):
     enabled: bool = True
     max_citing_works: int = 200
@@ -74,7 +66,6 @@ class Config(BaseModel):
     author_backfill_days: int = 30
     embedding: EmbeddingConfig = Field(default_factory=EmbeddingConfig)
     classifier: ClassifierConfig = Field(default_factory=ClassifierConfig)
-    summary: SummaryConfig = Field(default_factory=SummaryConfig)
     citations: CitationsConfig = Field(default_factory=CitationsConfig)
     inspire: InspireConfig = Field(default_factory=InspireConfig)
     # "owner/repo" and branch the dashboard commits edits to. Defaults to $GITHUB_REPOSITORY.

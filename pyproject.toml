@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Local models: SPECTER2 embeddings, SetFit classifier, flan-t5 summaries.
+# Local models: SPECTER2 embeddings, SetFit classifier.
 # Install torch from the CPU index first on CI (see .github/workflows/daily.yml).
 ml = [
   "sentence-transformers>=3.0",

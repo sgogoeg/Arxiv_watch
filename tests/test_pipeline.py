@@ -19,7 +19,7 @@ def test_offline_run_end_to_end(cfg, sample_day):
     assert by["2511.00101"]["best_topic"] == "Reinforcement learning"
     assert by["2511.00105"]["best_topic"] == "LLM evaluation"
     assert by["2511.00101"]["why"]["closest"]["id"] in {"2405.00001", "2405.00002"}
-    assert all("tldr" in p for p in papers[:5])
+    assert not any("tldr" in p for p in papers)
     assert doc["score_source"] == {"Reinforcement learning": "similarity", "LLM evaluation": "similarity"}
     assert len(doc["background"]) == 11 - len(papers)
     idx = store.read("index.json")
