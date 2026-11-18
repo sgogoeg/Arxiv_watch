@@ -4,19 +4,19 @@ A personal daily arXiv feed. Every weekday a GitHub Action:
 
 1. fetches the new papers in your chosen arXiv categories,
 2. ranks and tags them against your own **topics** with a local model (no paid API),
-3. writes a one-sentence TL;DR for the top papers,
-4. tracks papers by **authors you follow** and **citations to your own papers**,
-5. publishes a dashboard to GitHub Pages.
+3. tracks papers by **authors you follow** and **citations to your own papers**,
+4. publishes a dashboard to GitHub Pages.
 
 On the dashboard you **delete** papers you don't care about, mark papers **I care** (a training signal
 that doesn't file the paper anywhere), and **save** good ones into **folders**. All three train the
 classifier on the next run. Paper links open the INSPIRE-HEP record when there is one, and arXiv otherwise.
-LaTeX in titles, summaries and abstracts is rendered with KaTeX.
+LaTeX in titles and abstracts is rendered with KaTeX.
 
 | Tab | What it does |
 | --- | --- |
-| **Daily** | Today's shortlisted papers with per-topic scores, why each matched, TL;DR, abstract. Filter by topic, score, followed authors, text. Delete (with undo) or save to a folder. |
+| **Daily** | Today's shortlisted papers with per-topic scores, why each matched, abstract. Mark the day as checked when you're done. Filter by topic, score, followed authors, text. Delete (with undo) or save to a folder. |
 | (Daily, top) | *Today's selection*: a pie of the papers that passed your filters by category, with followed-author, saved / I care / deleted counts and frequent terms. |
+| **Calendar** | A month view of announcement days: which ones you've checked, which you haven't, and how many papers each had. Tap a day to open it in Daily. |
 | **Stats** | Analytics for a day. *General*: everything fetched (categories, title terms, active authors, authors per paper, similarity to your topics). *Personalized*: what passed your filters (per-topic counts, score distribution, pass rate by category, top papers). |
 | **Authors** | Follow one name or paste a list. Their new papers are always shown in Daily; the last 30 days are backfilled when you add someone. |
 | **My papers** | Add your papers by arXiv ID, DOI or title. Shows citation counts over time, new citations since your last visit, and the citing papers. |
@@ -29,7 +29,6 @@ RSS (today's IDs) → arXiv API (metadata, ≥3 s between requests)
   → SPECTER2 embeddings
   → pre-filter: similarity to each topic's description, seed papers and saved papers, plus keyword nudges → top N
   → SetFit classifier (SPECTER2 fine-tuned few-shot, one-vs-rest per topic) → score per topic
-  → flan-t5-base TL;DR for the top K
 ```
 
 * **Cold start.** Until a topic has `min_positives_per_topic` examples (seed papers + saved papers),
@@ -105,12 +104,12 @@ Tests: `pytest` (fast). `pytest -m slow` also trains a tiny SetFit model end to 
 
 | File | Written by | Content |
 | --- | --- | --- |
-| `days/YYYY-MM-DD.json` | pipeline | shortlisted papers with scores, reasons, TL;DRs |
+| `days/YYYY-MM-DD.json` | pipeline | shortlisted papers with scores and reasons |
 | `index.json` | pipeline | list of days, topics, threshold |
 | `author_matches.json` | pipeline | papers per followed author |
 | `citations.json` | pipeline | counts, history and citing works for your papers |
 | `seeds.json` | pipeline | metadata cache for topic seed papers |
-| `feedback.json` | dashboard | deleted papers |
+| `feedback.json` | dashboard | deleted and "I care" papers, days you've checked |
 | `library.json` | dashboard | folders and saved papers |
 | `authors.json` | dashboard | followed authors |
 | `my_papers.json` | dashboard | papers to track citations for |

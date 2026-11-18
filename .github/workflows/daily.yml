@@ -77,7 +77,7 @@ jobs:
             pip install -e .
           fi
 
-      - name: Fetch, classify and summarize
+      - name: Fetch and classify
         if: env.MODE == 'run'
         env:
           OPENALEX_MAILTO: ${{ secrets.OPENALEX_MAILTO }}

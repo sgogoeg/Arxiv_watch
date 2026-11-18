@@ -17,6 +17,7 @@
   <div class="brand"><span class="dot" aria-hidden="true"></span>arXiv Radar</div>
   <nav class="tabs" role="tablist">
     <a href="#daily" data-tab="daily">Daily</a>
+    <a href="#calendar" data-tab="calendar">Calendar <span id="unchecked-count" class="badge" title="Unchecked days in the last 30 days" hidden>0</span></a>
     <a href="#stats" data-tab="stats">Stats</a>
     <a href="#authors" data-tab="authors">Authors</a>
     <a href="#my-papers" data-tab="my-papers">My papers</a>
@@ -33,7 +34,7 @@
 <dialog id="settings">
   <form method="dialog" class="settings-form">
     <h2>Settings</h2>
-    <p class="muted small">Edits (deletes, "I care" marks, folders, authors, my papers) are saved in this browser and committed to the repo when you press <b>Sync</b>.
+    <p class="muted small">Edits (deletes, "I care" marks, checked days, folders, authors, my papers) are saved in this browser and committed to the repo when you press <b>Sync</b>.
       Use a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> limited to this repository with <i>Contents: read and write</i>.
       It is stored only in this browser.</p>
     <label>Repository <input id="set-repo" placeholder="owner/repo" autocomplete="off"></label>

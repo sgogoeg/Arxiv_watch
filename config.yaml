@@ -29,11 +29,6 @@ classifier:
   min_positives_per_topic: 3
   random_negatives: 100
 
-summary:
-  backend: flan-t5
-  model: google/flan-t5-base
-  top_k: 20
-
 citations:
   enabled: true
 

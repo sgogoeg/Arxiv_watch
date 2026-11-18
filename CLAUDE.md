@@ -14,7 +14,7 @@ README.md has the user-facing description of every feature.
 ```bash
 python -m venv .venv && . .venv/bin/activate
 pip install -e '.[dev]'                       # enough for the fast tests
-pip install torch --index-url https://download.pytorch.org/whl/cpu && pip install -e '.[ml]'   # SetFit/SPECTER2/flan-t5
+pip install torch --index-url https://download.pytorch.org/whl/cpu && pip install -e '.[ml]'   # SetFit/SPECTER2
 
 python -m pytest -q                           # fast suite (slow tests are deselected by default in pyproject)
 python -m pytest -q tests/test_fetch.py::test_normalize_id      # one test
@@ -43,7 +43,7 @@ There is no linter configured.
    `min_positives_per_topic` positives. Other topics keep `prefilter.percentile_scores`, a within-day rank (relative,
    not absolute). The per-topic source is written to `score_source`.
 6. **Assemble.** Each entry gets `scores`, `score` (best topic), `combined` (noisy-OR across topics; Daily sorts by
-   it) and `why`. Then come INSPIRE links, TL;DRs and `stats.compute`.
+   it) and `why`. Then come INSPIRE links and `stats.compute`.
 7. **Write.** `days/<date>.json` and `index.json`. Then the side tasks in `_finish_side_tasks`: author matches and
    backfill, INSPIRE recheck of recent days, citations.
 

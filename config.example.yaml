@@ -37,11 +37,6 @@ classifier:
   max_seq_length: 256              # tokens per paper during training and scoring
   time_budget_seconds: 900         # stop training after 15 min and use the model as trained so far
 
-summary:
-  backend: flan-t5                 # "first-sentence" or "none" to skip the model
-  model: google/flan-t5-base
-  top_k: 20
-
 citations:
   enabled: true
   max_citing_works: 200
