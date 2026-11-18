@@ -614,7 +614,8 @@
     "similarity": 0.955
    },
    "tldr": "The present and future of direct particle detection, including nuclear and electron recoil searches, annual modulation measurements, and directional detection.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230062"
   },
   {
    "id": "2611.21368",
@@ -656,7 +657,8 @@
     "similarity": 0.954
    },
    "tldr": "We study the structure, stability, and mass-radius relations of compact stars composed of quark matter within the non-ideal MIT Bag Model mixed with self-interacting bosonic dark matter with a $n$ self-interaction potential.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230166"
   },
   {
    "id": "2611.21279",
@@ -699,7 +701,8 @@
     "similarity": 0.937
    },
    "tldr": "We derive the timing-residual cross-correlations induced by rapid metric oscillations of spin-2 ULDM, allowing for general polarization statistics.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3229796"
   },
   {
    "id": "2611.18833",
@@ -784,7 +787,8 @@
     "similarity": 0.927
    },
    "tldr": "The localization of Galactic Binary Black Holes by the Laser Interferometer Space Antenna provides strong evidence for a primordial population.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230058"
   },
   {
    "id": "2611.21278",
@@ -825,7 +829,8 @@
     "similarity": 0.93
    },
    "tldr": "The mono-$Z$ signature of a vector dark matter model at future electron-positron colliders provides a viable DM candidate that interacts with the Standard Model through a Higgs portal.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230114"
   },
   {
    "id": "2611.19416",
@@ -914,7 +919,8 @@
     "similarity": 0.937
    },
    "tldr": "Repeated lensing from binary black holes on eccentric and precessing orbits around supermassive black holes.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230075"
   },
   {
    "id": "2611.20004",
@@ -957,7 +963,8 @@
     "similarity": 0.916
    },
    "tldr": "Probing superradiant cloud level transitions in stellar-mass black hole binaries with milli-Hertz and multiband gravitational-wave observations",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3229957"
   },
   {
    "id": "2611.17345",
@@ -1085,7 +1092,8 @@
     "similarity": 0.937
    },
    "tldr": "We compute the massless scalar quasinormal spectra of charged Letelier black holes surrounded by logarithmic perfect fluid dark matter and quintessence, for $=0$ and for asymptotically anti-de Sitter space",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3229954"
   },
   {
    "id": "2611.19294",
@@ -1190,7 +1198,8 @@
     "similarity": 0.936
    },
    "tldr": "A hybrid log-likelihood-ratio statistic for single-detector SPIIR gravitational-wave searches.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3229973"
   },
   {
    "id": "2611.21047",
@@ -1230,7 +1239,8 @@
     "similarity": 0.902
    },
    "tldr": "The imprint of neutron escape on non-thermal protons in AGN coronae",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230043"
   },
   {
    "id": "2611.19117",
@@ -1316,7 +1326,8 @@
     "similarity": 0.935
    },
    "tldr": "We propose a resolvable mismatch between eccentric signals and circular templates in the decihertz band, and show that the mismatch is resolvable for a source at $1,mathrmGpc$.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230068"
   },
   {
    "id": "2611.19098",
@@ -1398,7 +1409,8 @@
     "similarity": 0.921
    },
    "tldr": "The spin-0 mode is the only radiative degree of freedom in Einstein-Aether theory.",
-   "tldr_source": "model"
+   "tldr_source": "model",
+   "inspire_url": "https://inspirehep.net/literature/3230034"
   },
   {
    "id": "2611.19510",
@@ -1524,7 +1536,8 @@
      "title": "Impact of dynamical, quadratic, and higher-order tidal effects on gravitational-wave observations of binary neutron stars"
     },
     "similarity": 0.948
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230082"
   },
   {
    "id": "2611.18700",
@@ -1604,7 +1617,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230047"
   },
   {
    "id": "2611.20919",
@@ -1646,7 +1660,8 @@
      "title": "Light Primordial Black Holes from a First-Order Phase Transition near the End of Inflation: Baryogenesis and Gravitational Wave Signatures"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230060"
   },
   {
    "id": "2611.17266",
@@ -1687,7 +1702,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.95
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229923"
   },
   {
    "id": "2611.20887",
@@ -1724,7 +1740,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.954
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230101"
   },
   {
    "id": "2611.21252",
@@ -1760,7 +1777,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.941
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230059"
   },
   {
    "id": "2611.18997",
@@ -1837,7 +1855,8 @@
      "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229932"
   },
   {
    "id": "2611.18827",
@@ -1940,7 +1959,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.938
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229933"
   },
   {
    "id": "2611.20938",
@@ -1977,7 +1997,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.936
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230016"
   },
   {
    "id": "2611.20542",
@@ -2012,7 +2033,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.933
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229959"
   },
   {
    "id": "2611.19906",
@@ -2056,7 +2078,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229965"
   },
   {
    "id": "2611.21591",
@@ -2092,7 +2115,8 @@
      "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230110"
   },
   {
    "id": "2611.20160",
@@ -2131,7 +2155,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229983"
   },
   {
    "id": "2611.21413",
@@ -2171,7 +2196,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.921
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230104"
   },
   {
    "id": "2611.18697",
@@ -2250,7 +2276,8 @@
      "title": "A Phase-Transition Portal to Enhanced Dark Matter Annihilation"
     },
     "similarity": 0.917
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229987"
   },
   {
    "id": "2611.19026",
@@ -2361,7 +2388,8 @@
      "title": "Challenging the hoop conjecture with spinning pancakes and baguettes"
     },
     "similarity": 0.928
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3228953"
   },
   {
    "id": "2611.19648",
@@ -2397,7 +2425,8 @@
      "title": "Thermal Field Theory for General Equilibrium Density Matrices"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229588"
   },
   {
    "id": "2611.19308",
@@ -2616,7 +2645,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230161"
   },
   {
    "id": "2611.18705",
@@ -2692,7 +2722,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.924
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229953"
   },
   {
    "id": "2611.20940",
@@ -2728,7 +2759,8 @@
      "title": "Stars Within Stars: The Interplay Between Main-Sequence Stars and Dark Matter"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230066"
   },
   {
    "id": "2611.20085",
@@ -2765,7 +2797,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.927
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230163"
   },
   {
    "id": "2611.19502",
@@ -2837,7 +2870,8 @@
      "title": "Light Primordial Black Holes from a First-Order Phase Transition near the End of Inflation: Baryogenesis and Gravitational Wave Signatures"
     },
     "similarity": 0.908
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230103"
   },
   {
    "id": "2611.21424",
@@ -2873,7 +2907,8 @@
      "title": "Enhancing Gravitational Waves from Global Strings via a First-Order Phase Transition"
     },
     "similarity": 0.918
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230113"
   },
   {
    "id": "2611.18862",
@@ -2952,7 +2987,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.932
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230061"
   },
   {
    "id": "2611.18824",
@@ -3026,7 +3062,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229944"
   },
   {
    "id": "2611.20669",
@@ -3087,7 +3124,8 @@
      "title": "A pipeline for identifying astrophysical signals and instrumental glitches in LISA data"
     },
     "similarity": 0.903
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230025"
   },
   {
    "id": "2611.21031",
@@ -3124,7 +3162,8 @@
      "title": "Can Two-Point Correlations Determine Gravitational Waves from Sound Waves?"
     },
     "similarity": 0.931
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230032"
   },
   {
    "id": "2611.18850",
@@ -3329,7 +3368,8 @@
      "title": "When Can Pulsar Timing Distinguish a Propagation Mass from a Weak Longitudinal Background?"
     },
     "similarity": 0.946
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230128"
   },
   {
    "id": "2611.21109",
@@ -3371,7 +3411,8 @@
      "title": "Hydrodynamic Natal Kicks and Formation of Black Hole Binaries"
     },
     "similarity": 0.909
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230051"
   },
   {
    "id": "2611.20627",
@@ -3409,7 +3450,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230010"
   },
   {
    "id": "2611.21271",
@@ -3448,7 +3490,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.927
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230080"
   },
   {
    "id": "2611.21601",
@@ -3487,7 +3530,8 @@
      "title": "Probing flavor-dependent neutrino-dark matter interactions with the flavor composition of high-energy cosmic neutrinos"
     },
     "similarity": 0.913
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230147"
   },
   {
    "id": "2611.21226",
@@ -3525,7 +3569,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.912
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229907"
   },
   {
    "id": "2611.18712",
@@ -3610,7 +3655,8 @@
      "title": "Fundamental Noise Processes in Pulsar Timing"
     },
     "similarity": 0.911
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229967"
   },
   {
    "id": "2611.21439",
@@ -3648,7 +3694,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.936
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229794"
   },
   {
    "id": "2611.18828",
@@ -3760,7 +3807,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230136"
   },
   {
    "id": "2611.05042",
@@ -3838,7 +3886,8 @@
      "title": "Background Effects on Thermal Free Energy in Conformal Field Theories"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229943"
   },
   {
    "id": "2611.21595",
@@ -3873,7 +3922,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.92
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230160"
   },
   {
    "id": "2611.20328",
@@ -3912,7 +3962,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.917
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230046"
   },
   {
    "id": "2611.20967",
@@ -4037,7 +4088,8 @@
      "title": "Galaxy clusters as cosmic lenses for high frequency gravitational-waves"
     },
     "similarity": 0.922
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229941"
   },
   {
    "id": "2611.21161",
@@ -4077,7 +4129,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.917
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230036"
   },
   {
    "id": "2611.21338",
@@ -4113,7 +4166,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230146"
   },
   {
    "id": "2611.19191",
@@ -4188,7 +4242,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229847"
   },
   {
    "id": "2611.19500",
@@ -4263,7 +4318,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.904
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230040"
   },
   {
    "id": "2611.19612",
@@ -4549,7 +4605,8 @@
      "title": "DarkMatterFM-Registry: A Machine-Readable Registry of Dark-Matter Models Extracted from the arXiv Literature"
     },
     "similarity": 0.923
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230011"
   },
   {
    "id": "2611.21043",
@@ -4588,7 +4645,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.921
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230085"
   },
   {
    "id": "2611.19950",
@@ -4627,7 +4685,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.92
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230004"
   },
   {
    "id": "2611.20958",
@@ -4666,7 +4725,8 @@
      "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition"
     },
     "similarity": 0.92
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229893"
   },
   {
    "id": "2611.20701",
@@ -4702,7 +4762,8 @@
      "title": "Challenging the hoop conjecture with spinning pancakes and baguettes"
     },
     "similarity": 0.916
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230005"
   },
   {
    "id": "2611.07288",
@@ -4780,7 +4841,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.912
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230014"
   },
   {
    "id": "2611.19831",
@@ -4818,7 +4880,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.911
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229936"
   },
   {
    "id": "2611.20778",
@@ -4855,7 +4918,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230002"
   },
   {
    "id": "2611.21245",
@@ -5059,7 +5123,8 @@
      "title": "Challenging the hoop conjecture with spinning pancakes and baguettes"
     },
     "similarity": 0.904
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229999"
   },
   {
    "id": "2611.21011",
@@ -5100,7 +5165,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230042"
   },
   {
    "id": "2611.19355",
@@ -5176,7 +5242,8 @@
      "title": "Challenging the hoop conjecture with spinning pancakes and baguettes"
     },
     "similarity": 0.924
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230095"
   },
   {
    "id": "2611.18843",
@@ -5261,7 +5328,8 @@
      "title": "Supercooled Dark Scalar Phase Transitions explanation of NANOGrav data"
     },
     "similarity": 0.92
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230097"
   },
   {
    "id": "2611.20200",
@@ -5298,7 +5366,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.919
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229878"
   },
   {
    "id": "2611.19617",
@@ -5474,7 +5543,8 @@
      "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition"
     },
     "similarity": 0.915
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230038"
   },
   {
    "id": "2611.20189",
@@ -5515,7 +5585,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.914
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229982"
   },
   {
    "id": "2611.19734",
@@ -5588,7 +5659,8 @@
      "title": "Cosmological phase transitions: from perturbative particle physics to gravitational waves"
     },
     "similarity": 0.912
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229947"
   },
   {
    "id": "2611.20754",
@@ -5660,7 +5732,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.911
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230029"
   },
   {
    "id": "2611.18694",
@@ -5853,7 +5926,8 @@
      "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition"
     },
     "similarity": 0.91
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229998"
   },
   {
    "id": "2611.20828",
@@ -6076,7 +6150,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.907
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230020"
   },
   {
    "id": "2611.18944",
@@ -6304,7 +6379,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.906
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230033"
   },
   {
    "id": "2611.19513",
@@ -6376,7 +6452,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.906
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229986"
   },
   {
    "id": "2611.19035",
@@ -6452,7 +6529,8 @@
      "title": "Challenging the hoop conjecture with spinning pancakes and baguettes"
     },
     "similarity": 0.904
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3229877"
   },
   {
    "id": "2611.19338",
@@ -6607,7 +6685,8 @@
      "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230094"
   },
   {
    "id": "2611.20508",
@@ -6647,7 +6726,8 @@
      "title": "NuSTEC Review: Current Experimental and Theoretical Challenges of Neutrino-Nucleus Scattering"
     },
     "similarity": 0.902
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230006"
   },
   {
    "id": "2611.18955",
@@ -6721,7 +6801,8 @@
      "title": "Nanohertz gravitational waves and asymmetric dark matter from a supercooled dark sector phase transition"
     },
     "similarity": 0.901
-   }
+   },
+   "inspire_url": "https://inspirehep.net/literature/3230022"
   },
   {
    "id": "2611.19377",
