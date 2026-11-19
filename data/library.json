@@ -3,6 +3,13 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.22266",
+    "2611.21997",
+    "2611.21714",
+    "2611.21368",
+    "2611.21736",
+    "2611.23371",
+    "2611.17604",
     "2611.15860",
     "2611.14628",
     "2611.14039",
@@ -724,6 +731,227 @@
     "Phase transitions & GWs"
    ],
    "saved": "2026-11-13"
+  },
+  "2611.17604": {
+   "id": "2611.17604",
+   "title": "Resonant Trapping of Neutrinophilic Dark Matter in Supernovae",
+   "authors": [
+    "Christopher V. Cappiello",
+    "P. S. Bhupal Dev",
+    "Amol V. Patwardhan"
+   ],
+   "abstract": "Supernova cooling provides some of the strongest constraints on light particles beyond the Standard Model, including sub-GeV dark matter (DM). While sufficiently large couplings to the Standard Model sector can trap these particles inside the supernova or cause them to decay before escaping, there typically exists an intermediate range of couplings in which their efficient production and subsequent escape lead to excessive energy loss, resulting in stringent constraints on new light particles. In this work, we demonstrate for the first time that, for certain types of DM-neutrino interactions, resonantly enhanced $s$-channel scattering with neutrinos can efficiently trap DM inside the supernova and can fundamentally alter the conventional supernova cooling constraints. In particular, we show that for mediator masses comparable to the supernova core temperature, this resonant scattering can prevent a substantial fraction of the produced DM from freely escaping, thereby significantly weakening, or even evading, the usual supernova cooling constraints on such models.",
+   "abs_url": "https://arxiv.org/abs/2611.17604",
+   "pdf_url": "https://arxiv.org/pdf/2611.17604v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.HE"
+   ],
+   "published": "2026-11-13T00:01:16Z",
+   "date": "2026-11-16",
+   "tldr": "Resonantly enhanced $s$-channel scattering with neutrinos can trap sub-GeV dark matter inside the supernova and fundamentally alter the conventional supernova cooling constraints.",
+   "inspire_url": "https://inspirehep.net/literature/3228689",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-16"
+  },
+  "2611.23371": {
+   "id": "2611.23371",
+   "title": "Seeing through the fog: astrophysical priors and the evidence for new physics in pulsar timing arrays",
+   "authors": [
+    "Torsten Bringmann",
+    "Chris Gordon",
+    "Carlo Tasillo"
+   ],
+   "abstract": "Pulsar timing arrays (PTAs) have found evidence for a gravitational wave background at nHz frequencies. Inspiralling supermassive black hole binaries (SMBHBs) likely contribute to at least part of the signal, but there may be additional cosmological sources from new physics in the early universe. Disentangling the two is complicated by the prohibitively slow modelling of SMBHB spectra based on realistic population models. Here we introduce binaryfog, a surrogate of up-to-date population models also used by the NANOGrav collaboration, that returns the statistical distribution of bent spectra $\\mathcal{O}(10^6)$ faster than direct computation. We use binaryfog to profile over the six astrophysical parameters in fits of four extensively discussed new-physics models: a dark sector phase transition, cosmic superstrings, inflationary gravitational waves, and domain walls. Compared to the widely adopted power-law description of the SMBHB background, the preference for a phase transition drops from $2.8σ$ to $1.5σ$. The other three models follow a similar pattern. We also recommend updated astrophysical priors based on galaxy surveys published since 2014, which for current PTA data still only give a marginal preference of $1.7σ$ for a phase transition. An interpretation of the signal in terms of SMBHBs alone favours binaries that merge within about $2\\,$Gyr after their host galaxies have merged, requiring an efficient mechanism to overcome the final parsec of separation. If binaries need longer than about $6.5\\,$Gyr to merge, the preference for a phase transition exceeds $3σ$ under our recommended updated prior set. binaryfog can help resolve these questions, as it allows users to study the impact of updated astrophysical priors and a realistic SMBHB population model on new-physics searches with PTAs.",
+   "abs_url": "https://arxiv.org/abs/2611.23371",
+   "pdf_url": "https://arxiv.org/pdf/2611.23371v1",
+   "primary_category": "astro-ph.CO",
+   "categories": [
+    "astro-ph.CO",
+    "astro-ph.GA",
+    "hep-ph"
+   ],
+   "published": "2026-11-17T19:00:01Z",
+   "date": "2026-11-19",
+   "inspire_url": "https://inspirehep.net/literature/3230760",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-19"
+  },
+  "2611.21736": {
+   "id": "2611.21736",
+   "title": "Active Galactic Nuclei as Beyond the Standard Model Laboratories: a White Paper",
+   "authors": [
+    "Gonzalo Herrera",
+    "Filippo Sala",
+    "Piero Ullio",
+    "Misty C. Bentz",
+    "Carlos Blanco",
+    "Roberto Caiozzo",
+    "Marina Cermeño",
+    "Matteo Cerruti",
+    "James M. Cline",
+    "Andrea Giovanni De Marchi",
+    "Pierfrancesco Di Cintio",
+    "Alessandro Granelli",
+    "R. Andrew Gustafson",
+    "Bradley J. Kavanagh",
+    "Cristina Lagunas Gualda",
+    "Kohta Murase",
+    "Takuya Okawa",
+    "Xavier Rodrigues",
+    "Lorenzo Ubaldi",
+    "Gabrijela Zaharijas"
+   ],
+   "abstract": "Multi-messenger and multi-wavelength observations of Active Galactic Nuclei (AGN) can provide otherwise inaccessible knowledge about physics Beyond the Standard Model (BSM), and may even lead to its discovery. Realizing this potential hinges on two parallel efforts: advancing our understanding of AGN and of the dark matter around them, and identifying the BSM signatures that are at once promising and robust against the gaps in that understanding. These fields have attracted growing interest in recent years, also motivated by the IceCube association of neutrinos to individual AGN, yet we have only begun to explore their cross-fertilization. This white paper offers a new perspective on this interdisciplinary endeavor. It concisely reviews the state of the art in each field and at their interface, and identifies the key open questions that must be addressed to strengthen our prospects for learning about BSM physics with AGN.",
+   "abs_url": "https://arxiv.org/abs/2611.21736",
+   "pdf_url": "https://arxiv.org/pdf/2611.21736v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.CO",
+    "astro-ph.GA",
+    "astro-ph.HE"
+   ],
+   "published": "2026-11-16T19:00:06Z",
+   "date": "2026-11-18",
+   "inspire_url": "https://inspirehep.net/literature/3230207",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-19"
+  },
+  "2611.21368": {
+   "id": "2611.21368",
+   "title": "Astrophysical Constraints for Bosonic Dark Matter in and Around Quark Stars",
+   "authors": [
+    "Júlia Tartera Barberà",
+    "Sarah Louisa Pitz",
+    "Jürgen Schaffner-Bielich",
+    "Laura Tolos"
+   ],
+   "abstract": "We investigate the structure, stability, and mass-radius relations of compact stars composed of quark matter within the non-ideal MIT Bag Model mixed with self-interacting bosonic dark matter with a $φ^n$ self-interaction potential. By solving the coupled two-fluid Tolman-Oppenheimer-Volkoff equations for boson masses between 200 MeV and 1 GeV and self-interaction strengths with $n=4$ and $n=40$, we show that strong self-interactions and higher boson masses enhance the stability of compact star configurations at high central pressures, though they reduce maximum overall masses. Ultra-compact solutions with $C \\ge 1/3$ capable of mimicking black holes are significantly restricted compared to hadronic models, emerging only for strong self-interactions and dark matter fractions exceeding 90\\%. Depending on the parameters, the compact stars form either extended dark matter halos or compact cores: stronger self-interactions and higher boson masses suppress the radial extension to favor compact cores of dark matter. Matching our models against observational constraints highlights PSR J1614$-$2230 and XTE J1814$-$338 as potential window of opportunity for dark matter detection. Notably, XTE J1814$-$338 could confirm a dark sector, given its requirement for light boson masses ($m_b \\approx 200\\text{--}300\\text{ MeV}$) and strongly DM-dominated configurations.",
+   "abs_url": "https://arxiv.org/abs/2611.21368",
+   "pdf_url": "https://arxiv.org/pdf/2611.21368v1",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE",
+    "hep-th",
+    "nucl-th"
+   ],
+   "published": "2026-11-16T16:35:25Z",
+   "date": "2026-11-18",
+   "inspire_url": "https://inspirehep.net/literature/3230166",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-19"
+  },
+  "2611.21714": {
+   "id": "2611.21714",
+   "title": "21 cm Cosmology of Boosted Dark Matter",
+   "authors": [
+    "Min Sub Lee",
+    "Jeong Han Kim",
+    "Kyoungchul Kong",
+    "Jong-Chul Park"
+   ],
+   "abstract": "The formation history of low-mass halos is sensitive to the properties of dark matter. At low redshift, nonlinear evolution and baryonic processes can obscure this information. The 21 cm signal provides access to a high-redshift stage of structure formation, when the abundance and clustering of low-mass halos retain direct sensitivity to the mass and interactions of dark matter. Boosted dark matter (BDM) realizes this possibility through a two-component scenario in which the annihilation of the heavier component converts part of the mass difference into kinetic energy of the lighter component. Self-interactions redistribute this energy and generate pressure support, suppressing small-scale density perturbations even for dark matter masses in the MeV range. We calculate the global 21 cm brightness temperature and its power spectrum in BDM cosmology. The reduced abundance of low-mass halos delays the global absorption feature and shifts the characteristic redshift evolution of the power spectrum. We assess the projected sensitivity of SKA1-Low to these signatures. The sensitivity is strongest at intermediate light-component fractions, where both components remain sufficiently abundant for self-heating to affect structure formation. For $σ_{\\rm self1}/m_1\\simeq0.1\\,{\\rm cm^2\\,g^{-1}}$, models with $0.2\\lesssim r_1\\lesssim0.7$ can be distinguished from the fiducial $Λ$CDM prediction at the $95\\%$ confidence level under the optimistic forecast. We compare our results with existing direct-detection bounds from SENSEI and prospects for BDM searches at large-volume neutrino experiments, including Super-/Hyper-Kamiokande, JUNO, and DUNE. This comparison highlights the unique and complementary role of high-redshift surveys in testing BDM models.",
+   "abs_url": "https://arxiv.org/abs/2611.21714",
+   "pdf_url": "https://arxiv.org/pdf/2611.21714v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.CO",
+    "astro-ph.HE"
+   ],
+   "published": "2026-11-16T19:00:01Z",
+   "date": "2026-11-18",
+   "inspire_url": "https://inspirehep.net/literature/3230165",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-19"
+  },
+  "2611.21997": {
+   "id": "2611.21997",
+   "title": "Fundamental physics with quantum sensors in space",
+   "authors": [
+    "Jason Arakawa",
+    "Daniel J. Blumenthal",
+    "Oliver Buchmueller",
+    "Dmitry Budker",
+    "Luigi Cacciapuoti",
+    "Emily D. Caldwell",
+    "Andrei Derevianko",
+    "Benjamin P. Dix-Matthews",
+    "Michael A. Fedderke",
+    "Naceur Gaaloul",
+    "Susan Gardner",
+    "Jonah Glick",
+    "Paul Hamilton",
+    "Elena Jordan",
+    "Hidetoshi Katori",
+    "Peter Kurczynski",
+    "David R. Leibrandt",
+    "Anna L. Marchant",
+    "Indra Periwal",
+    "Igor Pikovski",
+    "Marianna S. Safronova",
+    "Christian Sanner",
+    "Sascha W. Schediwy",
+    "Volodymyr Takhistov",
+    "Yu-Cheng Tien",
+    "Yu-Dai Tsai",
+    "Jason R. Williams"
+   ],
+   "abstract": "Quantum sensors such as atomic clocks, atom interferometers, and atomic magnetometers can be used as sensitive probes of physics beyond the Standard Model. Space offers microgravity, long baselines, low environmental noise, access to varying gravitational potentials, and unique opportunities involving the Sun, Moon, planets, and asteroids. These proceedings of the Aspen Center for Physics workshop on \"Fundamental physics in space with quantum sensors,\" held February 22-27, 2026, summarize the scientific case, current capabilities, and space mission concepts for investigating dark matter, testing general relativity, and detecting gravitational waves in frequency bands inaccessible from the ground.",
+   "abs_url": "https://arxiv.org/abs/2611.21997",
+   "pdf_url": "https://arxiv.org/pdf/2611.21997v1",
+   "primary_category": "quant-ph",
+   "categories": [
+    "quant-ph",
+    "astro-ph.IM",
+    "gr-qc",
+    "hep-ph",
+    "physics.atom-ph"
+   ],
+   "published": "2026-11-16T23:29:06Z",
+   "date": "2026-11-18",
+   "inspire_url": "https://inspirehep.net/literature/3230252",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-19"
+  },
+  "2611.22266": {
+   "id": "2611.22266",
+   "title": "Gravitational waves from cosmological first-order phase transitions with fluctuation-induced friction",
+   "authors": [
+    "Jun-Ye Chen",
+    "Dongdong Wei",
+    "Zong-Kuan Guo"
+   ],
+   "abstract": "We study gravitational-wave production in a cosmological first-order phase transition with fluctuation-induced friction using three-dimensional lattice simulations of two coupled scalar fields. Kinetic and gradient energy in the additional field $s$ accumulates near the expanding bubble walls of $φ$ and affects their motion. The contribution from $s$ exceeds that from $φ$ at the spectral peak and has a slope similar to that of the bulk flow model over a finite interval above the peak. In the high-wave-number (UV) direction, $φ$ dominates and the total spectrum develops a broad feature. For the larger coupling, slowly contracting false vacuum remnants persist long after bubble merger.",
+   "abs_url": "https://arxiv.org/abs/2611.22266",
+   "pdf_url": "https://arxiv.org/pdf/2611.22266v1",
+   "primary_category": "gr-qc",
+   "categories": [
+    "gr-qc",
+    "astro-ph.CO",
+    "hep-ph"
+   ],
+   "published": "2026-11-17T06:13:17Z",
+   "date": "2026-11-18",
+   "inspire_url": "https://inspirehep.net/literature/3230276",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-19"
   }
  }
 }

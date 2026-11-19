@@ -55,6 +55,38 @@
    "topics": [
     "Phase transitions & GWs"
    ]
+  },
+  "2611.23015": {
+   "date": "2026-11-19",
+   "title": "A Universal Axion in a Twin-QCD Sector",
+   "abstract": "Dark matter may consist of multiple components with distinct particle-physics origins. We investigate a scenario in which a universal axion couples to both visible and twin QCD, with twin baryons providing a possible dominant dark-matter component. The presence of a second strongly interacting sector can substantially enhance the axion mass while preserving its role in resolving the strong-CP problem, provided the physical vacuum angles are appropriately aligned. For a representative uniformly rescaled twin spectrum with a confinement scale five times that of ordinary QCD, the axion mass is enhanced by approximately a factor of 25. Using lattice-informed QCD results and a two-temperature description of the early universe, we investigate the cosmological evolution and relative abundances of the dark-sector components. In a representative conditional numerical benchmark, axions account for a small percentage of the observed dark matter, while twin baryons could constitute the remainder for a suitable primordial baryon asymmetry. We also examine the implications for additional relativistic species, strong-CP alignment, and the interactions of stable twin matter. Our results provide a quantitative framework for exploring mixed axion--twin-baryon dark matter and identify the particle-physics and cosmological conditions necessary for a viable realization, including constraints from the thermal history and formation of cosmic structure.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.21737": {
+   "date": "2026-11-19",
+   "title": "Thermal Composite Dark Matter at LZ",
+   "abstract": "We show that stable fermionic resonances of Composite Higgs models provide a thermal inelastic Dark Matter interpretation of the high-energy nuclear-recoil event LZ230616. Their stability follows from an exact accidental parity of the strong sector. Annihilation channels from composite interactions link the thermal relic mass to the strong coupling, allowing masses well beyond the pure electroweak prediction. We identify three scenarios in which the neutral states form a split pseudo-Dirac pair, distinguished by the origin of the inelastic coupling to the $Z$ boson. In the pure electroweak regime, the pair consists of the neutral components of a complex Higgsino-like doublet. Its unsuppressed inelastic $Z$ coupling requires Dark Matter masses above 20 TeV. In the pure strong regime, the suppressed $Z$ coupling of neutral states with vanishing hypercharge arises from strong interactions alone, allowing for smaller splittings and TeV-scale masses. In the third regime, which interpolates between the previous two, the neutral components of multiplets with different hypercharge are mixed. This enhances their inelastic coupling, accommodating the LZ event for masses of a few TeV and splittings around 300 keV, with mixing angles of order $10^\\circ$. All three cases provide a thermal Dark Matter candidate able to explain the LZ event, consistently with the solar-capture bounds, the LZ high-energy sideband, and gamma-ray indirect searches.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.23104": {
+   "date": "2026-11-19",
+   "title": "Testing general relativity with galaxy cluster clustering from the DESI Legacy Imaging Surveys",
+   "abstract": "Deviations from general relativity on cosmological scales have been proposed as possible explanations for dark energy and dark matter. Galaxy cluster clustering offers an independent probe of gravitational growth, benefiting from theoretically motivated halo-bias constraints and complementing cluster-abundance measurements. We analyse a subsample of the largest publicly available spectroscopic galaxy cluster catalogue to date, constructed from the DESI Legacy Imaging Surveys. Following our selection cuts, the sample comprises 85 818 clusters at $0.1\\leq z \\leq0.4$ with $M_{\\rm 500c}\\gtrsim 6\\times10^{13}\\,M_\\odot$. To enable a robust clustering analysis of this sample, we develop and validate methods for constructing random catalogues and calibrating the effective halo bias. We model the redshift-space two-point correlation function monopole and quadrupole over separations of $10$--$150\\,h^{-1}\\mathrm{Mpc}$ to jointly constrain gravitational growth and Alcock--Paczynski (AP) distortions, fixing the matter power-spectrum shape to that of a fiducial cosmology. We infer the product $fσ_8$ of the linear growth rate $f$ and the matter power spectrum normalisation $σ_8$, obtaining $fσ_8=0.45\\pm0.08$ at an effective redshift of $z_{\\rm eff}=0.28$, changing to $0.52\\pm0.03$ when excluding baryon acoustic oscillation scales with tight AP priors. Both results are consistent with general relativity within the adopted fiducial cosmology.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.22725": {
+   "date": "2026-11-19",
+   "title": "Gravitational Waves Population Study for Testing Kerr Hypothesis: Are Non-Kerr Deformations Universal or Source-Dependent?",
+   "abstract": "Gravitational-wave observations of binary black hole mergers can test the Kerr black hole hypothesis in the strong-field and dynamical regime. In our previous works, we constrained the deformation parameters $α_{13}$ and $ε_3$ of the Johannsen metric using individual inspiral-dominated events from GWTC-3 and GWTC-4 and found no evidence of deviations from the Kerr solution. Here we combine 17 of these events to test whether black holes are Kerr, share a common non-zero deformation, or have deformations that vary from source to source. We first estimate the Savage--Dickey Bayes factor of each event, and we test how it depends on the prior range and on the removal of single events. We then combine the event likelihoods assuming a universal deformation, yielding a tighter joint constraint. Next, we perform a simple hierarchical analysis by assuming that the event-level deformation parameters are drawn from a population with mean $μ$ and intrinsic scatter $σ$. A universal deformation is constrained to $α_{13}=-0.01^{+0.14}_{-0.12}$ and $ε_3=0.06^{+0.59}_{-0.54}$. The means from the population are consistent with zero for both parameters, and the scatter is not resolved by the current data. Our results are consistent with the Kerr hypothesis, but they cannot yet distinguish a shared deformation from a source-dependent one.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
   }
  },
  "cared": {
@@ -130,5 +162,8 @@
     "Phase transitions & GWs"
    ]
   }
+ },
+ "checked": {
+  "2026-11-19": "2026-11-19"
  }
 }
