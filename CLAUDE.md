@@ -21,8 +21,10 @@ python -m pytest -q tests/test_fetch.py::test_normalize_id      # one test
 HF_HUB_OFFLINE=1 python -m pytest -q -m slow  # SetFit end to end with a tiny BERT built locally (needs the ml extra)
 node --check site/app.js                      # the only check for the dashboard script (CI runs it)
 
-# No network, no models: recorded sample day + hashing embedder
-python -m arxiv_radar --config tests/fixtures/config.test.yaml run --offline tests/fixtures/sample_day --dry-run --out out
+# No network, no models: recorded sample day + hashing embedder. --dry-run only redirects writes; the run still reads
+# data/ (settings.json categories would filter the sample day to 0 papers), so point data_dir at an empty dir.
+(cat tests/fixtures/config.test.yaml; echo "data_dir: /tmp/radar/data"; echo "cache_dir: /tmp/radar/cache") > /tmp/radar.yaml
+python -m arxiv_radar --config /tmp/radar.yaml run --offline tests/fixtures/sample_day --dry-run --out /tmp/radar/out
 
 python -m arxiv_radar run | refresh | citations | retrain | restat YYYY-MM-DD | export-bib FOLDER
 python -m arxiv_radar build-site --out _site && python -m http.server -d _site   # dashboard locally
@@ -52,13 +54,26 @@ Training signals, all read through `Store`:
 - **Negatives:** deleted papers, plus each recent day's `background` sample (never-shortlisted papers). The current
   day's background is excluded.
 
-The model is cached in `.cache/model` and retrained only when `classify.training_hash` changes.
+The model is cached in `.cache/model` and retrained only when `classify.training_hash` changes. The hash covers the
+sampled background negatives, so in practice it retrains on most days.
+
+SetFit trains on the CPU of a 4-CPU / 16 GB runner, so the `classifier` defaults are tuned to fit it:
+- `batch_size: 8` and `max_seq_length: 256`. Batch 16 at 512 tokens runs out of memory, and the runner dies without
+  uploading a log.
+- `training_steps` caps `max_steps` at one pass over SetFit's pairs (SetFit's `max_steps` overrides epochs, so a larger
+  value just repeats pairs).
+- A `time_budget_seconds` callback stops training early and keeps the partly trained model.
+
+Check memory and step time before raising any of these.
 
 ### Data contract between pipeline and dashboard
 - **Dashboard-owned** (edited in the browser, committed on Sync): `feedback.json`, `library.json`, `authors.json`,
   `my_papers.json`, `settings.json`.
 - **Pipeline-owned:** `days/*`, `index.json`, `author_matches.json`, `citations.json`, `seeds.json`.
-- `store.py`'s docstring documents the shapes.
+- `store.py`'s docstring documents the shapes. `feedback.json` also holds `checked` (days marked done in the Calendar
+  tab). The dashboard uses it; the pipeline ignores it.
+- Old day files can carry fields that features no longer write, such as `awards` and `tldr`. Readers ignore unknown
+  fields; don't migrate old days.
 - `settings.json` `categories` and `topics` override `config.yaml`. Go through `Store.categories()` and
   `pipeline.effective_config()`; don't read `cfg.categories` / `cfg.topics` directly in run paths. `cfg.categories`
   is still the base the dashboard editor compares against.
