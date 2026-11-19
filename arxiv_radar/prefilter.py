@@ -1,7 +1,7 @@
 """Cheap first pass: similarity of each paper to each topic's reference papers.
 
 References per topic: the topic description, its seed papers, and papers saved
-into a folder linked to that topic. Keyword hits add a small boost;
+into a folder linked to that topic (or, for a folder category, into that folder). Keyword hits add a small boost;
 negative keywords subtract a penalty.
 """
 from __future__ import annotations

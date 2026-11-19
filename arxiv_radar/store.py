@@ -4,8 +4,9 @@ Files the dashboard edits (through GitHub commits):
   feedback.json   {"deleted": {arxiv_id: {"date", "title", "abstract", "topics"}},
                    "cared":   {arxiv_id: {...same fields}},   ("I care": train on it, no folder)
                    "checked": {date: date_marked}}   (days you went through; Calendar tab)
-  library.json    {"folders": {name: {"topic": str|None, "papers": [arxiv_id]}},
+  library.json    {"folders": {name: {"topic": str|None, "classify": bool, "papers": [arxiv_id]}},
                    "papers": {arxiv_id: paper metadata}}
+                  ("classify": the folder is a classifier category, scored as its own topic every day)
   authors.json    {"authors": [{"name", "openalex_id", "added"}]}
   my_papers.json  {"papers": [{"query", "label", "added"}]}
   settings.json   {"categories": [...], "topics": [{name, description, seed_ids, keywords,
@@ -74,6 +75,11 @@ class Store:
                 if pid in papers:
                     out.append((papers[pid], info.get("topic"), folder))
         return out
+
+    def category_folders(self) -> list[str]:
+        """Library folders marked as classifier categories (each becomes a topic named after the folder)."""
+        return [n for n, info in self.read("library.json").get("folders", {}).items()
+                if info.get("classify") and n.strip()]
 
     def cared_papers(self) -> dict[str, dict]:
         return self.read("feedback.json").get("cared", {})

@@ -14,7 +14,9 @@ class Topic(BaseModel):
     seed_ids: list[str] = Field(default_factory=list)
     keywords: list[str] = Field(default_factory=list)
     negative_keywords: list[str] = Field(default_factory=list)
-
+    # Set by the pipeline for a Library folder marked as a classifier category: the folder's papers are
+    # this topic's positives. Never stored in settings.json or config.yaml.
+    folder: str | None = None
 
     @field_validator("seed_ids", mode="before")
     @classmethod

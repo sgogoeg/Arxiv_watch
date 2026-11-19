@@ -147,3 +147,26 @@ def test_dashboard_topics_override_config(cfg, sample_day):
     combined = [p["combined"] for p in doc["papers"]]
     assert combined == sorted(combined, reverse=True)
     assert Store(cfg.data_dir).read("index.json")["topics"] == ["Robotics", "LLM evaluation"]
+
+
+def test_category_folders_become_topics(cfg, sample_day, tmp_path):
+    store = Store(cfg.data_dir)
+    paper = {"id": "2511.00105", "title": "LLM judge", "abstract": "judge", "topics": []}
+    store.write("library.json", {"folders": {
+        "Judges": {"topic": None, "classify": True, "papers": ["2511.00105"]},
+        "LLM evaluation": {"topic": None, "classify": True, "papers": ["2511.00105"]},  # same name as a topic
+        "Plain": {"topic": None, "papers": ["2511.00105"]},
+    }, "papers": {"2511.00105": paper}})
+    assert store.category_folders() == ["Judges", "LLM evaluation"]
+    eff = pipeline.effective_config(cfg, store)
+    assert eff.topic_names == ["Reinforcement learning", "LLM evaluation", "Judges"]
+    assert [t.folder for t in eff.topics] == [None, "LLM evaluation", "Judges"]
+    doc = pipeline.run(cfg, offline=str(sample_day))
+    assert doc["topics"] == ["Reinforcement learning", "LLM evaluation", "Judges"]
+    assert doc["score_source"]["Judges"] == "similarity"
+    assert all("Judges" in p["scores"] for p in doc["papers"])
+    assert Store(cfg.data_dir).read("index.json")["topics"] == doc["topics"]
+    # the dashboard's topic editor only sees the user's own topics
+    conf = json.loads((pipeline.build_site(cfg, site_src="site", out=str(tmp_path / "_site")) / "config.json").read_text())
+    assert [t["name"] for t in conf["topic_defs"]] == ["Reinforcement learning", "LLM evaluation"]
+    assert "folder" not in conf["topic_defs"][0] and "Judges" in conf["topics"]

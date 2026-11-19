@@ -173,6 +173,7 @@ details.abs p { margin: 6px 0 0; font-size: 14px; }
 }
 .folder:hover { background: var(--surface-2); }
 .folder.on { background: var(--accent-soft); color: var(--accent); }
+.cat-badge { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; padding: 1px 5px; border-radius: 6px; border: 1px solid currentColor; color: var(--accent); margin-left: 4px; vertical-align: 1px; }
 .empty { text-align: center; color: var(--muted); padding: 32px 16px; }
 .pending-note { font-size: 12px; color: var(--warn); }
 

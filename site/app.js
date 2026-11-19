@@ -18,7 +18,7 @@ const OP_FILE = {
   delete: "feedback.json", undelete: "feedback.json", care: "feedback.json", uncare: "feedback.json",
   day_check: "feedback.json", day_uncheck: "feedback.json",
   save: "library.json", unsave: "library.json", folder_create: "library.json",
-  folder_rename: "library.json", folder_delete: "library.json", folder_topic: "library.json",
+  folder_rename: "library.json", folder_delete: "library.json", folder_topic: "library.json", folder_classify: "library.json",
   author_add: "authors.json", author_remove: "authors.json",
   mypaper_add: "my_papers.json", mypaper_remove: "my_papers.json",
   categories_set: "settings.json", topics_set: "settings.json",
@@ -148,6 +148,9 @@ function applyOp(f, op) {
       break;
     case "folder_delete": delete lib.folders[op.name]; cleanup(); break;
     case "folder_topic": if (lib.folders[op.name]) lib.folders[op.name].topic = op.topic || null; break;
+    case "folder_classify":
+      if (lib.folders[op.name]) { if (op.on) lib.folders[op.name].classify = true; else delete lib.folders[op.name].classify; }
+      break;
     case "author_add": {
       const list = f["authors.json"].authors;
       op.names.forEach((n) => { if (!list.some((a) => a.name.toLowerCase() === n.toLowerCase())) list.push({ name: n, openalex_id: null, added: op.date }); });
@@ -223,6 +226,12 @@ function push(op) {
     if (sameSet(op.categories, base)) {
       ls.set("pending", S.pending); recompute(); render(); return;
     }
+  }
+  if (op.type === "folder_classify") {  // only the last toggle per folder counts; toggling back cancels it
+    S.pending = S.pending.filter((o) => !(o.type === "folder_classify" && o.name === op.name));
+    const before = normalizeFiles(clone(S.base));
+    S.pending.forEach((o) => applyOp(before, o));
+    if (!!before["library.json"].folders[op.name]?.classify === !!op.on) { ls.set("pending", S.pending); recompute(); render(); return; }
   }
   if (cancelsLast(op)) S.pending.pop();
   else S.pending.push(op);
@@ -330,7 +339,7 @@ function summarizeOps(ops) {
   const n = {};
   ops.forEach((o) => { n[o.type] = (n[o.type] || 0) + 1; });
   const label = { delete: "deleted", undelete: "restored", care: "marked I care", uncare: "unmarked I care", save: "saved", unsave: "removed from folder", folder_create: "new folder",
-    folder_rename: "renamed folder", folder_delete: "deleted folder", folder_topic: "folder topic", author_add: "author add",
+    folder_rename: "renamed folder", folder_delete: "deleted folder", folder_topic: "folder topic", folder_classify: "classifier category", author_add: "author add",
     author_remove: "author removed", mypaper_add: "my paper added", mypaper_remove: "my paper removed", categories_set: "categories changed", topics_set: "topics changed", day_check: "day checked", day_uncheck: "day unchecked" };
   return Object.entries(n).map(([k, v]) => `${v} ${label[k] || k}`).join(", ");
 }
@@ -750,11 +759,12 @@ function renderLibrary(v) {
   const fo = S.folder ? lib.folders[S.folder] : null;
   const papers = fo ? fo.papers.map((id) => lib.papers[id]).filter(Boolean) : [];
   cardPapers = Object.fromEntries(papers.map((p) => [p.id, p]));
-  const topics = S.index.topics || [];
+  // Folder categories are topics of their own; a folder can't be linked to one.
+  const topics = (S.index.topics || []).filter((t) => !lib.folders[t]?.classify || fo?.topic === t);
   v.innerHTML = `<div class="layout-lib">
     <aside class="panel">
       <h2>Folders</h2>
-      <div class="folders">${names.map((n) => `<button class="folder ${n === S.folder ? "on" : ""}" data-folder="${esc(n)}"><span>${esc(n)}</span><span class="muted">${lib.folders[n].papers.length}</span></button>`).join("") || `<span class="muted small">No folders yet.</span>`}</div>
+      <div class="folders">${names.map((n) => `<button class="folder ${n === S.folder ? "on" : ""}" data-folder="${esc(n)}"><span>${esc(n)}${lib.folders[n].classify ? ` <span class="cat-badge" title="Classifier category">category</span>` : ""}</span><span class="muted">${lib.folders[n].papers.length}</span></button>`).join("") || `<span class="muted small">No folders yet.</span>`}</div>
       <form id="new-folder" class="row gap" style="margin-top:10px">
         <input id="folder-name" placeholder="New folder" style="flex:1">
         <button class="btn small">Add</button>
@@ -764,6 +774,8 @@ function renderLibrary(v) {
       ${fo ? `<div class="panel">
         <div class="toolbar" style="margin:0">
           <h2 style="margin:0;flex:1 1 160px">${esc(S.folder)}</h2>
+          <label class="check" title="Score every day's papers against this folder, as a topic of its own">
+            <input type="checkbox" id="folder-classify" ${fo.classify ? "checked" : ""}> Classifier category</label>
           <label class="check">Trains topic
             <select id="folder-topic"><option value="">(the paper's own topics)</option>${topics.map((t) => `<option ${fo.topic === t ? "selected" : ""}>${esc(t)}</option>`).join("")}</select>
           </label>
@@ -772,7 +784,9 @@ function renderLibrary(v) {
           <button class="btn small" id="json">JSON</button>
           <button class="btn small danger" id="del-folder">Delete folder</button>
         </div>
-        <p class="muted small" style="margin:8px 0 0">Papers saved here count as positive examples for the classifier.</p>
+        <p class="muted small" style="margin:8px 0 0">${fo.classify
+          ? `Classifier category: from the next run, Daily scores every paper against “${esc(S.folder)}” and adds it as a filter. Its papers are the examples; with ${S.cfg.min_positives || 3} or more the model is trained on them, before that the score is a similarity rank within the day.`
+          : "Papers saved here count as positive examples for the classifier. Mark it as a classifier category to get a Daily score and filter for this folder."}</p>
       </div>
       <div class="cards">${papers.map((p) => card(p, { inFolder: S.folder, date: p.saved ? `saved ${p.saved}` : null })).join("") || `<div class="empty">Save papers here from the Daily or Authors tabs.</div>`}</div>`
       : `<div class="empty">Create a folder, or save a paper from the Daily tab.</div>`}
@@ -787,6 +801,7 @@ function renderLibrary(v) {
     render();
   };
   if (fo) {
+    $("#folder-classify").onchange = (e) => push({ type: "folder_classify", name: S.folder, on: e.target.checked });
     $("#folder-topic").onchange = (e) => push({ type: "folder_topic", name: S.folder, topic: e.target.value || null });
     $("#rename").onclick = () => {
       const to = prompt("Rename folder", S.folder);
