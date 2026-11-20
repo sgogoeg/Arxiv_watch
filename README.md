@@ -20,7 +20,7 @@ LaTeX in titles and abstracts is rendered with KaTeX.
 | **Stats** | Analytics for a day. *General*: everything fetched (categories, title terms, active authors, authors per paper, similarity to your topics). *Personalized*: what passed your filters (per-topic counts, score distribution, pass rate by category, top papers). |
 | **Authors** | Follow one name or paste a list. Their new papers are always shown in Daily; the last 30 days are backfilled when you add someone. |
 | **My papers** | Add your papers by arXiv ID, DOI or title. Shows citation counts over time, new citations since your last visit, and the citing papers. |
-| **Library** | Your folders. Rename, delete, link a folder to a topic, export BibTeX or JSON. |
+| **Library** | Your folders. Rename, delete, link a folder to a topic, mark it as a **classifier category**, export BibTeX or JSON. |
 
 ## How ranking works
 
@@ -37,6 +37,11 @@ RSS (today's IDs) → arXiv API (metadata, ≥3 s between requests)
 * **Training data.** Positives are seed papers and saved papers. A saved paper counts for its folder's
   topic if the folder is linked to one, otherwise for the topics it was tagged with when you saved it.
   Negatives are deleted papers plus a random sample of papers that were never shortlisted.
+* **Classifier categories.** Tick *Classifier category* on a Library folder to make it a topic of its own, named
+  after the folder. From the next run every paper gets a score for it, the shortlist includes papers close to it,
+  and Daily shows it as a filter chip. The folder's papers are its examples (cold start applies until it has
+  `min_positives_per_topic` of them). A folder named like an existing topic adds its papers to that topic.
+  Unticking it removes the topic from later days.
 * The model only retrains when that data changes. Models are kept in the Actions cache, not in git.
 
 ## Setup

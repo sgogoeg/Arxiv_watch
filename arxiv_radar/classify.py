@@ -3,7 +3,8 @@
 Training data
   positives: topic seed papers, and papers saved into folders. A saved paper is a positive
              for its folder's topic if the folder has one, otherwise for the topics it was
-             tagged with when it was saved.
+             tagged with when it was saved. A folder marked as a classifier category is a
+             topic of its own, and its papers are positives for it as well.
   negatives: deleted papers, plus a random sample of papers that were never shortlisted.
 
 A topic with fewer than `min_positives_per_topic` positives is not trained; it keeps
@@ -39,6 +40,10 @@ def build_training_set(topics, seeds: dict[str, dict], saved, deleted: dict[str,
                        background: list[dict], n_random: int, rng: random.Random | None = None) -> list[Example]:
     rng = rng or random.Random(0)
     names = {t.name for t in topics}
+    by_folder: dict[str, set[str]] = {}
+    for t in topics:
+        if getattr(t, "folder", None):
+            by_folder.setdefault(t.folder, set()).add(t.name)
     ex: dict[str, Example] = {}
 
     def add(key: str, paper: dict, labels: set[str]):
@@ -54,11 +59,12 @@ def build_training_set(topics, seeds: dict[str, dict], saved, deleted: dict[str,
         for sid in t.seed_ids:
             if sid in seeds:
                 add(sid, seeds[sid], {t.name})
-    for paper, folder_topic, _folder in saved:
+    for paper, folder_topic, folder in saved:
         if folder_topic and folder_topic in names:
             labels = {folder_topic}
         else:
             labels = {x for x in paper.get("topics", []) if x in names}
+        labels |= by_folder.get(folder, set())
         if labels:
             add(paper["id"], paper, labels)
     for pid, paper in deleted.items():

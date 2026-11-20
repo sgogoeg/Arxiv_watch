@@ -14,7 +14,7 @@ from . import inspire, prefilter, stats
 from .authors import AuthorMatcher, backfill, update_matches
 from .citations import update_citations
 from .classify import build_training_set, classify
-from .config import Config
+from .config import Config, Topic
 from .embed import EmbeddingCache, make_embedder, paper_text
 from .fetch import ArxivClient, fetch_metadata, fetch_today, filter_by_categories, load_offline, parse_api
 from .store import DEFAULTS, Store
@@ -59,8 +59,9 @@ def topic_refs(cfg: Config, seeds: dict, saved, cache: EmbeddingCache, embedder)
             if sid in seeds:
                 items.append((sid, paper_text(seeds[sid])))
                 ids.append(sid)
-        for paper, folder_topic, _ in saved:
-            linked = folder_topic == t.name or (not folder_topic and t.name in paper.get("topics", []))
+        for paper, folder_topic, folder in saved:
+            linked = (folder_topic == t.name or (not folder_topic and t.name in paper.get("topics", []))
+                      or (t.folder is not None and folder == t.folder))
             if linked and paper["id"] not in ids:
                 items.append((paper["id"], paper_text(paper)))
                 ids.append(paper["id"])
@@ -91,8 +92,16 @@ def update_index(store: Store, writer: Store, cfg: Config, day: str, count: int,
 
 
 def effective_config(cfg: Config, store: Store) -> Config:
-    """config.yaml with the dashboard's topic list (data/settings.json) applied."""
-    return cfg.model_copy(update={"topics": store.topics(cfg.topics)})
+    """config.yaml with the dashboard's topic list (data/settings.json) applied, plus one topic per Library
+    folder marked as a classifier category. A folder named like an existing topic adds its papers to it."""
+    topics = list(store.topics(cfg.topics))
+    for name in store.category_folders():
+        k = next((i for i, t in enumerate(topics) if t.name == name), None)
+        if k is None:
+            topics.append(Topic(name=name, folder=name))
+        else:
+            topics[k] = topics[k].model_copy(update={"folder": name})
+    return cfg.model_copy(update={"topics": topics})
 
 
 def combined_score(scores: dict[str, float]) -> float:
@@ -310,9 +319,11 @@ def build_site(cfg: Config, site_src: str = "site", out: str = "_site") -> Path:
         "data_dir": cfg.data_dir,
         "categories": cfg.categories,
         "topics": effective_config(cfg, Store(cfg.data_dir)).topic_names,
-        "topic_defs": [t.model_dump() for t in effective_config(cfg, Store(cfg.data_dir)).topics],
-        "config_topic_defs": [t.model_dump() for t in cfg.topics],
+        # The topic editor works on the user's own topics; folder categories are edited in the Library.
+        "topic_defs": [t.model_dump(exclude={"folder"}) for t in Store(cfg.data_dir).topics(cfg.topics)],
+        "config_topic_defs": [t.model_dump(exclude={"folder"}) for t in cfg.topics],
         "threshold": cfg.score_threshold,
+        "min_positives": cfg.classifier.min_positives_per_topic,
     }, indent=1))
     (out_p / ".nojekyll").write_text("")
     # Version the script and stylesheet URLs so browsers fetch new copies after each deploy.

@@ -57,6 +57,17 @@ def test_training_set_labels():
     assert training_hash(ex, ["A"], "m") == training_hash(list(reversed(ex)), ["A"], "m")
 
 
+def test_category_folder_papers_are_positives():
+    topics = [Topic(name="A"), Topic(name="Misc", folder="misc")]
+    saved = [
+        ({"id": "p1", "title": "t1", "abstract": "a", "topics": ["A"]}, None, "misc"),
+        ({"id": "p2", "title": "t2", "abstract": "a", "topics": []}, None, "misc"),
+        ({"id": "p3", "title": "t3", "abstract": "a", "topics": []}, None, "other"),
+    ]
+    by = {e.key: e.labels for e in build_training_set(topics, {}, saved, {}, [], 0)}
+    assert by == {"p1": {"A", "Misc"}, "p2": {"Misc"}}
+
+
 def test_classify_falls_back_without_labels(cfg):
     fb = np.array([[0.2, 0.8]], dtype=np.float32)
     scores, sources = classify(cfg, cfg.topics, [], ["text"], fb, "/nonexistent")

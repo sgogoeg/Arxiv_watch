@@ -51,6 +51,10 @@ There is no linter configured.
 
 Training signals, all read through `Store`:
 - **Positives:** topic `seed_ids`, papers saved in Library folders, and "I care" papers (`Store.positive_papers`).
+- **Folder categories:** a folder with `classify: true` in `library.json` becomes a topic named after it.
+  `pipeline.effective_config` appends it as a `Topic` with `folder` set (or tags an existing topic of that name), and
+  the folder's papers are its positives in `topic_refs` and `build_training_set`. `build_site`'s `topic_defs` leaves
+  them out, so the Settings topic editor never writes them to `settings.json`.
 - **Negatives:** deleted papers, plus each recent day's `background` sample (never-shortlisted papers). The current
   day's background is excluded.
 
