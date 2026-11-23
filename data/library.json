@@ -53,6 +53,7 @@
   "GW": {
    "topic": null,
    "papers": [
+    "2611.26681",
     "2611.07877",
     "2611.05504",
     "2611.07416",
@@ -976,6 +977,29 @@
     "Phase transitions & GWs"
    ],
    "saved": "2026-11-19"
+  },
+  "2611.26681": {
+   "id": "2611.26681",
+   "title": "Lost in the Signal Model: Confusion Between Deterministic and Stochastic Gravitational Wave Signals in Pulsar Timing Array Data",
+   "authors": [
+    "Caitlin A. Witt",
+    "Nihan S. Pol"
+   ],
+   "abstract": "With growing evidence for the presence of a gravitational wave background (GWB) in pulsar timing array (PTA) data, it is imperative to understand how this signal will act as a foreground for other GW signals, particularly those from individual supermassive black hole binaries (SMBHBs), which are predicted to be detected in the next decade. For PTAs, since these two types of signals are long-timescale persistent signals, a signal from an SMBHB system may already be present in the latest PTA datasets. In this work, we analyze how the presence of this signal could affect our detection statistics for the GWB, and how the presence of the GWB can affect our search for the SMBHB system. We find that individual SMBHB signals can significantly skew the recovery of the GWB amplitude and spectral index. However, when the SMBHB signals are recovered consistently, we are again able to recover the GWB power-law parameters, highlighting the importance of joint searches in future PTA searches for GWs. We also explore the rate of improvement of parameter estimation uncertainty, giving insight to the types of signals most likely to be identified well enough to enable multimessenger analyses.",
+   "abs_url": "https://arxiv.org/abs/2611.26681",
+   "pdf_url": "https://arxiv.org/pdf/2611.26681v1",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE",
+    "astro-ph.GA"
+   ],
+   "published": "2026-11-19T19:00:01Z",
+   "date": "2026-11-23",
+   "inspire_url": "https://inspirehep.net/literature/3231719",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-23"
   }
  }
 }
