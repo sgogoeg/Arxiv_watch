@@ -3,72 +3,86 @@
   {
    "date": "2026-11-25",
    "count": 150,
-   "fetched": 234
+   "fetched": 234,
+   "selected": 30
   },
   {
    "date": "2026-11-24",
    "count": 150,
-   "fetched": 357
+   "fetched": 357,
+   "selected": 42
   },
   {
    "date": "2026-11-23",
    "count": 150,
-   "fetched": 159
+   "fetched": 159,
+   "selected": 7
   },
   {
    "date": "2026-11-20",
    "count": 150,
-   "fetched": 232
+   "fetched": 232,
+   "selected": 27
   },
   {
    "date": "2026-11-19",
    "count": 150,
-   "fetched": 193
+   "fetched": 193,
+   "selected": 33
   },
   {
    "date": "2026-11-18",
    "count": 150,
-   "fetched": 225
+   "fetched": 225,
+   "selected": 31
   },
   {
    "date": "2026-11-17",
    "count": 150,
-   "fetched": 341
+   "fetched": 341,
+   "selected": 25
   },
   {
    "date": "2026-11-16",
    "count": 150,
-   "fetched": 195
+   "fetched": 195,
+   "selected": 24
   },
   {
    "date": "2026-11-13",
    "count": 150,
-   "fetched": 447
+   "fetched": 447,
+   "selected": 83
   },
   {
    "date": "2026-11-11",
    "count": 150,
-   "fetched": 203
+   "fetched": 203,
+   "selected": 37
   },
   {
    "date": "2026-11-10",
    "count": 150,
-   "fetched": 324
+   "fetched": 324,
+   "selected": 46
   },
   {
    "date": "2026-11-09",
    "count": 150,
-   "fetched": 183
+   "fetched": 183,
+   "selected": 15
   },
   {
    "date": "2026-11-06",
    "count": 150,
-   "fetched": 207
+   "fetched": 207,
+   "selected": 9
   },
   {
    "date": "2026-11-05",
    "count": 150,
-   "fetched": 156
+   "fetched": 156,
+   "selected": 78
   }
  ],
  "topics": [
