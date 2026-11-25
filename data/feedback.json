@@ -161,6 +161,23 @@
    "topics": [
     "Phase transitions & GWs"
    ]
+  },
+  "2611.32800": {
+   "date": "2026-11-25",
+   "title": "Toward Solving the Galactic Foreground Problem in Gravitational-Wave Astronomy with Machine Learning",
+   "abstract": "Space-borne gravitational-wave detectors will see tens of millions of Galactic binaries. Resolved, they would form a census of the Galaxy's ultracompact binaries unhindered by dust; unresolved, they are the dominant noise up to a few millihertz for massive black-hole binaries, extreme-mass-ratio inspirals and backgrounds from the early Universe. Separating the two requires the number of binaries, which is ill-defined because binaries exist at every amplitude. We make it an observable by defining a source as a binary above a signal-to-noise threshold. Neural flows count the binaries to within one in 99% of 1 microhertz intervals over 0.5-10 mHz, and nested sampling resolves them, even pairs closer than one frequency bin. The data themselves set a limit: a source is resolvable only if its signal pays for its own description, about 20 nats, which biases even ideal trans-dimensional samplers. Like the diffraction limit in imaging, this Bayesian confusion limit is set by the data rather than by the method, and it governs any superposition of weak sources, from radio surveys and pulsar timing arrays to super-resolution microscopy. For future space-borne detectors, the method turns the Galactic foreground into a definite, calibrated count of binaries with an analytic selection function, the basis for global fits and for tests of population models.",
+   "topics": [
+    "GW"
+   ]
+  },
+  "2611.32563": {
+   "date": "2026-11-25",
+   "title": "Analytic response functions of space-based gravitational-wave detectors to ultralight scalar-field dark matter under multiple types of TDI combinations",
+   "abstract": "Ultralight scalar fields are important candidates for dark matter. As coherently oscillating fields, they can leave characteristic signatures in space-based gravitational-wave detectors through their coupling to test masses. In this paper, we derive analytic expressions for the response functions of space-based gravitational-wave detectors to ultralight scalar-field dark matter under multiple types of time-delay interferometry (TDI) combinations. Starting from the coupling action between the scalar field and a test mass, we obtain the additional displacement of the test mass and the single-link Doppler response. We then give the general analytic form of the response function for an arbitrary TDI combination and compare the analytic and Monte Carlo numerical results for the optimal combinations A, E, and T. Finally, we analyze the responses of multiple types of TDI combinations, classify them into ordinary and ζ types according to their low-frequency behavior, and give the low-frequency response expressions of the individual combinations. The results can be used to evaluate the sensitivity of space-based gravitational-wave missions such as LISA, Taiji, and TianQin to the mass and coupling parameters of ultralight scalar-field dark matter.",
+   "topics": [
+    "Phase transitions & GWs",
+    "GW"
+   ]
   }
  },
  "checked": {
@@ -176,6 +193,7 @@
   "2026-11-16": "2026-11-19",
   "2026-11-20": "2026-11-23",
   "2026-11-23": "2026-11-23",
-  "2026-11-24": "2026-11-25"
+  "2026-11-24": "2026-11-25",
+  "2026-11-25": "2026-11-25"
  }
 }

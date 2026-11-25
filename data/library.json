@@ -31,6 +31,8 @@
   "Dark Matter": {
    "topic": null,
    "papers": [
+    "2611.32563",
+    "2611.31282",
     "2611.28217",
     "2611.07136",
     "2611.08680",
@@ -58,6 +60,7 @@
   "GW": {
    "topic": null,
    "papers": [
+    "2611.32563",
     "2611.26681",
     "2611.07877",
     "2611.05504",
@@ -1072,6 +1075,56 @@
    "date": "2026-11-24",
    "topics": [
     "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-25"
+  },
+  "2611.31282": {
+   "id": "2611.31282",
+   "title": "CosmoMap: Predicting Hot Gas Temperature and Density from Dark Matter with a Conditioned 3D U-Net",
+   "authors": [
+    "Aman Bhutani",
+    "Maggie Lieu"
+   ],
+   "abstract": "Mock X-ray observations of hot gas in galaxy groups, clusters and the cosmic web require its temperature and density over large volumes and many cosmologies, for which hydrodynamical simulations are expensive. We present CosmoMap, a 3D U-Net FiLM-conditioned on cosmological and feedback parameters that predicts gas temperature $T$ and electron density $n_{\\rm e}$ from dark matter density and velocity. On the CAMELS IllustrisTNG Latin hypercube, CosmoMap reaches $R^2 = 0.765$ for $\\log T$ and $0.934$ for $\\log n_{\\rm e}$ at $z=0$, reducing the error of gradient-boosted trees by 22-23 per cent. Temperature is predicted best in the densest regions, mostly galaxy- and group-scale haloes ($R^2 = 0.88$), but the electron density of the brightest X-ray-emitting gas is biased low by $0.12$ dex. One model outperforms the baselines at every redshift up to $z=2$, and using inputs from gravity-only simulations costs little accuracy. The predictions reproduce scaling relations, surface brightness profile shapes and most of the cosmological information in the gas. They produce box-integrated luminosities with a median bias of $-0.16$ dex, sensitive at the $0.2$ dex level to the inference scheme unless batch normalisation is used. Training for per-voxel uncertainties with a heteroscedastic likelihood costs accuracy and lowers luminosities by a further $0.1$-$0.3$ dex; the composite-loss variant, CosmoMap-$σ$, provides uncertainties that are calibrated at 68 per cent after rescaling by predicted emissivity, except for the density of the brightest gas. Compact structures are smoothed: mock X-ray lightcones recover 89 per cent of the brightest tenth of sources but 28 per cent of all sources.",
+   "abs_url": "https://arxiv.org/abs/2611.31282",
+   "pdf_url": "https://arxiv.org/pdf/2611.31282v1",
+   "primary_category": "astro-ph.CO",
+   "categories": [
+    "astro-ph.CO"
+   ],
+   "published": "2026-11-19T15:55:20Z",
+   "date": "2026-11-25",
+   "inspire_url": "https://inspirehep.net/literature/3233418",
+   "topics": [
+    "Phase transitions & GWs",
+    "Dark Matter"
+   ],
+   "saved": "2026-11-25"
+  },
+  "2611.32563": {
+   "id": "2611.32563",
+   "title": "Analytic response functions of space-based gravitational-wave detectors to ultralight scalar-field dark matter under multiple types of TDI combinations",
+   "authors": [
+    "Wenqiu Tang",
+    "Pan-Pan Wang",
+    "Yuezhe Chen",
+    "Rui Luo",
+    "Cheng-Gang Shao"
+   ],
+   "abstract": "Ultralight scalar fields are important candidates for dark matter. As coherently oscillating fields, they can leave characteristic signatures in space-based gravitational-wave detectors through their coupling to test masses. In this paper, we derive analytic expressions for the response functions of space-based gravitational-wave detectors to ultralight scalar-field dark matter under multiple types of time-delay interferometry (TDI) combinations. Starting from the coupling action between the scalar field and a test mass, we obtain the additional displacement of the test mass and the single-link Doppler response. We then give the general analytic form of the response function for an arbitrary TDI combination and compare the analytic and Monte Carlo numerical results for the optimal combinations A, E, and T. Finally, we analyze the responses of multiple types of TDI combinations, classify them into ordinary and ζ types according to their low-frequency behavior, and give the low-frequency response expressions of the individual combinations. The results can be used to evaluate the sensitivity of space-based gravitational-wave missions such as LISA, Taiji, and TianQin to the mass and coupling parameters of ultralight scalar-field dark matter.",
+   "abs_url": "https://arxiv.org/abs/2611.32563",
+   "pdf_url": "https://arxiv.org/pdf/2611.32563v1",
+   "primary_category": "gr-qc",
+   "categories": [
+    "gr-qc",
+    "astro-ph.IM"
+   ],
+   "published": "2026-11-24T13:10:40Z",
+   "date": "2026-11-25",
+   "inspire_url": "https://inspirehep.net/literature/3233553",
+   "topics": [
+    "Phase transitions & GWs",
+    "GW"
    ],
    "saved": "2026-11-25"
   }
