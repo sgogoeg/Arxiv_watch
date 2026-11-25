@@ -377,49 +377,88 @@ function followedSet() {
   return new Set((S.view["authors.json"]?.authors || []).map((a) => lastName(a.name)));
 }
 
+// A paper counts as selected when it reached a topic's threshold or has a followed author.
+// Old day files without `topics` fall back to the combined score.
+function isSelected(p) {
+  if ((p.followed_authors || []).length) return true;
+  if (p.topics) return p.topics.length > 0;
+  return combinedScore(p) >= (S.index.threshold ?? 0.5);
+}
+
+// Score as an instrument reads it: ".92", "1.00".
+const scoreText = (v) => (v >= 1 ? "1.00" : v.toFixed(2).replace(/^0/, ""));
+
+// Author list: the first few names plus any followed author, so a long collaboration stays one line.
+function authorLine(p) {
+  const all = p.authors || [];
+  const followed = new Set((p.followed_authors || []).map(lastName));
+  const SHOW = 4;
+  const parts = [];
+  let skipped = 0, gap = false;
+  all.forEach((a, i) => {
+    const isF = followed.has(lastName(a));
+    if (i < SHOW || isF) {
+      if (gap) { parts.push("…"); gap = false; }
+      parts.push(isF ? `<b>${esc(a)}</b>` : esc(a));
+    } else { skipped++; gap = true; }
+  });
+  return parts.join(", ").replace(/, …,/g, " …") + (skipped ? ` <span class="more">+${skipped} more</span>` : "");
+}
+
+// opts: date (shown in the meta line), inFolder (Library), topic (the Daily chip in use, for the gauge)
 function card(p, opts = {}) {
   const deleted = !!S.view["feedback.json"].deleted[p.id];
   const cared = !!S.view["feedback.json"].cared[p.id];
   const folders = Object.entries(S.view["library.json"].folders).filter(([, f]) => f.papers.includes(p.id)).map(([k]) => k);
-  const followedNames = new Set((p.followed_authors || []).map(lastName));
-  const authors = (p.authors || []).slice(0, 12).map((a) => (followedNames.has(lastName(a)) ? `<b>${esc(a)}</b>` : esc(a))).join(", ")
-    + ((p.authors || []).length > 12 ? `, … (+${p.authors.length - 12})` : "");
   const topics = Object.keys(p.scores || {});
   const thr = S.index.threshold ?? 0.5;
-  const combinedPill = topics.length > 1
-    ? `<span class="score combined" title="Combined: chance it matches at least one topic">Combined <b>${combinedScore(p).toFixed(2)}</b></span>` : "";
-  const scores = p.scores ? combinedPill + topics.map((t) => {
-    const v = p.scores[t] ?? 0;
-    return `<span class="score ${v >= thr ? "hit" : ""}" title="${esc(t)}: ${v.toFixed(2)}">${esc(t)} <span class="bar"><i style="width:${Math.round(v * 100)}%"></i></span></span>`;
-  }).join("") : "";
+  // Gauge: the selected topic's score, or the combined score; no gauge for papers without scores (Library).
+  const topic = opts.topic && opts.topic !== "all" ? opts.topic : null;
+  const v = topic ? (p.scores?.[topic] ?? 0) : topics.length ? combinedScore(p) : null;
+  const hit = v != null && (topic ? v >= thr : topics.some((t) => p.scores[t] >= thr));
+  const gaugeTitle = topic ? `${topic}: ${v?.toFixed(2)}` : topics.length > 1 ? `Combined: ${v?.toFixed(2)}, the chance it matches at least one topic` : `${topics[0] || "Score"}: ${v?.toFixed(2)}`;
+  const gauge = v == null ? "" : `<div class="gauge-cell ${hit ? "hit" : ""}" title="${esc(gaugeTitle)} (threshold ${thr})">
+      <span class="gauge ${hit ? "hit" : ""}" style="--v:${Math.min(Math.max(v, 0), 1).toFixed(3)};--t:${thr}" aria-hidden="true"></span>
+      <span class="gauge-n"><span class="sr-only">Score </span>${scoreText(v)}</span></div>`;
+  const readouts = topics.length > 1 ? `<div class="readouts">${topics.map((t) => {
+    const s = p.scores[t] ?? 0;
+    return `<span class="${s >= thr ? "hit" : ""}">${esc(t)}<b>${scoreText(s)}</b></span>`;
+  }).join("")}</div>` : "";
   const why = [];
   if (p.why) {
-    Object.entries(p.why.keywords || {}).forEach(([t, k]) => why.push(`keywords (${esc(t)}): ${k.map(esc).join(", ")}`));
-    if (p.why.closest && p.why.closest.title) why.push(`similar to <a href="https://arxiv.org/abs/${esc(p.why.closest.id)}" target="_blank" rel="noopener">${esc(p.why.closest.title)}</a>`);
+    Object.entries(p.why.keywords || {}).forEach(([t, k]) => why.push(`Keywords (${esc(t)}): ${k.map(esc).join(", ")}`));
+    if (p.why.closest && p.why.closest.title) why.push(`Similar to <a class="tex" href="https://arxiv.org/abs/${esc(p.why.closest.id)}" target="_blank" rel="noopener">${esc(p.why.closest.title)}</a>`);
   }
-  return `<article class="card ${deleted ? "deleted" : ""}" data-id="${esc(p.id)}">
-    <h3><a class="tex" href="${esc(paperUrl(p))}" target="_blank" rel="noopener" title="${p.inspire_url ? "Open on INSPIRE" : "Open on arXiv"}">${esc(p.title)}</a></h3>
-    <div class="authors">${authors}</div>
-    <div class="meta">
-      <span>${esc(p.id)}</span>
-      ${p.primary_category ? `<span class="pill">${esc(p.primary_category)}</span>` : ""}
-      ${p.announce_type === "cross" ? `<span class="pill">cross-list</span>` : ""}
-      ${(p.followed_authors || []).length ? `<span class="pill follow">followed: ${p.followed_authors.map(esc).join(", ")}</span>` : ""}
-      ${cared ? `<span class="pill cared">★ I care</span>` : ""}
-      ${folders.map((f) => `<span class="pill saved">▸ ${esc(f)}</span>`).join("")}
-      ${opts.date ? `<span>${esc(opts.date)}</span>` : ""}
-    </div>
-    ${scores ? `<div class="scores">${scores}</div>` : ""}
-    ${why.length ? `<div class="why">${why.join(" · ")}</div>` : ""}
-    ${p.abstract ? `<details class="abs"><summary>Abstract</summary><p class="tex">${esc(p.abstract)}</p></details>` : ""}
-    <div class="actions">
-      <span class="save-menu"><button class="btn small" data-act="save-open">+ Save</button></span>
-      <button class="btn small ${cared ? "on" : ""}" data-act="${cared ? "uncare" : "care"}" aria-pressed="${cared}"
-        title="Train the classifier on this paper without adding it to a folder">${cared ? "★" : "☆"} I care</button>
-      ${opts.inFolder ? `<button class="btn small" data-act="unsave" data-folder="${esc(opts.inFolder)}">Remove from folder</button>`
-        : deleted ? `<button class="btn small" data-act="undelete">Restore</button>` : `<button class="btn small" data-act="delete">× Delete</button>`}
-      ${p.inspire_url ? `<a class="btn small" href="${esc(arxivUrl(p))}" target="_blank" rel="noopener">arXiv</a>` : ""}
-      <a class="btn small" href="${esc(p.pdf_url || `https://arxiv.org/pdf/${p.id}`)}" target="_blank" rel="noopener">PDF</a>
+  const followedTag = (p.followed_authors || []).length ? `<span class="tag follow">Followed: ${p.followed_authors.map(esc).join(", ")}</span>` : "";
+  return `<article class="card ${deleted ? "deleted" : ""} ${gauge ? "" : "no-gauge"}" data-id="${esc(p.id)}" tabindex="-1">
+    ${gauge || "<div></div>"}
+    <div class="body">
+      <h3><a class="tex" href="${esc(paperUrl(p))}" target="_blank" rel="noopener" title="${p.inspire_url ? "Open on INSPIRE" : "Open on arXiv"}">${esc(p.title)}</a></h3>
+      <div class="authors">${authorLine(p)}</div>
+      <div class="meta">
+        <span class="id">${esc(p.id)}</span>
+        ${p.primary_category ? `<span class="tag">${esc(p.primary_category)}</span>` : ""}
+        ${p.announce_type === "cross" ? `<span class="tag">cross-list</span>` : ""}
+        ${followedTag}
+        ${cared ? `<span class="tag cared">★ I care</span>` : ""}
+        ${folders.map((f) => `<span class="tag saved" title="Saved in ${esc(f)}">▸ ${esc(f)}</span>`).join("")}
+        ${opts.date ? `<span>${esc(opts.date)}</span>` : ""}
+      </div>
+      ${readouts}
+      ${why.length ? `<div class="why">${why.join("; ")}</div>` : ""}
+      ${p.abstract ? `<details class="abs"><summary>Abstract</summary><p class="tex">${esc(p.abstract)}</p></details>` : ""}
+      <div class="actions">
+        <button class="act ${cared ? "on" : ""}" data-act="${cared ? "uncare" : "care"}" aria-pressed="${cared}"
+          title="Train the classifier on this paper without adding it to a folder"><span class="glyph" aria-hidden="true">${cared ? "★" : "☆"}</span>I care</button>
+        <span class="save-menu"><button class="act" data-act="save-open" aria-haspopup="true"><span class="glyph" aria-hidden="true">+</span>Save</button></span>
+        ${opts.inFolder ? `<button class="act danger" data-act="unsave" data-folder="${esc(opts.inFolder)}"><span class="glyph" aria-hidden="true">✕</span>Remove from folder</button>`
+          : deleted ? `<button class="act" data-act="undelete"><span class="glyph" aria-hidden="true">↺</span>Restore</button>`
+          : `<button class="act danger" data-act="delete"><span class="glyph" aria-hidden="true">✕</span>Delete</button>`}
+        <span class="act-links">
+          <a class="act link" href="${esc(p.pdf_url || `https://arxiv.org/pdf/${p.id}`)}" target="_blank" rel="noopener">PDF</a>
+          ${p.inspire_url ? `<a class="act link" href="${esc(arxivUrl(p))}" target="_blank" rel="noopener">arXiv</a>` : ""}
+        </span>
+      </div>
     </div>
   </article>`;
 }
@@ -434,6 +473,7 @@ function bindCards(root) {
       b.onclick = (ev) => {
         ev.stopPropagation();
         const act = b.dataset.act;
+        if (act !== "save-open") rememberFocus(el, act);
         if (act === "care") { push({ type: "care", id: p.id, paper: paperMeta(p) }); toast("Marked: the classifier will learn from it"); }
         else if (act === "uncare") push({ type: "uncare", id: p.id });
         else if (act === "delete") {
@@ -445,6 +485,23 @@ function bindCards(root) {
       };
     });
   });
+}
+
+// The view re-renders after every edit. Put focus back on the same control, or on the next paper when this one
+// left the list, so keyboard users keep their place.
+const TOGGLED = { care: "uncare", uncare: "care", delete: "undelete", undelete: "delete" };
+function rememberFocus(cardEl, act) {
+  const next = cardEl.nextElementSibling?.matches(".card") ? cardEl.nextElementSibling : cardEl.previousElementSibling;
+  S.focusAfter = { id: cardEl.dataset.id, act, next: next?.dataset.id || null };
+}
+function restoreFocus(root) {
+  const f = S.focusAfter;
+  S.focusAfter = null;
+  if (!f) return;
+  const byId = (id) => [...root.querySelectorAll(".card")].find((c) => c.dataset.id === id);
+  const el = byId(f.id);
+  const target = el ? (el.querySelector(`[data-act="${TOGGLED[f.act] || f.act}"]`) || el) : (f.next && byId(f.next));
+  if (target) target.focus({ preventScroll: true });
 }
 
 function openSaveMenu(anchor, p) {
@@ -485,8 +542,9 @@ async function loadDay(date) {
   return S.dayCache[date];
 }
 
-// ------------------------------------------------------------------ daily summary (donut)
-const SLICE_VARS = ["--cat-1", "--cat-2", "--cat-3", "--cat-4", "--cat-5"];
+// ------------------------------------------------------------------ daily summary (strip + donut)
+// Four categorical slots (validated for color-vision deficiency on both themes) plus a grey "Other".
+const SLICE_VARS = ["--cat-1", "--cat-2", "--cat-3", "--cat-4"];
 
 function donut(parts, total) {
   const R = 60, r = 36, C = 70;
@@ -506,19 +564,20 @@ function donut(parts, total) {
     <text x="70" y="68" text-anchor="middle" class="donut-n">${total}</text><text x="70" y="86" text-anchor="middle" class="donut-l">selected</text></svg>`;
 }
 
-function dailySummary(d, deleted) {
-  const sel = d.papers.filter((p) => !deleted[p.id] && ((p.topics || []).length || (p.followed_authors || []).length));
+// One line above the list (count, stacked category bar, top categories); opens to the donut and the day's facts.
+function summaryStrip(d, deleted) {
+  const sel = d.papers.filter((p) => !deleted[p.id] && isSelected(p));
   const fetched = d.counts?.fetched ?? d.papers.length;
-  const open = ls.get("summary-open", true);
-  if (!sel.length) return `<details class="panel summary" ${open ? "open" : ""}><summary>Today's selection</summary><p class="muted small">Nothing passed your filters today.</p></details>`;
+  const open = ls.get("strip-open", false);
+  const total = sel.length;
+  const head = `<span class="strip-n"><b>${total}</b> of ${fetched} selected</span>`;
+  if (!total) return `<details class="strip" ${open ? "open" : ""}><summary>${head}<span class="strip-cats">Nothing reached your threshold today.</span></summary></details>`;
   const byCat = {};
   sel.forEach((p) => { const c = p.primary_category || "(unknown)"; byCat[c] = (byCat[c] || 0) + 1; });
   const ranked = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
-  const top = ranked.length > 6 ? ranked.slice(0, 5) : ranked.slice(0, 6);
-  const parts = top.slice(0, 5).map(([label, n], i) => ({ label, n, color: SLICE_VARS[i] }));
+  const parts = ranked.slice(0, SLICE_VARS.length).map(([label, n], i) => ({ label, n, color: SLICE_VARS[i] }));
   const rest = ranked.slice(parts.length).reduce((a, [, n]) => a + n, 0);
   if (rest) parts.push({ label: ranked.length - parts.length === 1 ? ranked[parts.length][0] : "Other", n: rest, color: "--series-other" });
-  const total = sel.length;
   const fb = S.view["feedback.json"], lib = S.view["library.json"];
   const ids = new Set(d.papers.map((p) => p.id));
   const savedToday = new Set(Object.values(lib.folders).flatMap((f) => f.papers).filter((id) => ids.has(id))).size;
@@ -527,14 +586,19 @@ function dailySummary(d, deleted) {
   const topics = d.topics || [];
   const terms = (d.stats?.personal?.top_terms || []).slice(0, 4).map((t) => t[0]);
   const followed = sel.filter((p) => (p.followed_authors || []).length).length;
-  return `<details class="panel summary" ${open ? "open" : ""}><summary>Today's selection · ${total} of ${fetched} papers (${pct(total, fetched)})</summary>
+  const bar = parts.map((p) => `<i style="flex:${p.n};background:var(${p.color})" title="${esc(p.label)}: ${p.n}"></i>`).join("");
+  return `<details class="strip" ${open ? "open" : ""}><summary title="${pct(total, fetched)} of the day's papers">${head}
+      <span class="stackbar" aria-hidden="true">${bar}</span>
+      <span class="strip-cats">${parts.slice(0, 3).map((p) => `${esc(p.label)} ${p.n}`).join(", ")}</span></summary>
     <div class="summary-body">
       ${donut(parts, total)}
       <ul class="legend-list">${parts.map((p) => `<li><i class="sw" style="background:var(${p.color})"></i><span class="name">${esc(p.label)}</span><span class="v">${p.n}</span><span class="muted">${pct(p.n, total)}</span></li>`).join("")}</ul>
       <dl class="facts">
         ${topics.length > 1 ? topics.map((t) => `<dt>${esc(t)}</dt><dd>${sel.filter((p) => (p.topics || []).includes(t)).length}</dd>`).join("") : ""}
         <dt>Followed authors</dt><dd>${followed}</dd>
-        <dt>Saved · I care · deleted</dt><dd>${savedToday} · ${caredToday} · ${deletedToday}</dd>
+        <dt>Saved</dt><dd>${savedToday}</dd>
+        <dt>I care</dt><dd>${caredToday}</dd>
+        <dt>Deleted</dt><dd>${deletedToday}</dd>
         ${terms.length ? `<dt>Frequent terms</dt><dd class="terms">${terms.map(esc).join(", ")}</dd>` : ""}
       </dl>
     </div></details>`;
@@ -568,7 +632,7 @@ async function renderDaily(v) {
   });
   if (f.cat && !catOptions.some(([c]) => c === f.cat)) f.cat = "";
   const inScope = (p) => !f.cat || inCat(p, f.cat);
-  counts.all = all.filter((p) => !deleted[p.id] && inScope(p)).length;
+  counts.all = all.filter((p) => !deleted[p.id] && inScope(p) && isSelected(p)).length;
   dayTopics.forEach((t) => { counts[t] = all.filter((p) => !deleted[p.id] && inScope(p) && (p.scores?.[t] ?? 0) >= thr).length; });
   const list = all.filter((p) => {
     if (!f.showDeleted && deleted[p.id]) return false;
@@ -582,35 +646,49 @@ async function renderDaily(v) {
   });
   if (f.topic !== "all") list.sort((a, b) => (b.scores?.[f.topic] ?? 0) - (a.scores?.[f.topic] ?? 0));
   else list.sort((a, b) => combinedScore(b) - combinedScore(a));
+  // Combined lists the selected papers; the rest wait, folded, under the threshold line.
+  const above = f.topic === "all" ? list.filter(isSelected) : list;
+  const below = f.topic === "all" ? list.filter((p) => !isSelected(p)) : [];
   cardPapers = Object.fromEntries(all.map((p) => [p.id, p]));
   const sources = d.score_source || {};
   const untrained = Object.entries(sources).filter(([, s]) => s !== "model").map(([t]) => t);
   const idx = S.index.days.findIndex((x) => x.date === S.day);
+  const filtersOpen = ls.get("filters-open", false);
+  const active = [f.cat, f.min > 0, f.followedOnly, f.showDeleted].filter(Boolean).length;
+  const rows = (ps) => ps.map((p) => card(p, { topic: f.topic })).join("");
+  const emptyAbove = below.length ? "No papers reached your threshold. Open the list below to see the closest ones." : "No papers match these filters.";
   v.innerHTML = `
-    <div class="toolbar">
+    <div class="toolbar day-bar">
       <button class="btn small" id="prev" ${idx >= S.index.days.length - 1 ? "disabled" : ""} aria-label="Previous day">←</button>
-      <select id="day">${S.index.days.map((x) => `<option value="${esc(x.date)}" ${x.date === S.day ? "selected" : ""}>${esc(x.date)}${isChecked(x.date) ? " ✓" : ""}</option>`).join("")}</select>
+      <select id="day" aria-label="Day">${S.index.days.map((x) => `<option value="${esc(x.date)}" ${x.date === S.day ? "selected" : ""}>${esc(x.date)}${isChecked(x.date) ? " ✓" : ""}</option>`).join("")}</select>
       <button class="btn small" id="next" ${idx <= 0 ? "disabled" : ""} aria-label="Next day">→</button>
       <button class="btn small check-day ${isChecked(S.day) ? "on" : ""}" id="check-day" aria-pressed="${isChecked(S.day)}"
         title="Keep track of which days you've gone through (see Calendar)">${isChecked(S.day) ? "✓ Checked" : "Mark checked"}</button>
-      <input type="search" class="grow" id="q" placeholder="Search title, abstract, authors" value="${esc(f.q)}">
+      <input type="search" class="grow" id="q" placeholder="Search title, abstract, authors" aria-label="Search papers" value="${esc(f.q)}">
     </div>
-    ${dailySummary(d, deleted)}
-    <div class="chips">
-      <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all" title="All papers, ranked by how well they match any of your topics">Combined<span class="n">${counts.all}</span></button>
-      ${dayTopics.map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
+    ${summaryStrip(d, deleted)}
+    <div class="chip-row">
+      <div class="chips" role="group" aria-label="Ranking">
+        <button class="chip ${f.topic === "all" ? "on" : ""}" data-topic="all" aria-pressed="${f.topic === "all"}" title="Papers that match any of your topics, ranked by how well they match">Combined<span class="n">${counts.all}</span></button>
+        ${dayTopics.map((t) => `<button class="chip ${f.topic === t ? "on" : ""}" data-topic="${esc(t)}" aria-pressed="${f.topic === t}">${esc(t)}<span class="n">${counts[t]}</span></button>`).join("")}
+      </div>
+      <button class="btn small filters-btn" id="filters-btn" aria-expanded="${filtersOpen}" aria-controls="filters">Filters${active ? ` <span class="badge">${active}</span>` : ""}</button>
     </div>
-    <div class="toolbar">
-      <label class="check">Category
-        <select id="cat-filter"><option value="">All categories</option>${catOptions.map(([c, label, n]) => `<option value="${esc(c)}" ${f.cat === c ? "selected" : ""}>${esc(label)} (${n})</option>`).join("")}</select>
-      </label>
-      <label class="check">Min score <input type="range" id="min" min="0" max="1" step="0.05" value="${f.min}"> <span id="minv">${Number(f.min).toFixed(2)}</span></label>
-      <label class="check"><input type="checkbox" id="followed" ${f.followedOnly ? "checked" : ""}> Followed authors only</label>
-      <label class="check"><input type="checkbox" id="showdel" ${f.showDeleted ? "checked" : ""}> Show deleted</label>
+    <div class="filters" id="filters" ${filtersOpen ? "" : "hidden"}>
+      <div class="toolbar">
+        <label class="check">Category
+          <select id="cat-filter"><option value="">All categories</option>${catOptions.map(([c, label, n]) => `<option value="${esc(c)}" ${f.cat === c ? "selected" : ""}>${esc(label)} (${n})</option>`).join("")}</select>
+        </label>
+        <label class="check">Min score <input type="range" id="min" min="0" max="1" step="0.05" value="${f.min}"> <span id="minv" class="num">${Number(f.min).toFixed(2)}</span></label>
+        <label class="check"><input type="checkbox" id="followed" ${f.followedOnly ? "checked" : ""}> Followed authors only</label>
+        <label class="check"><input type="checkbox" id="showdel" ${f.showDeleted ? "checked" : ""}> Show deleted</label>
+      </div>
+      <div class="stat">${list.length} shown of ${d.counts?.shortlisted ?? all.length} shortlisted from ${d.counts?.fetched ?? "?"} new papers in ${esc((d.categories || []).join(", "))}${categoriesNote(d)}
+        ${untrained.length ? `. <span title="Save or delete a few papers to train these topics">Ranked by similarity for ${untrained.map(esc).join(", ")}</span>` : ""}</div>
     </div>
-    <div class="stat">${list.length} shown · ${d.counts?.shortlisted ?? all.length} shortlisted from ${d.counts?.fetched ?? "?"} new papers in ${esc((d.categories || []).join(", "))}${categoriesNote(d)}
-      ${untrained.length ? ` · <span title="Save or delete a few papers to train these topics">ranking by similarity for: ${untrained.map(esc).join(", ")}</span>` : ""}</div>
-    <div class="cards">${list.map((p) => card(p)).join("") || `<div class="empty">No papers match these filters.</div>`}</div>`;
+    <div class="cards">${rows(above) || `<div class="empty">${emptyAbove}</div>`}</div>
+    ${below.length ? `<details class="below" ${f.belowOpen ? "open" : ""}><summary>${below.length} paper${below.length === 1 ? "" : "s"} below your threshold (${thr.toFixed(2)})</summary>
+      ${f.belowOpen ? `<div class="cards">${rows(below)}</div>` : ""}</details>` : ""}`;
   $("#day").onchange = (e) => { S.day = e.target.value; render(); };
   $("#prev").onclick = () => { S.day = S.index.days[idx + 1].date; render(); };
   $("#next").onclick = () => { S.day = S.index.days[idx - 1].date; render(); };
@@ -623,14 +701,22 @@ async function renderDaily(v) {
     }
   };
   $("#q").oninput = debounce((e) => { f.q = e.target.value; render().then(() => { const el = $("#q"); el.focus(); el.setSelectionRange(el.value.length, el.value.length); }); }, 250);
+  $("#filters-btn").onclick = () => {
+    const open = !ls.get("filters-open", false);
+    ls.set("filters-open", open);
+    $("#filters").hidden = !open;
+    $("#filters-btn").setAttribute("aria-expanded", open);
+  };
   $("#min").oninput = (e) => { $("#minv").textContent = Number(e.target.value).toFixed(2); };
   $("#min").onchange = (e) => { f.min = Number(e.target.value); render(); };
   $("#followed").onchange = (e) => { f.followedOnly = e.target.checked; render(); };
   $("#cat-filter").onchange = (e) => { f.cat = e.target.value; render(); };
   $("#showdel").onchange = (e) => { f.showDeleted = e.target.checked; render(); };
   v.querySelectorAll("[data-topic]").forEach((b) => { b.onclick = () => { f.topic = b.dataset.topic; render(); }; });
-  const sum = v.querySelector("details.summary");
-  if (sum) sum.ontoggle = () => ls.set("summary-open", sum.open);
+  const strip = v.querySelector("details.strip");
+  if (strip) strip.ontoggle = () => ls.set("strip-open", strip.open);
+  const bel = v.querySelector("details.below");
+  if (bel) bel.ontoggle = () => { if (bel.open !== !!f.belowOpen) { f.belowOpen = bel.open; render(); } };
   bindCards(v);
 }
 
@@ -975,9 +1061,22 @@ const VIEWS = { daily: renderDaily, calendar: renderCalendar, stats: renderStats
 async function render() {
   const tab = (location.hash || "#daily").slice(1);
   const name = VIEWS[tab] ? tab : "daily";
-  document.querySelectorAll(".tabs a").forEach((a) => a.classList.toggle("active", a.dataset.tab === name));
+  document.querySelectorAll("a[data-tab]").forEach((a) => {
+    const on = a.dataset.tab === name;
+    a.classList.toggle("active", on);
+    if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+  $("#more-btn").classList.toggle("active", !!$(`.tab-more[data-tab="${name}"]`));
+  showMoreMenu(false);
   await VIEWS[name]($("#view"));
   typeset($("#view"));
+  restoreFocus($("#view"));
+}
+
+// Phones show Daily, Calendar and Library in the bottom bar; the other views sit behind "More".
+function showMoreMenu(open) {
+  $("#more-menu").hidden = !open;
+  $("#more-btn").setAttribute("aria-expanded", open);
 }
 
 function applyTheme() {
@@ -1139,6 +1238,9 @@ async function init() {
   window.addEventListener("hashchange", render);
   $("#sync-btn").onclick = sync;
   $("#settings-btn").onclick = openSettings;
+  $("#more-btn").onclick = (e) => { e.stopPropagation(); showMoreMenu($("#more-menu").hidden); };
+  document.addEventListener("click", (e) => { if (!e.target.closest("#more-menu")) showMoreMenu(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#more-menu").hidden) { showMoreMenu(false); $("#more-btn").focus(); } });
   $("#cat-list").innerHTML = ARXIV_CATS.map((c) => `<option value="${c}">`).join("");
   $("#cat-add").onclick = addCategory;
   $("#topic-new").onclick = () => { S.topicDraft = true; renderTopicEditor(); };

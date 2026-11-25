@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache">
 <title>arXiv Radar</title>
 <meta name="description" content="Personalized daily arXiv papers, followed authors, citation tracking and a reading library.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%23b31b1b' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%23b31b1b'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='12' fill='none' stroke='%23cad2d8' stroke-width='6'/><path d='M16 4a12 12 0 0 1 11.4 8.3' fill='none' stroke='%23b86e00' stroke-width='6'/></svg>">
+<link rel="preload" href="fonts/Archivo-v25-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -14,32 +15,43 @@
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><span class="dot" aria-hidden="true"></span>arXiv Radar</div>
-  <nav class="tabs" role="tablist">
+  <div class="brand"><span class="gauge" style="--v:.3" aria-hidden="true"></span>arXiv Radar</div>
+  <nav class="tabs" aria-label="Views">
     <a href="#daily" data-tab="daily">Daily</a>
     <a href="#calendar" data-tab="calendar">Calendar <span id="unchecked-count" class="badge" title="Unchecked days in the last 30 days" hidden>0</span></a>
+    <a href="#stats" data-tab="stats" class="tab-more">Stats</a>
+    <a href="#authors" data-tab="authors" class="tab-more">Authors</a>
+    <a href="#my-papers" data-tab="my-papers" class="tab-more">My papers</a>
+    <a href="#library" data-tab="library">Library</a>
+    <button type="button" id="more-btn" class="more-btn" aria-expanded="false" aria-controls="more-menu">More</button>
+  </nav>
+  <div id="more-menu" class="more-menu" hidden>
     <a href="#stats" data-tab="stats">Stats</a>
     <a href="#authors" data-tab="authors">Authors</a>
     <a href="#my-papers" data-tab="my-papers">My papers</a>
-    <a href="#library" data-tab="library">Library</a>
-  </nav>
+  </div>
   <div class="top-actions">
     <button id="sync-btn" class="btn" title="Commit your changes to the repository">Sync <span id="pending-count" class="badge" hidden>0</span></button>
     <button id="settings-btn" class="btn" title="Settings">Settings</button>
   </div>
 </header>
 
-<main id="view" aria-live="polite"><p class="muted center">Loading…</p></main>
+<main id="view"><p class="muted center">Loading…</p></main>
 
 <dialog id="settings">
   <form method="dialog" class="settings-form">
     <h2>Settings</h2>
+    <section class="set-sec">
+    <h3>Sync</h3>
     <p class="muted small">Edits (deletes, "I care" marks, checked days, folders, authors, my papers) are saved in this browser and committed to the repo when you press <b>Sync</b>.
       Use a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> limited to this repository with <i>Contents: read and write</i>.
       It is stored only in this browser.</p>
     <label>Repository <input id="set-repo" placeholder="owner/repo" autocomplete="off"></label>
     <label>Branch <input id="set-branch" placeholder="main" autocomplete="off"></label>
     <label>Token <input id="set-token" type="password" placeholder="github_pat_…" autocomplete="off"></label>
+    </section>
+    <section class="set-sec">
+    <h3>Feed</h3>
     <fieldset class="cats">
       <legend>arXiv categories</legend>
       <p class="muted small">Searched by the daily run. Changes apply from the next run after you Sync.</p>
@@ -57,10 +69,14 @@
       <div id="topic-list"></div>
       <button type="button" class="btn small" id="topic-new">+ New topic</button>
     </fieldset>
+    </section>
+    <section class="set-sec">
+    <h3>Appearance</h3>
     <label>Theme
       <select id="set-theme"><option value="">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
     </label>
-    <div class="row gap">
+    </section>
+    <div class="row gap form-actions">
       <button value="save" class="btn primary" id="set-save">Save</button>
       <button value="cancel" class="btn">Close</button>
       <button type="button" class="btn danger ml-auto" id="set-discard" title="Throw away unsynced edits">Discard unsynced edits</button>
