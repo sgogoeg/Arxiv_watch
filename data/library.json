@@ -3,6 +3,7 @@
   "Interesting": {
    "topic": null,
    "papers": [
+    "2611.30454",
     "2611.21997",
     "2611.21736",
     "2611.23371",
@@ -30,6 +31,7 @@
   "Dark Matter": {
    "topic": null,
    "papers": [
+    "2611.28217",
     "2611.07136",
     "2611.08680",
     "2611.08583",
@@ -42,6 +44,7 @@
   "Phase Transitions": {
    "topic": null,
    "papers": [
+    "2611.28630",
     "2611.07416",
     "2611.08680",
     "2611.08642",
@@ -1000,6 +1003,74 @@
     "Phase transitions & GWs"
    ],
    "saved": "2026-11-23"
+  },
+  "2611.28217": {
+   "id": "2611.28217",
+   "title": "WIMPs as FIMPs: the Inert Doublet Model and low-temperature reheating",
+   "authors": [
+    "Genevi\\`eve B\\'elanger",
+    "Nicol\\'as Bernal",
+    "Andreas Goudelis",
+    "Alexander Pukhov",
+    "Thomas Reggio"
+   ],
+   "abstract": "Weakly Interacting Massive Particles (WIMPs) are conventionally assumed to acquire their dark matter relic abundance through thermal freeze-out. However, this association relies on assumptions concerning the thermal history of the early Universe. We revisit the Inert Doublet Model (IDM), a representative WIMP framework in which dark matter interacts with the Standard Model through electroweak gauge interactions, even when its Higgs-portal coupling vanishes. We demonstrate that sufficiently low reheating temperatures can prevent chemical equilibrium, allowing a genuine WIMP to acquire its relic abundance through freeze-in rather than freeze-out. Considering both instantaneous and finite-duration reheating, we identify different production histories, including freeze-out during radiation domination, freeze-out during reheating, and freeze-in with potentially significant annihilation backreactions. These scenarios open regions of the IDM parameter space that would otherwise be excluded by dark matter overabundance. Our results demonstrate that WIMPs can behave as FIMPs, depending on the thermal history of the Universe.",
+   "abs_url": "https://arxiv.org/abs/2611.28217",
+   "pdf_url": "https://arxiv.org/pdf/2611.28217",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph"
+   ],
+   "date": "2026-11-24",
+   "inspire_url": "https://inspirehep.net/literature/3232197",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-25"
+  },
+  "2611.28630": {
+   "id": "2611.28630",
+   "title": "Strong First-Order Phase Transition in a Pseudo-Nambu-Goldstone Boson Model",
+   "authors": [
+    "Yuichiro Nakai",
+    "Masanori Tanaka",
+    "Yaoduo Wang"
+   ],
+   "abstract": "We propose a novel, calculable model for realizing strong first-order phase transitions in the early Universe, in which the phase transition occurs along a pseudo-Nambu-Goldstone boson (pNGB) direction. The model involves two scalar fields whose interactions exhibit collective symmetry breaking, protecting the pNGB potential from quadratically divergent radiative corrections induced by these interactions. This structure allows strong first-order phase transitions to be realized without severe parameter tuning while maintaining perturbative control. We investigate the finite-temperature effective potential and bubble nucleation dynamics, identifying parameter regions where strong first-order phase transitions can successfully complete. The strength and characteristic time scale of the transitions are evaluated, and the resulting gravitational-wave (GW) spectra are computed. The predicted GW signals can fall within the sensitivity ranges of planned GW experiments.",
+   "abs_url": "https://arxiv.org/abs/2611.28630",
+   "pdf_url": "https://arxiv.org/pdf/2611.28630",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph"
+   ],
+   "date": "2026-11-24",
+   "inspire_url": "https://inspirehep.net/literature/3232233",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-25"
+  },
+  "2611.30454": {
+   "id": "2611.30454",
+   "title": "Tidal effects of bulk viscosity in neutron stars",
+   "authors": [
+    "A. Kanakis-Pegios",
+    "P. S. Koliogiannis",
+    "Ch. C. Moustakidis"
+   ],
+   "abstract": "Bulk viscosity in neutron-star matter provides a temperature-dependent mechanism for tidal dissipation. In this study, we investigate the impact of bulk viscosity on the dissipative tidal response of neutron stars composed of neutrons, protons, and electrons. Employing cold equations of state derived through the momentum-dependent interaction model, we examine the bulk viscosity arising from the direct Urca process, which acts to restore chemical equilibrium. The temperature dependence is incorporated through the weak-interaction rate, allowing us to explore the behavior of bulk viscosity in the neutrino-transparent regime at temperatures up to a few MeV. To account for the spatial distribution of bulk viscosity within neutron stars, we introduce the effective bulk viscosity, a volume-averaged quantity over the region where direct Urca process operates, and establish a connection with the bulk viscosity. Specifically, we investigate its implications for tidal quantities, including the lag time and dissipative deformability, highlighting their dependence on temperature and stellar compactness. We find that the dissipative tidal effects become maximal at a temperature approximately coinciding with the one of maximum bulk viscosity on the onset of direct Urca. Additionally, these effects are more pronounced in intermediate neutron star masses compared to maximum ones. Finally, for both canonical $1.4\\;M_\\odot$ and maximum-mass neutron star configurations, we derive causality-based upper bounds on these quantities, providing theoretical benchmarks for assessing the potential observability of bulk-viscous effects in gravitational-wave signals from binary neutron star inspirals.",
+   "abs_url": "https://arxiv.org/abs/2611.30454",
+   "pdf_url": "https://arxiv.org/pdf/2611.30454",
+   "primary_category": "astro-ph.HE",
+   "categories": [
+    "astro-ph.HE",
+    "nucl-th"
+   ],
+   "date": "2026-11-24",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-25"
   }
  }
 }
