@@ -14,9 +14,9 @@ LaTeX in titles and abstracts is rendered with KaTeX.
 
 | Tab | What it does |
 | --- | --- |
-| **Daily** | Today's shortlisted papers with per-topic scores, why each matched, abstract. Mark the day as checked when you're done. Filter by topic, score, followed authors, text. Delete (with undo) or save to a folder. |
-| (Daily, top) | *Today's selection*: a pie of the papers that passed your filters by category, with followed-author, saved / I care / deleted counts and frequent terms. |
-| **Calendar** | A month view of announcement days: which ones you've checked, which you haven't, and how many papers each had. Tap a day to open it in Daily. |
+| **Daily** | Today's papers ranked by score, each with a gauge showing its score against your threshold, why it matched, and the abstract. Papers that reached a topic's threshold (or have a followed author) come first; the rest are folded under *N papers below your threshold*. Filter by topic, text, and under **Filters** by category, minimum score, followed authors. Delete (with undo), mark *I care*, or save to a folder. Mark the day as checked when you're done. |
+| (Daily, top) | A one-line summary: how many papers were selected, and a bar of them by category. Open it for a pie chart, followed-author, saved, I care and deleted counts, and frequent terms. |
+| **Calendar** | A month view of announcement days: which ones you've checked, which you haven't, and how many papers each had that reached your threshold (or have a followed author). Tap a day to open it in Daily. |
 | **Stats** | Analytics for a day. *General*: everything fetched (categories, title terms, active authors, authors per paper, similarity to your topics). *Personalized*: what passed your filters (per-topic counts, score distribution, pass rate by category, top papers). |
 | **Authors** | Follow one name or paste a list. Their new papers are always shown in Daily; the last 30 days are backfilled when you add someone. |
 | **My papers** | Add your papers by arXiv ID, DOI or title. Shows citation counts over time, new citations since your last visit, and the citing papers. |
@@ -75,6 +75,9 @@ Folders linked to a renamed topic follow the new name.
 Daily's **Combined** ranking orders papers by the chance they match at least one topic (noisy-OR of the topic scores).
 With one topic it equals that topic's score, and papers that fit several topics rank higher. The **Category** filter
 narrows Daily to one arXiv category (primary or cross-list) or a whole archive (`astro-ph.*`).
+
+On a phone, Daily, Calendar and Library sit in a bar at the bottom of the screen; Stats, Authors and My papers are
+under **More**.
 
 ### Changing categories
 
