@@ -1029,8 +1029,11 @@ function renderCalendar(v) {
     const ok = isChecked(day);
     shown++; if (ok) done++;
     cls.push(ok ? "checked" : "unchecked");
-    cells += `<button class="${cls.join(" ")}" data-day="${day}" title="${day}: ${info.count} shortlisted of ${info.fetched} new · ${ok ? "checked" : "not checked yet"}">
-      <span class="cal-num">${dnum}</span><span class="cal-mark" aria-hidden="true">${ok ? "✓" : "•"}</span><span class="cal-n">${info.count}</span>
+    // `selected` is written by the pipeline (index.json); days indexed before it existed show no number.
+    const sel = info.selected;
+    const tip = sel != null ? `${sel} selected of ${info.fetched} new` : `${info.fetched} new`;
+    cells += `<button class="${cls.join(" ")}" data-day="${day}" title="${day}: ${tip}, ${ok ? "checked" : "not checked yet"}">
+      <span class="cal-num">${dnum}</span><span class="cal-mark" aria-hidden="true">${ok ? "✓" : "•"}</span><span class="cal-n">${sel != null ? `${sel}<span class="sr-only"> selected</span>` : ""}</span>
       <span class="sr-only">${ok ? "checked" : "not checked"}</span></button>`;
   }
   const todo = uncheckedDays();
@@ -1046,7 +1049,7 @@ function renderCalendar(v) {
       ${["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((w) => `<div class="cal-wd">${w}</div>`).join("")}
       ${cells}
     </div>
-    <p class="muted small cal-legend"><span class="cal-key checked">✓</span> checked · <span class="cal-key unchecked">•</span> not checked yet · the number is how many papers were shortlisted.
+    <p class="muted small cal-legend"><span class="cal-key checked">✓</span> checked · <span class="cal-key unchecked">•</span> not checked yet · the number is how many papers reached your threshold or have a followed author.
       Tap a day to open it in Daily, then press <b>Mark checked</b> when you're done.</p>`;
   $("#cal-prev").onclick = () => { S.calMonth = shift(-1); render(); };
   $("#cal-next").onclick = () => { S.calMonth = shift(1); render(); };

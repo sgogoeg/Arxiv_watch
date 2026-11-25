@@ -14,6 +14,8 @@ Files the dashboard edits (through GitHub commits):
 
 Files the pipeline writes:
   days/YYYY-MM-DD.json, index.json, author_matches.json, citations.json
+  index.json      {"days": [{"date", "count" (shortlisted), "fetched", "selected" (reached a topic's
+                   threshold or has a followed author)}], "topics", "threshold", "generated"}
 """
 from __future__ import annotations
 

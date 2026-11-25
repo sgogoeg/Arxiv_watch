@@ -24,6 +24,8 @@ def test_offline_run_end_to_end(cfg, sample_day):
     assert len(doc["background"]) == 11 - len(papers)
     idx = store.read("index.json")
     assert idx["days"][0]["date"] == "2025-11-05" and idx["topics"] == cfg.topic_names
+    selected = [p for p in papers if p["topics"] or p["followed_authors"]]
+    assert idx["days"][0]["selected"] == len(selected) and "2511.00110" in {p["id"] for p in selected}
     matches = store.read("author_matches.json")
     assert [m["id"] for m in matches["authors"]["Jörg Müller"]] == ["2511.00104", "2511.00110"] or \
         {m["id"] for m in matches["authors"]["Jörg Müller"]} == {"2511.00104", "2511.00110"}
@@ -170,3 +172,21 @@ def test_category_folders_become_topics(cfg, sample_day, tmp_path):
     conf = json.loads((pipeline.build_site(cfg, site_src="site", out=str(tmp_path / "_site")) / "config.json").read_text())
     assert [t["name"] for t in conf["topic_defs"]] == ["Reinforcement learning", "LLM evaluation"]
     assert "folder" not in conf["topic_defs"][0] and "Judges" in conf["topics"]
+
+
+def test_backfill_index_adds_selected_to_old_days(cfg):
+    store = Store(cfg.data_dir)
+    store.write_day("2025-11-03", {"papers": [
+        {"id": "a", "topics": ["T"], "followed_authors": []},
+        {"id": "b", "topics": [], "followed_authors": ["X"]},
+        {"id": "c", "topics": [], "followed_authors": []},
+        {"id": "d", "combined": 0.9},  # written before `topics` existed
+        {"id": "e", "combined": 0.1},
+    ]})
+    store.write("index.json", {"days": [{"date": "2025-11-04", "count": 9, "fetched": 9, "selected": 4},
+                                        {"date": "2025-11-03", "count": 5, "fetched": 8}],
+                               "topics": ["T"], "threshold": 0.5, "generated": None})
+    pipeline.backfill_index(store, cfg)
+    days = store.read("index.json")["days"]
+    assert days[0]["selected"] == 4  # already set: left alone (no day file to recount from)
+    assert days[1] == {"date": "2025-11-03", "count": 5, "fetched": 8, "selected": 3}

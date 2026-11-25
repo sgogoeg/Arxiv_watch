@@ -93,7 +93,7 @@ Check memory and step time before raising any of these.
 - Day files keep the topic names that were current when they were written. The dashboard reads topics from
   `d.topics` / `p.scores`, not from `index.json`, so old days still render after a rename.
 - Some logic is mirrored between Python and JS: BibTeX (`bibtex.py` / `toBibtex`), combined score
-  (`pipeline.combined_score` / `combinedScore`), and arXiv-ID normalization. Change both sides.
+  (`pipeline.combined_score` / `combinedScore`), selected papers (`pipeline.selected_count` / `isSelected`), and arXiv-ID normalization. Change both sides.
 - `build_site` copies `site/` and `data/`, writes `config.json` (repo, branch, effective topics), and appends content
   hashes to the `app.js` / `style.css` URLs. Without those hashes, Pages caching hides new deploys.
 - KaTeX is loaded from cdnjs and runs on elements with class `tex`.
@@ -110,7 +110,8 @@ Check memory and step time before raising any of these.
 `.github/workflows/daily.yml` has two modes:
 - `run`: scheduled, or `workflow_dispatch`.
 - `refresh`: on pushes to `main` that touch `site/**`, `arxiv_radar/**`, `config.yaml`, or the dashboard-owned data
-  files. It backfills authors, rechecks INSPIRE, refreshes citations and redeploys,
+  files. It backfills authors, fills `selected` on `index.json` days written before that field existed, rechecks
+  INSPIRE, refreshes citations and redeploys,
   without fetching papers.
 
 The bot's own data commits use `GITHUB_TOKEN`, so they don't retrigger the workflow. `test.yml` runs pytest and

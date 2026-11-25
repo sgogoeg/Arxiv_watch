@@ -78,17 +78,51 @@ def recent_background(store: Store, days: int = BACKGROUND_DAYS, exclude: str | 
     return out
 
 
-def update_index(store: Store, writer: Store, cfg: Config, day: str, count: int, fetched: int) -> None:
+def selected_count(entries: list[dict], threshold: float) -> int:
+    """Papers that reached a topic's threshold or have a followed author. Mirrors isSelected in site/app.js;
+    day files written before `topics` existed fall back to the combined score."""
+    def sel(p: dict) -> bool:
+        if p.get("followed_authors"):
+            return True
+        if "topics" in p:
+            return bool(p["topics"])
+        return (p.get("combined") if p.get("combined") is not None else p.get("score") or 0) >= threshold
+    return sum(sel(p) for p in entries)
+
+
+def _backfill_selected(store: Store, days: list[dict], threshold: float) -> bool:
+    """Fill `selected` on index entries written before it existed, from their day files."""
+    changed = False
+    for d in days:
+        if "selected" in d:
+            continue
+        doc = store.read_day(d["date"])
+        if doc is not None:
+            d["selected"] = selected_count(doc.get("papers", []), threshold)
+            changed = True
+    return changed
+
+
+def update_index(store: Store, writer: Store, cfg: Config, day: str, count: int, fetched: int,
+                 selected: int) -> None:
     idx = store.read("index.json")
     days = [d for d in idx.get("days", []) if d["date"] != day]
-    days.append({"date": day, "count": count, "fetched": fetched})
+    days.append({"date": day, "count": count, "fetched": fetched, "selected": selected})
     days.sort(key=lambda d: d["date"], reverse=True)
+    _backfill_selected(store, days, cfg.score_threshold)
     writer.write("index.json", {
         "days": days,
         "topics": cfg.topic_names,
         "threshold": cfg.score_threshold,
         "generated": _now(),
     })
+
+
+def backfill_index(store: Store, cfg: Config) -> None:
+    """Add `selected` to old index entries (refresh mode), without touching anything else."""
+    idx = store.read("index.json")
+    if _backfill_selected(store, idx.get("days", []), idx.get("threshold", cfg.score_threshold)):
+        store.write("index.json", idx)
 
 
 def effective_config(cfg: Config, store: Store) -> Config:
@@ -226,7 +260,7 @@ def run(cfg: Config, *, day: str | None = None, offline: str | None = None, out_
         "background": background,
     }
     writer.write_day(day, day_doc)
-    update_index(store, writer, cfg, day, len(entries), len(papers))
+    update_index(store, writer, cfg, day, len(entries), len(papers), selected_count(entries, cfg.score_threshold))
 
     _finish_side_tasks(cfg, store, writer, client, followed, [p for p in papers if p["followed_authors"]],
                        day, skip_citations or bool(offline_dir))
@@ -260,6 +294,7 @@ def refresh(cfg: Config) -> None:
     """Light update after dashboard edits: backfill new followed authors and refresh citations."""
     store = Store(cfg.data_dir)
     cfg = effective_config(cfg, store)
+    backfill_index(store, cfg)
     client = ArxivClient()
     matches = store.read("author_matches.json")
     followed = store.followed_author_names(cfg.authors)
