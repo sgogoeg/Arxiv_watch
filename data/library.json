@@ -31,6 +31,7 @@
   "Dark Matter": {
    "topic": null,
    "papers": [
+    "2611.34172",
     "2611.32563",
     "2611.31282",
     "2611.28217",
@@ -47,6 +48,7 @@
   "Phase Transitions": {
    "topic": null,
    "papers": [
+    "2611.32712",
     "2611.28630",
     "2611.07416",
     "2611.08680",
@@ -1127,6 +1129,55 @@
     "GW"
    ],
    "saved": "2026-11-25"
+  },
+  "2611.32712": {
+   "id": "2611.32712",
+   "title": "The impact of phase transitions on dilepton production",
+   "authors": [
+    "Renan Góes-Hirayama",
+    "Hannah Elfner"
+   ],
+   "abstract": "We calculate dielectron yields at beam energies relevant for the CBM experiment at FAIR and the STAR Beam Energy Scan. The production of intermediate mass dielectrons is expected to increase in presence of a phase transition due to the latent heat. In this work, we use the SMASH+vHLLE hybrid model to quantify this enhancement in two scenarios: with a toy equation of state consisting of the Bag Model and Hadron Resonance Gas, separated by a Maxwell-constructed transition; and with a more realistic equation of state containing a critical endpoint, based on the 3D Ising universality class. We confirm that the dilepton yield increases when the system passes through a first-order phase transition, by about 7% in the realistic scenario.",
+   "abs_url": "https://arxiv.org/abs/2611.32712",
+   "pdf_url": "https://arxiv.org/pdf/2611.32712v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "nucl-th"
+   ],
+   "published": "2026-11-24T14:36:41Z",
+   "date": "2026-11-25",
+   "inspire_url": "https://inspirehep.net/literature/3233583",
+   "topics": [
+    "Phase transitions & GWs"
+   ],
+   "saved": "2026-11-25"
+  },
+  "2611.34172": {
+   "id": "2611.34172",
+   "title": "Black hole accretion flows as dark matter bolometers",
+   "authors": [
+    "Ran Ding",
+    "Ningqiang Song",
+    "Cong Zhang"
+   ],
+   "abstract": "Astrophysical systems provide powerful probes of dark matter interactions, complementing direct-detection searches. We propose using accretion flows of the supermassive black hole as a bolometer for light DM. The kinetic energy of sub-MeV dark matter in the black hole gravitational potential can remain below the thermal energy of the plasma electrons. The colder dark matter population can therefore absorb energy through elastic scattering, cooling the electrons and modifying their emission spectrum. We integrate dark matter cooling into the advection-dominated accretion flow around M87$^{*}$ and solve the full set of thermodynamic equations to obtain the resulting temperature profile and radio-to-millimeter emission. By comparing the predicted spectrum with observations accompanying the Event Horizon Telescope campaign, we use, for the first time, the thermal energy balance of the hot accretion flow to constrain DM-electron scattering, obtaining stringent limits on keV-to-MeV DM for both heavy and light mediators.",
+   "abs_url": "https://arxiv.org/abs/2611.34172",
+   "pdf_url": "https://arxiv.org/pdf/2611.34172v1",
+   "primary_category": "hep-ph",
+   "categories": [
+    "hep-ph",
+    "astro-ph.CO",
+    "astro-ph.HE"
+   ],
+   "published": "2026-11-25T11:02:48Z",
+   "date": "2026-11-26",
+   "inspire_url": "https://inspirehep.net/literature/3233925",
+   "topics": [
+    "Phase transitions & GWs",
+    "Dark Matter"
+   ],
+   "saved": "2026-11-27"
   }
  }
 }

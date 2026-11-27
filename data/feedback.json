@@ -87,6 +87,22 @@
    "topics": [
     "Phase transitions & GWs"
    ]
+  },
+  "2611.31361": {
+   "date": "2026-11-25",
+   "title": "Tidally Induced Coda: Double Transients from Black Hole-Star Binary Encounters with Massive Black Holes",
+   "abstract": "Dense stellar environments surrounding massive black holes (MBHs) provide a natural setting for dynamical interactions that can produce transient electromagnetic and gravitational-wave sources. In particular, the tidal field of an MBH can strongly perturb binaries undergoing close encounters with it, driving their internal orbits to extreme eccentricities. Here, we investigate the outcomes of such interactions for binaries composed of a stellar-mass black hole (BH) and a star. Using direct few-body scattering experiments with the code SpaceHub, we explore hyperbolic encounters between BH-star binaries and MBHs. We systematically quantify the probabilities of different dynamical outcomes as functions of the binary orbital parameters and MBH mass, with particular emphasis on a channel in which the tidally induced eccentricity triggers a micro-tidal disruption event ($μ$TDE), as the star is disrupted by its BH companion, followed by accretion of the stellar debris onto the MBH. We derive fitting formulae for the $μ$TDE cross section and for the time delay between the two resulting flares, finding that the latter can be a few months for an MBH of $10^6\\,M_\\odot$. These double transients offer a distinctive observational signature of $μ$TDEs. We estimate event rates ranging from a few to $\\sim 100\\,{\\rm yr}^{-1}$ within a luminosity distance of $40\\,{\\rm Gpc}$.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
+  },
+  "2611.32840": {
+   "date": "2026-11-25",
+   "title": "An uncalibrated effective-one-body waveform model for intermediate-mass-ratio black hole binaries",
+   "abstract": "Intermediate-mass-ratio binaries, with mass ratios $q=m_1/m_2\\sim10^2-10^4$, are among the most challenging sources for waveform modeling. We present an inspiral-merger-ringdown effective-one-body model for nonspinning, quasicircular binaries with $q>10$, with dynamics built only from analytical post-Newtonian results. It reaches $(2,2)$ unfaithfulness of $10^{-4}-10^{-5}$ against numerical-relativity simulations with $q>10$ and subradian dephasing against second-order self-force waveforms over four-year inspirals at $q=10^4-10^5$. An optimized post-adiabatic implementation enables waveform generation up to two orders of magnitude faster than integrating the full equations of motion.",
+   "topics": [
+    "Phase transitions & GWs"
+   ]
   }
  },
  "cared": {
@@ -174,6 +190,24 @@
    "date": "2026-11-25",
    "title": "Analytic response functions of space-based gravitational-wave detectors to ultralight scalar-field dark matter under multiple types of TDI combinations",
    "abstract": "Ultralight scalar fields are important candidates for dark matter. As coherently oscillating fields, they can leave characteristic signatures in space-based gravitational-wave detectors through their coupling to test masses. In this paper, we derive analytic expressions for the response functions of space-based gravitational-wave detectors to ultralight scalar-field dark matter under multiple types of time-delay interferometry (TDI) combinations. Starting from the coupling action between the scalar field and a test mass, we obtain the additional displacement of the test mass and the single-link Doppler response. We then give the general analytic form of the response function for an arbitrary TDI combination and compare the analytic and Monte Carlo numerical results for the optimal combinations A, E, and T. Finally, we analyze the responses of multiple types of TDI combinations, classify them into ordinary and ζ types according to their low-frequency behavior, and give the low-frequency response expressions of the individual combinations. The results can be used to evaluate the sensitivity of space-based gravitational-wave missions such as LISA, Taiji, and TianQin to the mass and coupling parameters of ultralight scalar-field dark matter.",
+   "topics": [
+    "Phase transitions & GWs",
+    "GW"
+   ]
+  },
+  "2611.34172": {
+   "date": "2026-11-27",
+   "title": "Black hole accretion flows as dark matter bolometers",
+   "abstract": "Astrophysical systems provide powerful probes of dark matter interactions, complementing direct-detection searches. We propose using accretion flows of the supermassive black hole as a bolometer for light DM. The kinetic energy of sub-MeV dark matter in the black hole gravitational potential can remain below the thermal energy of the plasma electrons. The colder dark matter population can therefore absorb energy through elastic scattering, cooling the electrons and modifying their emission spectrum. We integrate dark matter cooling into the advection-dominated accretion flow around M87$^{*}$ and solve the full set of thermodynamic equations to obtain the resulting temperature profile and radio-to-millimeter emission. By comparing the predicted spectrum with observations accompanying the Event Horizon Telescope campaign, we use, for the first time, the thermal energy balance of the hot accretion flow to constrain DM-electron scattering, obtaining stringent limits on keV-to-MeV DM for both heavy and light mediators.",
+   "topics": [
+    "Phase transitions & GWs",
+    "Dark Matter"
+   ]
+  },
+  "2611.33434": {
+   "date": "2026-11-27",
+   "title": "Low-latency gravitational wave alert infrastructure and new data products for multi-messenger astronomy during LIGO-Virgo-KAGRA's fourth observing run",
+   "abstract": "Multi-messenger investigations of compact object mergers, such as binary neutron star and neutron star-black hole systems, remain among the most dynamic frontiers of modern astronomy. During the fourth observing run of Advanced LIGO, Advanced Virgo, and KAGRA, the search for joint electromagnetic and neutrino counterparts to gravitational-wave signals continued using public, semi-automated data products distributed in near real-time. The sky localizations and preliminary source characterizations provided by these alerts helped guide multiple rapid follow-up observations to candidate gravitational-wave events. During this run, the low-latency search parameter space was expanded to include the sub-solar mass regime and associated public data products were developed. Further, chirp mass estimates of the binary merger system were introduced as a new public data product and distributed to enable follow-up searches to concentrate their resources on the most promising transients. In order to streamline the implementation of new searches and data products, a mock data challenge, known as the Low-Latency Production Integration Challenge (LLPIC), was used as a replay of a simulated population of gravitational-wave sources to optimize and profile the software infrastructure and scientific deliverables. In this paper we describe these new public data products, their performance and the result of end-to-end testing of the low-latency infrastructure with the LLPIC.",
    "topics": [
     "Phase transitions & GWs",
     "GW"
